@@ -34,13 +34,14 @@ const ParticleBackground = () => {
 
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
-      const t = time * 0.0003;
+      const t = time * 0.00025;
 
-      // Golden aurora blobs
+      // Dramatic golden aurora blobs — larger, brighter, more mouse-reactive
       const blobs = [
-        { cx: 0.3 + Math.sin(t) * 0.1 + (mx - 0.5) * 0.05, cy: 0.4 + Math.cos(t * 0.7) * 0.1 + (my - 0.5) * 0.05, r: 0.35, alpha: 0.06 },
-        { cx: 0.7 + Math.cos(t * 0.8) * 0.12 + (mx - 0.5) * 0.03, cy: 0.6 + Math.sin(t * 0.6) * 0.08 + (my - 0.5) * 0.03, r: 0.3, alpha: 0.05 },
-        { cx: 0.5 + Math.sin(t * 1.2) * 0.08 + (mx - 0.5) * 0.04, cy: 0.3 + Math.cos(t * 0.9) * 0.12 + (my - 0.5) * 0.04, r: 0.25, alpha: 0.04 },
+        { cx: 0.3 + Math.sin(t) * 0.15 + (mx - 0.5) * 0.25, cy: 0.35 + Math.cos(t * 0.7) * 0.12 + (my - 0.5) * 0.2, r: 0.5, alpha: 0.12 },
+        { cx: 0.7 + Math.cos(t * 0.8) * 0.18 + (mx - 0.5) * 0.2, cy: 0.6 + Math.sin(t * 0.6) * 0.1 + (my - 0.5) * 0.18, r: 0.45, alpha: 0.1 },
+        { cx: 0.5 + Math.sin(t * 1.2) * 0.12 + (mx - 0.5) * 0.3, cy: 0.25 + Math.cos(t * 0.9) * 0.15 + (my - 0.5) * 0.25, r: 0.4, alpha: 0.08 },
+        { cx: mx * 0.8 + 0.1 + Math.sin(t * 1.5) * 0.05, cy: my * 0.8 + 0.1 + Math.cos(t * 1.3) * 0.05, r: 0.3, alpha: 0.07 },
       ];
 
       for (const blob of blobs) {

@@ -1,21 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-interface Particle {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  radius: number;
-  opacity: number;
-  pulseSpeed: number;
-  pulsePhase: number;
-}
-
 const ParticleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const particlesRef = useRef<Particle[]>([]);
-  const animationRef = useRef<number>(0);
+  const mouseRef = useRef({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -30,84 +17,68 @@ const ParticleBackground = () => {
     resize();
     window.addEventListener('resize', resize);
 
-    const count = Math.min(80, Math.floor(window.innerWidth / 20));
-    particlesRef.current = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      radius: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.5 + 0.2,
-      pulseSpeed: Math.random() * 0.02 + 0.01,
-      pulsePhase: Math.random() * Math.PI * 2,
-    }));
-
     const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
+      mouseRef.current = {
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight,
+      };
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const particles = particlesRef.current;
-      const mouse = mouseRef.current;
-      const time = Date.now() * 0.001;
+    let frame: number;
 
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        
-        // Mouse repulsion
-        const dx = p.x - mouse.x;
-        const dy = p.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const force = (150 - dist) / 150 * 0.5;
-          p.vx += (dx / dist) * force;
-          p.vy += (dy / dist) * force;
-        }
+    const draw = (time: number) => {
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
 
-        p.vx *= 0.98;
-        p.vy *= 0.98;
-        p.x += p.vx;
-        p.y += p.vy;
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+      const t = time * 0.0003;
 
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
+      // Golden aurora blobs
+      const blobs = [
+        { cx: 0.3 + Math.sin(t) * 0.1 + (mx - 0.5) * 0.05, cy: 0.4 + Math.cos(t * 0.7) * 0.1 + (my - 0.5) * 0.05, r: 0.35, alpha: 0.06 },
+        { cx: 0.7 + Math.cos(t * 0.8) * 0.12 + (mx - 0.5) * 0.03, cy: 0.6 + Math.sin(t * 0.6) * 0.08 + (my - 0.5) * 0.03, r: 0.3, alpha: 0.05 },
+        { cx: 0.5 + Math.sin(t * 1.2) * 0.08 + (mx - 0.5) * 0.04, cy: 0.3 + Math.cos(t * 0.9) * 0.12 + (my - 0.5) * 0.04, r: 0.25, alpha: 0.04 },
+      ];
 
-        const pulse = Math.sin(time * p.pulseSpeed * 10 + p.pulsePhase) * 0.3 + 0.7;
-        const alpha = p.opacity * pulse;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(193, 18, 31, ${alpha})`;
-        ctx.fill();
-
-        // Connect nearby particles
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const ddx = p.x - p2.x;
-          const ddy = p.y - p2.y;
-          const d = Math.sqrt(ddx * ddx + ddy * ddy);
-          if (d < 120) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(193, 18, 31, ${0.08 * (1 - d / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
+      for (const blob of blobs) {
+        const gradient = ctx.createRadialGradient(
+          blob.cx * w, blob.cy * h, 0,
+          blob.cx * w, blob.cy * h, blob.r * Math.max(w, h)
+        );
+        gradient.addColorStop(0, `rgba(201, 168, 76, ${blob.alpha})`);
+        gradient.addColorStop(0.5, `rgba(201, 168, 76, ${blob.alpha * 0.3})`);
+        gradient.addColorStop(1, 'rgba(201, 168, 76, 0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, w, h);
       }
 
-      animationRef.current = requestAnimationFrame(animate);
+      // Faint geometric grid lines
+      ctx.strokeStyle = 'rgba(201, 168, 76, 0.03)';
+      ctx.lineWidth = 0.5;
+      const gridSize = 80;
+      for (let x = 0; x < w; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 0; y < h; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      frame = requestAnimationFrame(draw);
     };
 
-    animate();
+    frame = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
     };

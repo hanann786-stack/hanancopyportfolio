@@ -1,11 +1,10 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const painCards = [
-  { pain: 'Low Conversions', solution: 'Copy that turns browsers into buyers with buyer-psychology frameworks.' },
-  { pain: 'Weak Brand Voice', solution: 'A distinct, ownable voice people recognize — and remember at 2am.' },
-  { pain: 'Emails Nobody Opens', solution: 'Subject lines that beg to be clicked. Sequences that feel like conversations.' },
+  { pain: 'Emails Nobody Opens', solution: 'Sequences engineered for curiosity and clicks.' },
+  { pain: 'Ads That Get Scrolled Past', solution: 'Hook-first ads built around buyer psychology.' },
+  { pain: 'Landing Pages That Leak Money', solution: 'High-converting pages that close while you sleep.' },
 ];
 
 const FlipCard = ({ pain, solution, index }: { pain: string; solution: string; index: number }) => {
@@ -21,14 +20,12 @@ const FlipCard = ({ pain, solution, index }: { pain: string; solution: string; i
       className="group perspective-1000 h-64"
     >
       <div className="relative w-full h-full transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-        {/* Front */}
-        <div className="absolute inset-0 [backface-visibility:hidden] bg-card border border-border rounded-sm flex flex-col items-center justify-center p-8">
-          <span className="text-primary text-5xl font-display mb-3">✕</span>
-          <h3 className="font-display text-3xl text-foreground">{pain}</h3>
+        <div className="absolute inset-0 [backface-visibility:hidden] bg-card border border-border rounded-sm flex flex-col items-center justify-center p-8 group-hover:border-primary/40 transition-colors">
+          <span className="text-primary text-4xl font-display mb-4">✕</span>
+          <h3 className="font-display text-2xl text-foreground text-center">{pain}</h3>
         </div>
-        {/* Back */}
-        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-primary rounded-sm flex items-center justify-center p-8">
-          <p className="font-body text-primary-foreground text-center text-base leading-relaxed">{solution}</p>
+        <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-primary/10 border border-primary/40 rounded-sm flex items-center justify-center p-8">
+          <p className="font-body text-foreground text-center text-sm leading-relaxed">{solution}</p>
         </div>
       </div>
     </motion.div>
@@ -47,18 +44,18 @@ const PainSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="font-display text-5xl md:text-6xl text-center mb-4 text-foreground"
+          className="font-display text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-foreground max-w-4xl mx-auto leading-tight"
         >
-          Most Copy Blends In.{' '}
-          <span className="text-gradient-crimson">Yours Shouldn't.</span>
+          Most brands are invisible. Not because their product is bad —{' '}
+          <span className="text-gradient-gold">because their words are.</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-muted-foreground text-center mb-16 font-body"
+          className="text-muted-foreground text-center mb-16 font-body text-sm"
         >
-          Hover to see the fix.
+          Hover to see how I fix it.
         </motion.p>
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {painCards.map((card, i) => (

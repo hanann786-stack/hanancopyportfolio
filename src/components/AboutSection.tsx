@@ -16,15 +16,15 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="aspect-[3/4] overflow-hidden rounded-sm">
+            <div className="aspect-[3/4] overflow-hidden border border-primary/30 p-2">
               <img
                 src={portraitImg}
-                alt="Copywriter portrait"
-                className="w-full h-full object-cover"
+                alt="Hanan Arif portrait"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                 loading="lazy"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent rounded-sm" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
           </motion.div>
 
           <motion.div
@@ -32,20 +32,21 @@ const AboutSection = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6 leading-tight">
-              I became a copywriter because I got tired of seeing great products fail because of{' '}
-              <span className="text-gradient-crimson">bad words.</span>
+            <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6 leading-tight">
+              I got tired of watching great products fail because of{' '}
+              <span className="text-gradient-gold">bad words.</span>
             </h2>
             <p className="font-body text-muted-foreground leading-relaxed mb-4">
-              I've spent years studying what makes people click, buy, and come back. Not theory — 
-              real campaigns, real data, real results. I don't write pretty sentences. I write 
-              sentences that make the cash register ring.
+              I'm Hanan Arif. I write emails, landing pages, and ads that don't just
+              sound good — they make people move. My obsession isn't writing. It's the{' '}
+              <span className="text-foreground border-b border-primary/50 pb-0.5">psychology</span>{' '}
+              behind why people click, buy, and come back.
             </p>
             <p className="font-body text-muted-foreground leading-relaxed mb-4">
-              When I'm not obsessing over a headline, you'll find me breaking down Super Bowl ads 
-              for fun, re-reading Ogilvy, or arguing that the Oxford comma is non-negotiable.
+              Every word I write is backed by research, tested by data, and sharpened
+              by instinct. I don't do "nice copy." I do copy that makes the register ring.
             </p>
-            <p className="font-body text-accent text-sm uppercase tracking-widest mt-6">
+            <p className="font-body text-primary text-xs uppercase tracking-[0.2em] mt-8">
               Words are my weapon. Results are my proof.
             </p>
           </motion.div>

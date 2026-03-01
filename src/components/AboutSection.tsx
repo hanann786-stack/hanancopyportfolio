@@ -10,21 +10,54 @@ const AboutSection = () => {
     <section id="about" className="py-32 relative z-10">
       <div className="container mx-auto px-6">
         <div ref={ref} className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* Photo with luxury treatments */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="relative"
+            initial={{ opacity: 0, y: 60, scale: 1.05 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative flex justify-center"
           >
-            <div className="aspect-[3/4] overflow-hidden border border-primary/30 p-2">
-              <img
-                src={portraitImg}
-                alt="Hanan Arif portrait"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                loading="lazy"
-              />
+            {/* Gold glow halo behind frame */}
+            <div className="absolute inset-4 rounded-sm bg-primary/10 blur-3xl" />
+            
+            {/* Offset gold geometric border */}
+            <div className="relative">
+              {/* Outer offset frame */}
+              <div className="absolute -inset-3 border border-primary/40" />
+              {/* Inner frame */}
+              <div className="absolute -inset-1 border border-primary/20" />
+              
+              {/* Photo container */}
+              <div className="relative aspect-[3/4] w-full max-w-[380px] overflow-hidden">
+                <img
+                  src={portraitImg}
+                  alt="Hanan Arif — premium copywriter"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  style={{
+                    filter: 'saturate(0.82) contrast(1.08) brightness(0.95)',
+                  }}
+                />
+                {/* Vignette overlay */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      'radial-gradient(ellipse at center, transparent 50%, rgba(8,8,8,0.7) 100%)',
+                  }}
+                />
+                {/* Cool shadows / warm highlights color grade */}
+                <div
+                  className="absolute inset-0 pointer-events-none mix-blend-color"
+                  style={{
+                    background:
+                      'linear-gradient(180deg, rgba(201,168,76,0.08) 0%, rgba(40,60,80,0.12) 100%)',
+                  }}
+                />
+                {/* Grain texture overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-30 bg-grain" />
+              </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
           </motion.div>
 
           <motion.div

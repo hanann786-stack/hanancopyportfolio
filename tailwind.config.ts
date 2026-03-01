@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Bebas Neue"', 'sans-serif'],
+        display: ['"Playfair Display"', 'serif'],
         body: ['"DM Sans"', 'sans-serif'],
       },
       colors: {
@@ -52,6 +52,7 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         gold: "hsl(var(--gold))",
+        "gold-light": "hsl(var(--gold-light))",
         crimson: "hsl(var(--crimson))",
         "dark-base": "hsl(var(--dark-base))",
         "dark-surface": "hsl(var(--dark-surface))",

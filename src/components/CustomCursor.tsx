@@ -34,20 +34,18 @@ const CustomCursor = () => {
 
   return (
     <>
-      {/* Dot */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999]"
         style={{
-          backgroundColor: hovering ? 'hsl(51, 100%, 52%)' : 'hsl(355, 85%, 41%)',
+          backgroundColor: hovering ? 'hsl(0, 0%, 100%)' : 'hsl(43, 58%, 54%)',
           x: pos.x - 4,
           y: pos.y - 4,
         }}
       />
-      {/* Trailing ring */}
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 rounded-full border pointer-events-none z-[9998]"
         style={{
-          borderColor: hovering ? 'hsl(51, 100%, 52%)' : 'hsl(355, 85%, 41%)',
+          borderColor: hovering ? 'hsl(0, 0%, 100%)' : 'hsl(43, 58%, 54%)',
         }}
         animate={{
           x: pos.x - 16,

@@ -2,10 +2,11 @@ import ParticleBackground from '@/components/ParticleBackground';
 import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
+import CredibilityBar from '@/components/CredibilityBar';
 import PainSection from '@/components/PainSection';
-import SocialProofSection from '@/components/SocialProofSection';
-import WorkShowcase from '@/components/WorkShowcase';
 import OfferSection from '@/components/OfferSection';
+import WorkShowcase from '@/components/WorkShowcase';
+import SocialProofSection from '@/components/SocialProofSection';
 import AboutSection from '@/components/AboutSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
@@ -17,10 +18,11 @@ const Index = () => {
       <CustomCursor />
       <Navbar />
       <HeroSection />
+      <CredibilityBar />
       <PainSection />
-      <SocialProofSection />
-      <WorkShowcase />
       <OfferSection />
+      <WorkShowcase />
+      <SocialProofSection />
       <AboutSection />
       <CTASection />
       <Footer />

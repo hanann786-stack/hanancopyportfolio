@@ -51,6 +51,7 @@
 @layer base {
   * {
     @apply border-border;
+    cursor: none !important;
   }
 
   html {
@@ -59,7 +60,13 @@
 
   body {
     @apply bg-background text-foreground font-body;
-    cursor: none;
+  }
+
+  /* Restore default cursor on touch devices */
+  @media (pointer: coarse) {
+    * {
+      cursor: auto !important;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -13,7 +13,7 @@ const CTASection = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="contact" className="relative z-10 py-32 bg-gradient-cta overflow-hidden">
+    <section id="contact" className="relative z-10 py-20 md:py-32 bg-gradient-cta overflow-hidden">
       <div className="bg-grain absolute inset-0" />
       
       <div className="container mx-auto px-6 text-center relative z-10">
@@ -21,7 +21,7 @@ const CTASection = () => {
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 max-w-4xl mx-auto leading-tight"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 max-w-4xl mx-auto leading-tight"
         >
           Your Next High-Converting Campaign{' '}
           <span className="text-gradient-gold">Starts With One Conversation.</span>

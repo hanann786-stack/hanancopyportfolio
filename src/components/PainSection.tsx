@@ -37,14 +37,14 @@ const PainSection = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="pain" className="py-32 relative z-10">
+    <section id="pain" className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="font-display text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-foreground max-w-4xl mx-auto leading-tight"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-foreground max-w-4xl mx-auto leading-tight"
         >
           Most brands are invisible. Not because their product is bad —{' '}
           <span className="text-gradient-gold">because their words are.</span>
@@ -53,11 +53,14 @@ const PainSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-muted-foreground text-center mb-16 font-body text-sm"
+          className="text-muted-foreground text-center mb-16 font-body text-sm hidden md:block"
         >
           Hover to see how I fix it.
         </motion.p>
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <p className="text-muted-foreground text-center mb-16 font-body text-sm md:hidden">
+          Tap a card to see how I fix it.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {painCards.map((card, i) => (
             <FlipCard key={card.pain} {...card} index={i} />
           ))}

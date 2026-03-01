@@ -14,13 +14,13 @@ const OfferSection = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="services" className="py-32 relative z-10">
+    <section id="services" className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-4xl md:text-5xl lg:text-6xl text-center mb-16 text-foreground"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-12 md:mb-16 text-foreground"
         >
           What Working With Hanan{' '}
           <span className="text-gradient-gold">Actually Gets You</span>
@@ -30,7 +30,7 @@ const OfferSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="max-w-2xl mx-auto bg-card border border-gold rounded-sm p-10 md:p-14 relative overflow-hidden"
+          className="max-w-2xl mx-auto bg-card border border-gold rounded-sm p-8 md:p-14 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl rounded-full" />
           <div className="absolute bottom-0 left-0 w-36 h-36 bg-primary/3 blur-3xl rounded-full" />

@@ -7,9 +7,9 @@ const AboutSection = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-32 relative z-10">
+    <section id="about" className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
-        <div ref={ref} className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div ref={ref} className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Photo with luxury treatments */}
           <motion.div
             initial={{ opacity: 0, y: 60, scale: 1.05 }}

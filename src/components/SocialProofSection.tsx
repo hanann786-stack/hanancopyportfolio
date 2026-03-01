@@ -44,7 +44,7 @@ const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
   }, [inView, target]);
 
   return (
-    <span ref={ref} className="font-display text-5xl md:text-6xl text-gradient-gold">
+    <span ref={ref} className="font-display text-4xl md:text-5xl lg:text-6xl text-gradient-gold">
       {count}{suffix}
     </span>
   );
@@ -55,19 +55,19 @@ const SocialProofSection = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="py-32 relative z-10">
+    <section className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
         {/* Testimonials */}
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-4xl md:text-5xl text-center mb-16 text-foreground"
+          className="font-display text-3xl sm:text-4xl md:text-5xl text-center mb-12 md:mb-16 text-foreground"
         >
           What They <span className="text-gradient-gold">Said</span>
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-24 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-20 md:mb-24 max-w-5xl mx-auto">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}

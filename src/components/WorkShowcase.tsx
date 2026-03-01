@@ -62,13 +62,13 @@ const WorkShowcase = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="work" className="py-32 relative z-10">
+    <section id="work" className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-foreground"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-foreground"
         >
           Copy That Actually{' '}
           <span className="text-gradient-gold">Did Something</span>
@@ -81,7 +81,7 @@ const WorkShowcase = () => {
         >
           Every project. One goal: make someone take action.
         </motion.p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {projects.map((p, i) => (
             <TiltCard key={p.name} project={p} index={i} />
           ))}

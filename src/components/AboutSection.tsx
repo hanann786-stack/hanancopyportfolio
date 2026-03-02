@@ -65,21 +65,22 @@ const AboutSection = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6 leading-tight">
+            <span className="section-label block mb-4">ABOUT</span>
+            <h2 className="font-display text-3xl md:text-4xl text-white-headline mb-6 leading-tight tracking-[-0.03em]">
               I got tired of watching great products fail because of{' '}
               <span className="text-gradient-gold">bad words.</span>
             </h2>
-            <p className="font-body text-muted-foreground leading-relaxed mb-4">
-              I'm Hanan Arif. I write emails, landing pages, and ads that don't just
-              sound good — they make people move. My obsession isn't writing. It's the{' '}
-              <span className="text-foreground border-b border-primary/50 pb-0.5">psychology</span>{' '}
+            <p className="font-body text-cream/80 leading-relaxed mb-4">
+              I'm <span className="text-gold">Hanan Arif</span>. I write emails, landing pages, and ads that don't just
+              sound good — they <span className="text-gold">make people move</span>. My obsession isn't writing. It's the{' '}
+              <span className="text-gold border-b border-primary/50 pb-0.5">psychology</span>{' '}
               behind why people click, buy, and come back.
             </p>
-            <p className="font-body text-muted-foreground leading-relaxed mb-4">
+            <p className="font-body text-cream/80 leading-relaxed mb-4">
               Every word I write is backed by research, tested by data, and sharpened
-              by instinct. I don't do "nice copy." I do copy that makes the register ring.
+              by instinct. I <span className="text-crimson">don't</span> do "nice copy." I do copy that makes the register ring.
             </p>
-            <p className="font-body text-primary text-xs uppercase tracking-[0.2em] mt-8">
+            <p className="font-accent text-gold text-[12px] uppercase tracking-[0.15em] mt-8">
               Words are my weapon. Results are my proof.
             </p>
           </motion.div>

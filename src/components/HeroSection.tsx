@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
-const line1Words = "I Don't Write Copy.".split(' ');
-const line2Words = "I Write Revenue.".split(' ');
-
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -20,7 +17,7 @@ const HeroSection = () => {
       >
         <div className="animate-slow-spin w-24 h-24 md:w-28 md:h-28 rounded-full border border-primary/30 flex items-center justify-center">
           <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-primary/50 flex items-center justify-center text-center">
-            <span className="font-body text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-primary leading-tight">
+            <span className="font-accent text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-gold leading-tight">
               Available<br />for Projects<br />✦ 2025
             </span>
           </div>
@@ -41,20 +38,20 @@ const HeroSection = () => {
           initial={{ opacity: 0, letterSpacing: '0.05em' }}
           animate={{ opacity: 1, letterSpacing: '0.3em' }}
           transition={{ delay: 0.1, duration: 1 }}
-          className="block font-body text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary/60 mb-8"
+          className="block font-accent text-[11px] md:text-[13px] uppercase tracking-[0.3em] text-gold/60 mb-8"
         >
           Email Marketing · Landing Pages · Social Ads
         </motion.span>
 
-        <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.9] mb-2">
+        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-[110px] xl:text-[120px] leading-[0.9] mb-2 tracking-[-0.03em]">
           <span className="block overflow-hidden">
-            {line1Words.map((word, i) => (
+            {["I", "Don't", "Write", "Copy."].map((word, i) => (
               <motion.span
                 key={`l1-${i}`}
                 initial={{ opacity: 0, y: 80, rotateX: 40 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{ delay: 0.4 + i * 0.08, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block mr-3 md:mr-4 text-foreground"
+                className="inline-block mr-3 md:mr-4 text-white-headline"
                 style={{ perspective: '600px' }}
               >
                 {word}
@@ -62,20 +59,27 @@ const HeroSection = () => {
             ))}
           </span>
           <span className="block mt-2 overflow-hidden">
-            {line2Words.map((word, i) => (
+            {["I", "Write"].map((word, i) => (
               <motion.span
                 key={`l2-${i}`}
                 initial={{ opacity: 0, y: 80, rotateX: 40 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{ delay: 0.9 + i * 0.1, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className={`inline-block mr-3 md:mr-4 ${
-                  word === 'Decisions.' ? 'text-gradient-gold' : 'text-foreground'
-                }`}
+                className="inline-block mr-3 md:mr-4 text-white-headline"
                 style={{ perspective: '600px' }}
               >
                 {word}
               </motion.span>
             ))}
+            <motion.span
+              initial={{ opacity: 0, y: 80, rotateX: 40 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ delay: 1.1, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-block mr-3 md:mr-4 text-gold"
+              style={{ perspective: '600px' }}
+            >
+              Revenue.
+            </motion.span>
           </span>
         </h1>
 
@@ -91,9 +95,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.7, duration: 0.6 }}
-          className="font-body text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="font-body text-base md:text-lg text-cream max-w-2xl mx-auto mb-12 leading-relaxed opacity-70"
         >
-          Hi, I'm Hanan Arif — and the fact that you're still reading this?
+          Hi, I'm <span className="text-gold">Hanan Arif</span> — and the fact that you're still reading this?
           <br className="hidden md:block" />
           That's exactly what I do for your brand.
         </motion.p>
@@ -107,14 +111,14 @@ const HeroSection = () => {
           <a
             href="#work"
             data-clickable
-            className="font-body text-xs uppercase tracking-[0.2em] bg-primary text-primary-foreground px-10 py-4 animate-glow-pulse hover:bg-primary/90 transition-colors font-medium"
+            className="font-accent text-[13px] uppercase tracking-[0.15em] bg-primary text-primary-foreground px-10 py-4 animate-glow-pulse hover:bg-primary/90 transition-colors font-medium"
           >
             See My Work →
           </a>
           <a
             href="#contact"
             data-clickable
-            className="font-body text-xs uppercase tracking-[0.2em] border border-foreground/20 text-foreground px-10 py-4 hover:border-primary hover:text-primary transition-all duration-300 font-medium"
+            className="font-accent text-[13px] uppercase tracking-[0.15em] border border-foreground/20 text-foreground px-10 py-4 hover:border-primary hover:text-primary transition-all duration-300 font-medium"
           >
             Let's Talk
           </a>

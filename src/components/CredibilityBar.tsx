@@ -17,17 +17,17 @@ const CredibilityBar = () => {
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}
       transition={{ duration: 0.6 }}
-      className="relative z-10 py-5 bg-glass border-y border-border overflow-hidden"
+      className="relative z-10 py-5 bg-glass border-y border-[hsla(43,52%,54%,0.18)] overflow-hidden"
     >
       <div className="flex items-center">
-        <span className="font-body text-xs uppercase tracking-[0.2em] text-muted-foreground whitespace-nowrap pl-6 pr-8">
+        <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-muted-foreground whitespace-nowrap pl-6 pr-8">
           Trusted across industries —
         </span>
         <div className="flex animate-marquee whitespace-nowrap">
           {[...niches, ...niches].map((n, i) => (
             <span
               key={i}
-              className="mx-6 font-body text-xs uppercase tracking-[0.2em] text-primary/50"
+              className="mx-6 font-accent text-[11px] uppercase tracking-[0.15em] text-gold/50"
             >
               {n}
             </span>

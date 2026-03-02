@@ -14,13 +14,20 @@ const OfferSection = () => {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="services" className="py-20 md:py-32 relative z-10">
+    <section id="services" className="py-20 md:py-32 relative z-10 bg-gradient-warm">
       <div className="container mx-auto px-6">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="section-label block text-center mb-4"
+        >
+          SERVICES
+        </motion.span>
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-12 md:mb-16 text-foreground"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-12 md:mb-16 text-white-headline tracking-[-0.03em]"
         >
           What Working With Hanan{' '}
           <span className="text-gradient-gold">Actually Gets You</span>
@@ -30,7 +37,7 @@ const OfferSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="max-w-2xl mx-auto bg-card border border-gold rounded-sm p-8 md:p-14 relative overflow-hidden"
+          className="max-w-2xl mx-auto bg-glass-card border border-[hsla(43,52%,54%,0.18)] rounded-sm p-8 md:p-14 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl rounded-full" />
           <div className="absolute bottom-0 left-0 w-36 h-36 bg-primary/3 blur-3xl rounded-full" />
@@ -42,10 +49,18 @@ const OfferSection = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.4 + i * 0.1 }}
-                className="flex items-start gap-4 font-body text-foreground/90"
+                className="flex items-start gap-4 font-body text-cream"
               >
-                <span className="text-primary text-lg mt-0.5">✦</span>
-                <span className="text-base leading-relaxed">{item}</span>
+                <span className="text-gold text-lg mt-0.5">✦</span>
+                <span className="text-base leading-relaxed">
+                  {item.includes('psychology') ? (
+                    <>
+                      {item.split('psychology')[0]}
+                      <span className="text-gold">psychology</span>
+                      {item.split('psychology')[1]}
+                    </>
+                  ) : item}
+                </span>
               </motion.li>
             ))}
           </ul>
@@ -54,9 +69,11 @@ const OfferSection = () => {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 1 }}
-            className="mt-10 pt-8 border-t border-border font-display text-primary text-center italic text-lg"
+            className="mt-10 pt-8 border-t border-[hsla(43,52%,54%,0.18)] font-display text-center italic text-lg md:text-xl"
           >
-            This isn't a service. It's your unfair advantage.
+            <span className="text-cream">This isn't a service. It's your </span>
+            <span className="text-gold">unfair advantage</span>
+            <span className="text-cream">.</span>
           </motion.p>
         </motion.div>
       </div>

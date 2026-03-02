@@ -25,6 +25,18 @@ const stats = [
   { value: 3, suffix: 'x', label: 'Avg Conversion Lift' },
 ];
 
+// Highlight numbers in testimonials with gold
+const highlightNumbers = (text: string) => {
+  const parts = text.split(/(\d+[\d.]*[x%]?)/g);
+  return parts.map((part, i) =>
+    /\d/.test(part) ? (
+      <span key={i} className="text-gold font-semibold">{part}</span>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+};
+
 const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -44,7 +56,7 @@ const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
   }, [inView, target]);
 
   return (
-    <span ref={ref} className="font-display text-4xl md:text-5xl lg:text-6xl text-gradient-gold">
+    <span ref={ref} className="font-display text-4xl md:text-5xl lg:text-6xl text-gold">
       {count}{suffix}
     </span>
   );
@@ -58,11 +70,18 @@ const SocialProofSection = () => {
     <section className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
         {/* Testimonials */}
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="section-label block text-center mb-4"
+        >
+          TESTIMONIALS
+        </motion.span>
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-3xl sm:text-4xl md:text-5xl text-center mb-12 md:mb-16 text-foreground"
+          className="font-display text-3xl sm:text-4xl md:text-5xl text-center mb-12 md:mb-16 text-white-headline tracking-[-0.03em]"
         >
           What They <span className="text-gradient-gold">Said</span>
         </motion.h2>
@@ -74,14 +93,14 @@ const SocialProofSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.15 }}
-              className="bg-card border border-border rounded-sm p-8 relative"
+              className="bg-glass-card border border-[hsla(43,52%,54%,0.18)] rounded-sm p-8 relative"
             >
-              <span className="font-display text-6xl text-primary/20 absolute top-4 left-6">"</span>
-              <p className="font-body text-foreground/80 text-sm leading-relaxed mt-8 mb-6">
-                {t.quote}
+              <span className="font-display text-6xl text-gold/20 absolute top-4 left-6">"</span>
+              <p className="font-body text-cream/80 text-sm leading-relaxed mt-8 mb-6">
+                {highlightNumbers(t.quote)}
               </p>
               <div>
-                <p className="font-body font-semibold text-foreground text-sm">{t.name}</p>
+                <p className="font-body font-semibold text-cream text-sm">{t.name}</p>
                 <p className="font-body text-muted-foreground text-xs">{t.title}</p>
               </div>
             </motion.div>
@@ -93,7 +112,7 @@ const SocialProofSection = () => {
           {stats.map((s) => (
             <div key={s.label}>
               <CountUp target={s.value} suffix={s.suffix} />
-              <p className="font-body text-muted-foreground text-xs mt-2 uppercase tracking-[0.2em]">
+              <p className="font-accent text-muted-foreground text-[11px] mt-2 uppercase tracking-[0.15em]">
                 {s.label}
               </p>
             </div>

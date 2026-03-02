@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 
 const testimonials = [
   {
-    quote: "She didn't just write copy. She rewired how we talk to our customers. Conversions jumped 3.2x in 60 days.",
+    quote: "He didn't just write copy. He rewired how we talk to our customers. Conversions jumped 3.2x in 60 days.",
     name: 'Sarah Chen',
     title: 'CMO, Velostra',
   },
@@ -13,7 +13,7 @@ const testimonials = [
     title: 'Founder, NovaBrand',
   },
   {
-    quote: "She writes like she's inside your customer's head. It's unsettling — and incredibly effective.",
+    quote: "He writes like he's inside your customer's head. It's unsettling — and incredibly effective.",
     name: 'Elena Rossi',
     title: 'Head of Growth, Arcline',
   },

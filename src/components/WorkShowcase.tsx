@@ -10,6 +10,18 @@ const projects = [
   { name: 'Coaching High-Ticket Funnel', type: 'Ad Copy + Landing Page', result: 'Booked 47 calls in 14 days' },
 ];
 
+// Highlight numbers/stats in gold
+const highlightStats = (text: string) => {
+  const parts = text.split(/(\d+[\d.]*%?|\$[\d,]+K?)/g);
+  return parts.map((part, i) =>
+    /\d/.test(part) || /\$/.test(part) ? (
+      <span key={i} className="text-gold font-semibold">{part}</span>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+};
+
 const TiltCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const sectionRef = useRef(null);
@@ -41,15 +53,17 @@ const TiltCard = ({ project, index }: { project: typeof projects[0]; index: numb
         onMouseMove={handleMouse}
         onMouseLeave={handleLeave}
         style={{ rotateX, rotateY, transformPerspective: 800 }}
-        className="bg-card border border-border rounded-sm p-8 h-full group hover:border-primary/40 transition-colors duration-300"
+        className="bg-glass-card border border-[hsla(43,52%,54%,0.18)] rounded-sm p-8 h-full group hover:border-primary/40 transition-colors duration-300"
         data-clickable
       >
-        <span className="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-3 block">
+        <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-gold mb-3 block">
           {project.type}
         </span>
-        <h3 className="font-display text-xl text-foreground mb-3">{project.name}</h3>
-        <p className="font-body text-muted-foreground text-sm mb-6">{project.result}</p>
-        <span className="font-body text-xs uppercase tracking-[0.2em] text-primary group-hover:text-gold-light transition-colors">
+        <h3 className="font-display text-xl text-white-headline mb-3">{project.name}</h3>
+        <p className="font-body text-cream text-sm mb-6 leading-relaxed">
+          {highlightStats(project.result)}
+        </p>
+        <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-gold group-hover:text-gold-bright transition-colors">
           View →
         </span>
       </motion.div>
@@ -64,11 +78,18 @@ const WorkShowcase = () => {
   return (
     <section id="work" className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="section-label block text-center mb-4"
+        >
+          WORK
+        </motion.span>
         <motion.h2
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-foreground"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-white-headline tracking-[-0.03em]"
         >
           Copy That Actually{' '}
           <span className="text-gradient-gold">Did Something</span>

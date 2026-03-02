@@ -1,10 +1,10 @@
 import { Mail, Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => (
-  <footer className="relative z-10 py-10 border-t border-border">
+  <footer className="relative z-10 py-10 border-t border-[hsla(43,52%,54%,0.18)]">
     <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <span className="font-display text-lg tracking-wide text-muted-foreground">
-        HANAN <span className="text-primary">ARIF</span>
+      <span className="font-display text-lg tracking-wide text-cream/60">
+        HANAN <span className="text-gold">ARIF</span>
       </span>
       <div className="flex items-center gap-4">
         {[
@@ -18,7 +18,7 @@ const Footer = () => (
             target="_blank"
             rel="noopener noreferrer"
             data-clickable
-            className="text-muted-foreground hover:text-primary transition-colors"
+            className="text-muted-foreground hover:text-gold transition-colors"
             aria-label={s.label}
           >
             <s.icon size={16} />

@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
-const line1Words = "I Don't Just Write Copy.".split(' ');
-const line2Words = "I Engineer Decisions.".split(' ');
+const line1Words = "I Don't Write Copy.".split(' ');
+const line2Words = "I Write Revenue.".split(' ');
 
 const HeroSection = () => {
   return (

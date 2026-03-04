@@ -161,6 +161,7 @@ const WorkShowcase = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const [activeStudy, setActiveStudy] = useState<CaseStudy | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <>
@@ -192,13 +193,13 @@ const WorkShowcase = () => {
           </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {caseStudies.map((s, i) => (
-              <TiltCard key={s.name} study={s} index={i} onClick={() => setActiveStudy(s)} />
+              <TiltCard key={s.name} study={s} index={i} onClick={() => { setActiveStudy(s); setActiveIndex(i); }} />
             ))}
           </div>
         </div>
       </section>
 
-      <CaseStudyModal study={activeStudy} onClose={() => setActiveStudy(null)} />
+      <CaseStudyModal study={activeStudy} cardIndex={activeIndex} onClose={() => setActiveStudy(null)} />
     </>
   );
 };

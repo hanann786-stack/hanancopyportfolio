@@ -4,6 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { handleGmailClick } from "@/lib/gmail";
 
+// Replace with your EmailJS credentials from emailjs.com — free account, takes 5 minutes to set up.
+const SERVICE_ID = 'service_hrohxo7';
+const TEMPLATE_ID = 'template_4hp5jtj';
+const PUBLIC_KEY = 'nfAJdaLTCdX7h-H-0';
+
+// Initialize EmailJS once at module level
+emailjs.init(PUBLIC_KEY);
+
 const REVENUE_OPTIONS = [
   "Just starting out",
   "$1K – $5K/month",

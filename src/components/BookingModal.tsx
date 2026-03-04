@@ -4,6 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { handleGmailClick } from "@/lib/gmail";
 
+// Replace with your EmailJS credentials from emailjs.com — free account, takes 5 minutes to set up.
+const SERVICE_ID = 'service_hrohxo7';
+const TEMPLATE_ID = 'template_4hp5jtj';
+const PUBLIC_KEY = 'nfAJdaLTCdX7h-H-0';
+
+// Initialize EmailJS once at module level
+emailjs.init(PUBLIC_KEY);
+
 const REVENUE_OPTIONS = [
   "Just starting out",
   "$1K – $5K/month",
@@ -49,30 +57,41 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!validate()) return;
     setSending(true);
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      business: formData.business,
+      revenue: formData.revenue,
+      services: Array.isArray(formData.services)
+        ? formData.services.join(', ')
+        : formData.services,
+      challenge: formData.challenge,
+      to_email: 'hananhereat@gmail.com',
+    };
+
     try {
-      // Replace with your EmailJS credentials from emailjs.com — free account, takes 5 minutes to set up.
-      await emailjs.send(
-        "service_hrohxo7",
-        "template_4hp5jtj",
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          business: formData.business,
-          revenue: formData.revenue,
-          services: formData.services.join(", "),
-          challenge: formData.challenge,
-          to_email: "hananhereat@gmail.com",
-        },
-        "nfAJdaLTCdX7h-H-0",
+      const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      console.log('SUCCESS:', response.status, response.text);
+      setStep(2);
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      // Fallback — open Gmail directly with pre-filled info
+      const subject = encodeURIComponent('Strategy Call Request — ' + formData.name);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\nBusiness: ${formData.business}\nRevenue: ${formData.revenue}\nNeeds: ${formData.services.join(', ')}\nChallenge: ${formData.challenge}`
       );
-    } catch {
-      // Silently proceed — the form data is still collected
+      window.open(
+        `https://mail.google.com/mail/?view=cm&to=hananhereat@gmail.com&su=${subject}&body=${body}`,
+        '_blank'
+      );
+      setStep(2); // still show confirmation
     }
     setSending(false);
-    setStep(2);
   };
 
   const handleClose = () => {

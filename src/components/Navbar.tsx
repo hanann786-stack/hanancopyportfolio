@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
@@ -8,30 +8,41 @@ const links = [
   { label: 'About', href: '#about' },
 ];
 
-const Navbar = () => {
+const Navbar = memo(() => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const scrollTicking = useRef(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      if (!scrollTicking.current) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50);
+          scrollTicking.current = false;
+        });
+        scrollTicking.current = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  const handleLinkClick = () => setMobileOpen(false);
+  const handleLinkClick = useCallback(() => setMobileOpen(false), []);
+  const toggleMobile = useCallback(() => setMobileOpen(o => !o), []);
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      style={{ willChange: 'transform' }}
+      className={`fixed top-0 left-0 right-0 z-50 ${
         scrolled || mobileOpen
           ? 'bg-glass border-b border-[hsla(43,52%,54%,0.18)]'
           : 'bg-transparent'
@@ -66,7 +77,7 @@ const Navbar = () => {
         {/* Mobile hamburger */}
         <button
           className="md:hidden text-cream p-1"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          onClick={toggleMobile}
           aria-label="Toggle menu"
           data-clickable
         >
@@ -78,9 +89,9 @@ const Navbar = () => {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-glass border-b border-[hsla(43,52%,54%,0.18)]"
           >
@@ -110,6 +121,8 @@ const Navbar = () => {
       </AnimatePresence>
     </motion.nav>
   );
-};
+});
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;

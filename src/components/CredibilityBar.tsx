@@ -1,5 +1,4 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const niches = [
   'E-Commerce', 'SaaS', 'Fashion', 'Health & Wellness', 'Personal Finance',
@@ -7,17 +6,31 @@ const niches = [
 ];
 
 const CredibilityBar = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
-    <motion.section
+    <section
       id="credibility"
       ref={ref}
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.6 }}
-      className="relative z-10 py-5 bg-glass border-y border-[hsla(43,52%,54%,0.18)] overflow-hidden"
+      className="relative z-10 py-5 bg-glass border-y border-[hsla(43,52%,54%,0.18)] overflow-hidden transition-opacity duration-600"
+      style={{ opacity: visible ? 1 : 0 }}
     >
       <div className="flex items-center">
         <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-muted-foreground whitespace-nowrap pl-6 pr-8">
@@ -34,7 +47,7 @@ const CredibilityBar = () => {
           ))}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

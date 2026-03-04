@@ -243,19 +243,6 @@
   100% { transform: rotate(360deg); }
 }
 
-@keyframes cursor-ring-rotate {
-  0% { transform: translate(var(--tx, 0), var(--ty, 0)) rotate(45deg); }
-  100% { transform: translate(var(--tx, 0), var(--ty, 0)) rotate(405deg); }
-}
-
-.cursor-ring-spin {
-  animation: cursor-diamond-spin 8s linear infinite;
-}
-
-@keyframes cursor-diamond-spin {
-  0% { rotate: 0deg; }
-  100% { rotate: 360deg; }
-}
 
 .animate-glow-pulse {
   animation: glow-pulse-gold 2.5s ease-in-out infinite;

@@ -18,4 +18,14 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'framer': ['framer-motion'],
+          'react-vendor': ['react', 'react-dom'],
+        },
+      },
+    },
+  },
 }));

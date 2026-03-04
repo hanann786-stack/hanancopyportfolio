@@ -1,6 +1,15 @@
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useRef, useState, MouseEvent } from 'react';
-import CaseStudyModal, { CaseStudy } from './CaseStudyModal';
+import { useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useRef, useState, useCallback, memo, lazy, Suspense, MouseEvent, useEffect } from 'react';
+
+export interface CaseStudy {
+  type: string;
+  name: string;
+  headline: string;
+  body: string[];
+  statLine: string;
+}
+
+const CaseStudyModal = lazy(() => import('./CaseStudyModal'));
 
 const caseStudies: CaseStudy[] = [
   {
@@ -89,7 +98,6 @@ const caseStudies: CaseStudy[] = [
   },
 ];
 
-// Highlight numbers/stats in gold
 const highlightStats = (text: string) => {
   const parts = text.split(/(\d+[\d.]*%?|\$[\d,]+K?)/g);
   return parts.map((part, i) =>
@@ -101,15 +109,34 @@ const highlightStats = (text: string) => {
   );
 };
 
-const TiltCard = ({ study, index, onClick }: { study: CaseStudy; index: number; onClick: () => void }) => {
+const TiltCard = memo(({ study, index, onClick }: { study: CaseStudy; index: number; onClick: () => void }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { once: true, margin: '-50px' });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inView = useRef(false);
+  const [visible, setVisible] = useState(false);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 });
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 });
+
+  // CSS IntersectionObserver for entrance
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Stagger delay via setTimeout
+          setTimeout(() => setVisible(true), index * 100);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [index]);
 
   const handleMouse = (e: MouseEvent) => {
     if (!ref.current) return;
@@ -120,22 +147,27 @@ const TiltCard = ({ study, index, onClick }: { study: CaseStudy; index: number; 
 
   const handleLeave = () => { x.set(0); y.set(0); };
 
-  // Short teaser from first body paragraph
   const teaser = study.body[0].length > 120 ? study.body[0].slice(0, 120) + '…' : study.body[0];
 
   return (
-    <motion.div
-      ref={sectionRef}
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+    <div
+      ref={cardRef}
+      className="transition-all duration-500 ease-out"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(50px)',
+        willChange: visible ? 'auto' : 'transform, opacity',
+      }}
     >
-      <motion.div
+      <div
         ref={ref}
         onMouseMove={handleMouse}
         onMouseLeave={handleLeave}
         onClick={onClick}
-        style={{ rotateX, rotateY, transformPerspective: 800 }}
+        style={{
+          transform: `perspective(800px) rotateX(${rotateX.get()}deg) rotateY(${rotateY.get()}deg)`,
+          willChange: 'transform',
+        }}
         className="bg-glass-card border border-[hsla(43,52%,54%,0.18)] rounded-sm p-8 h-full group hover:border-primary/40 transition-colors duration-300 cursor-pointer"
         data-clickable
       >
@@ -152,54 +184,82 @@ const TiltCard = ({ study, index, onClick }: { study: CaseStudy; index: number; 
         <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-gold group-hover:text-gold-bright transition-colors">
           View →
         </span>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
-};
+});
+
+TiltCard.displayName = 'TiltCard';
 
 const WorkShowcase = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
+  const [headerVisible, setHeaderVisible] = useState(false);
   const [activeStudy, setActiveStudy] = useState<CaseStudy | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const handleCardClick = useCallback((study: CaseStudy, index: number) => {
+    setActiveStudy(study);
+    setActiveIndex(index);
+  }, []);
+
+  const handleClose = useCallback(() => setActiveStudy(null), []);
 
   return (
     <>
       <section id="work" className="py-20 md:py-32 relative z-10">
         <div className="container mx-auto px-6">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            className="section-label block text-center mb-4"
+          <span
+            className="section-label block text-center mb-4 transition-opacity duration-500"
+            style={{ opacity: headerVisible ? 1 : 0 }}
           >
             WORK
-          </motion.span>
-          <motion.h2
+          </span>
+          <h2
             ref={ref}
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-white-headline tracking-[-0.03em]"
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 text-white-headline tracking-[-0.03em] transition-all duration-600 ease-out"
+            style={{
+              opacity: headerVisible ? 1 : 0,
+              transform: headerVisible ? 'translateY(0)' : 'translateY(30px)',
+            }}
           >
             Copy That Actually{' '}
             <span className="text-gradient-gold">Did Something</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground text-center mb-16 font-body text-sm"
+          </h2>
+          <p
+            className="text-muted-foreground text-center mb-16 font-body text-sm transition-opacity duration-500 delay-200"
+            style={{ opacity: headerVisible ? 1 : 0 }}
           >
             Every project. One goal: make someone take action.
-          </motion.p>
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {caseStudies.map((s, i) => (
-              <TiltCard key={s.name} study={s} index={i} onClick={() => { setActiveStudy(s); setActiveIndex(i); }} />
+              <TiltCard key={s.name} study={s} index={i} onClick={() => handleCardClick(s, i)} />
             ))}
           </div>
         </div>
       </section>
 
-      <CaseStudyModal study={activeStudy} cardIndex={activeIndex} onClose={() => setActiveStudy(null)} />
+      <Suspense fallback={null}>
+        {activeStudy && (
+          <CaseStudyModal study={activeStudy} cardIndex={activeIndex} onClose={handleClose} />
+        )}
+      </Suspense>
     </>
   );
 };

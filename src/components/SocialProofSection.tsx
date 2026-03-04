@@ -1,4 +1,3 @@
-import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
 const testimonials = [
@@ -25,7 +24,6 @@ const stats = [
   { value: 3, suffix: 'x', label: 'Avg Conversion Lift' },
 ];
 
-// Highlight numbers in testimonials with gold
 const highlightNumbers = (text: string) => {
   const parts = text.split(/(\d+[\d.]*[x%]?)/g);
   return parts.map((part, i) =>
@@ -39,21 +37,33 @@ const highlightNumbers = (text: string) => {
 
 const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const duration = 2000;
-    const step = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [inView, target]);
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          let start = 0;
+          const duration = 2000;
+          const step = (timestamp: number) => {
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+            setCount(Math.floor(progress * target));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [target]);
 
   return (
     <span ref={ref} className="font-display text-4xl md:text-5xl lg:text-6xl text-gold">
@@ -63,37 +73,55 @@ const CountUp = ({ target, suffix }: { target: number; suffix: string }) => {
 };
 
 const SocialProofSection = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <section className="py-20 md:py-32 relative z-10">
       <div className="container mx-auto px-6">
-        {/* Testimonials */}
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          className="section-label block text-center mb-4"
+        <span
+          className="section-label block text-center mb-4 transition-opacity duration-500"
+          style={{ opacity: visible ? 1 : 0 }}
         >
           TESTIMONIALS
-        </motion.span>
-        <motion.h2
+        </span>
+        <h2
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="font-display text-3xl sm:text-4xl md:text-5xl text-center mb-12 md:mb-16 text-white-headline tracking-[-0.03em]"
+          className="font-display text-3xl sm:text-4xl md:text-5xl text-center mb-12 md:mb-16 text-white-headline tracking-[-0.03em] transition-all duration-500 ease-out"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? 'translateY(0)' : 'translateY(30px)',
+          }}
         >
           What They <span className="text-gradient-gold">Said</span>
-        </motion.h2>
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-20 md:mb-24 max-w-5xl mx-auto">
           {testimonials.map((t, i) => (
-            <motion.div
+            <div
               key={t.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.15 }}
-              className="bg-glass-card border border-[hsla(43,52%,54%,0.18)] rounded-sm p-8 relative"
+              className="bg-glass-card border border-[hsla(43,52%,54%,0.18)] rounded-sm p-8 relative transition-all duration-500 ease-out"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(40px)',
+                transitionDelay: `${0.2 + i * 0.15}s`,
+              }}
             >
               <span className="font-display text-6xl text-gold/20 absolute top-4 left-6">"</span>
               <p className="font-body text-cream/80 text-sm leading-relaxed mt-8 mb-6">
@@ -103,11 +131,10 @@ const SocialProofSection = () => {
                 <p className="font-body font-semibold text-cream text-sm">{t.name}</p>
                 <p className="font-body text-muted-foreground text-xs">{t.title}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto text-center">
           {stats.map((s) => (
             <div key={s.label}>

@@ -1,13 +1,25 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
-const ParticleBackground = () => {
+const ParticleBackground = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
+  const rafRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+
+    // On mobile, skip canvas entirely — CSS gradient fallback handles it
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      canvas.style.display = 'none';
+      return;
+    }
+
+    const ctx = canvas.getContext('2d', {
+      alpha: false,
+      desynchronized: true,
+    });
     if (!ctx) return;
 
     const resize = () => {
@@ -15,7 +27,7 @@ const ParticleBackground = () => {
       canvas.height = window.innerHeight;
     };
     resize();
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', resize, { passive: true });
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = {
@@ -23,20 +35,31 @@ const ParticleBackground = () => {
         y: e.clientY / window.innerHeight,
       };
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    let frame: number;
+    // FPS cap
+    let lastTime = 0;
+    const FRAME_MIN = 1000 / 60;
 
     const draw = (time: number) => {
+      if (time - lastTime < FRAME_MIN) {
+        rafRef.current = requestAnimationFrame(draw);
+        return;
+      }
+      lastTime = time;
+
       const w = canvas.width;
       const h = canvas.height;
-      ctx.clearRect(0, 0, w, h);
+
+      // Clear with background color (no alpha = faster)
+      ctx.fillStyle = '#080808';
+      ctx.fillRect(0, 0, w, h);
 
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const t = time * 0.00025;
 
-      // Dramatic golden aurora blobs — larger, brighter, more mouse-reactive
+      // Aurora blobs
       const blobs = [
         { cx: 0.3 + Math.sin(t) * 0.15 + (mx - 0.5) * 0.25, cy: 0.35 + Math.cos(t * 0.7) * 0.12 + (my - 0.5) * 0.2, r: 0.5, alpha: 0.12 },
         { cx: 0.7 + Math.cos(t * 0.8) * 0.18 + (mx - 0.5) * 0.2, cy: 0.6 + Math.sin(t * 0.6) * 0.1 + (my - 0.5) * 0.18, r: 0.45, alpha: 0.1 },
@@ -56,42 +79,63 @@ const ParticleBackground = () => {
         ctx.fillRect(0, 0, w, h);
       }
 
-      // Faint geometric grid lines
+      // Batched grid lines — single beginPath + single stroke
       ctx.strokeStyle = 'rgba(201, 168, 76, 0.03)';
       ctx.lineWidth = 0.5;
+      ctx.beginPath();
       const gridSize = 80;
       for (let x = 0; x < w; x += gridSize) {
-        ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, h);
-        ctx.stroke();
       }
       for (let y = 0; y < h; y += gridSize) {
-        ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(w, y);
-        ctx.stroke();
       }
+      ctx.stroke();
 
-      frame = requestAnimationFrame(draw);
+      rafRef.current = requestAnimationFrame(draw);
     };
 
-    frame = requestAnimationFrame(draw);
+    rafRef.current = requestAnimationFrame(draw);
+
+    // Pause when tab hidden
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafRef.current);
+      } else {
+        lastTime = 0;
+        rafRef.current = requestAnimationFrame(draw);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ willChange: 'transform' }}
-    />
+    <>
+      {/* CSS gradient fallback for mobile */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0 md:hidden"
+        style={{
+          background: 'radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%)',
+        }}
+      />
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-0 hidden md:block"
+        style={{ willChange: 'transform' }}
+      />
+    </>
   );
-};
+});
+
+ParticleBackground.displayName = 'ParticleBackground';
 
 export default ParticleBackground;

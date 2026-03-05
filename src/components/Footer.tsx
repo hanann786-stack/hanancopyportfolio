@@ -28,7 +28,7 @@ const Footer = () => (
         ))}
       </div>
       <p className="font-body text-xs text-muted-foreground">
-        © 2025 Hanan Arif. Built to Convert.
+        © 2026 Hanan Arif. Built to Convert.
       </p>
     </div>
   </footer>

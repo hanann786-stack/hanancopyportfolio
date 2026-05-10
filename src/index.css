@@ -161,6 +161,12 @@
     color: hsl(var(--color-gold));
   }
 
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, rgba(108, 78, 242, 0.05) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    background-position: 0 0;
+  }
+
   .bg-grain {
     position: relative;
   }

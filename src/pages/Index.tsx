@@ -1,4 +1,3 @@
-import ParticleBackground from '@/components/ParticleBackground';
 import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -13,8 +12,7 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="bg-grain min-h-screen relative">
-      <ParticleBackground />
+    <div className="bg-grain bg-dot-grid min-h-screen relative">
       <CustomCursor />
       <Navbar />
       <HeroSection />

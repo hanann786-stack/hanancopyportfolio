@@ -1,9 +1,13 @@
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import HeroBackground from './HeroBackground';
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated hero background (canvas) */}
+      <HeroBackground />
+
       {/* Cinematic letterbox bars */}
       <div className="absolute top-0 left-0 right-0 h-16 md:h-24 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
       <div className="absolute bottom-0 left-0 right-0 h-16 md:h-24 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />

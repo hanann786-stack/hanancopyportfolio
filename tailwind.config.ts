@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         display: ['"Cormorant Garamond"', 'serif'],
-        body: ['"DM Sans"', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', '"DM Sans"', 'sans-serif'],
         accent: ['"Bebas Neue"', 'sans-serif'],
       },
       colors: {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,42 +6,49 @@
 
 @layer base {
   :root {
-    /* Psychology-driven master color system */
-    --color-void: 0 0% 3.1%;
-    --color-gold: 43 52% 54%;
-    --color-gold-bright: 43 72% 66%;
-    --color-gold-dim: 38 52% 36%;
-    --color-cream: 30 25% 92%;
-    --color-white: 0 0% 98%;
-    --color-crimson: 355 84% 40%;
-    --color-crimson-glow: 355 84% 40%;
+    /* New light, editorial color system
+       (token names preserved for backwards compatibility — values remapped) */
+
+    /* Surfaces */
+    --color-void: 36 35% 95%;          /* parchment primary bg #F7F4EF */
+    --color-cream: 261 24% 11%;        /* primary text #1A1523 (was light, now dark) */
+    --color-white: 0 0% 100%;          /* pure white for cards */
+
+    /* Primary accent — electric violet (was gold) */
+    --color-gold: 252 87% 63%;         /* #6C4EF2 */
+    --color-gold-bright: 252 87% 63%;  /* same — used for emphasis */
+    --color-gold-dim: 251 67% 53%;     /* #5538D4 hover */
+
+    /* Secondary accent — warm persimmon (was crimson) */
+    --color-crimson: 16 90% 56%;       /* #F4622A */
+    --color-crimson-glow: 16 90% 56%;
 
     --background: var(--color-void);
     --foreground: var(--color-cream);
 
-    --card: 30 10% 5%;
+    --card: 0 0% 100%;                 /* pure white cards */
     --card-foreground: var(--color-cream);
 
-    --popover: 30 10% 5%;
+    --popover: 0 0% 100%;
     --popover-foreground: var(--color-cream);
 
     --primary: var(--color-gold);
-    --primary-foreground: 0 0% 3%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 5% 10%;
+    --secondary: 39 22% 91%;           /* #EDE9E1 deeper warm surface */
     --secondary-foreground: var(--color-cream);
 
-    --muted: 30 5% 12%;
-    --muted-foreground: 30 10% 50%;
+    --muted: 39 22% 91%;
+    --muted-foreground: 263 12% 37%;   /* #5C5469 */
 
-    --accent: var(--color-gold);
-    --accent-foreground: 0 0% 3%;
+    --accent: 263 50% 95%;             /* #F0EBF8 lavender highlight */
+    --accent-foreground: var(--color-cream);
 
     --destructive: var(--color-crimson);
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 8% 14%;
-    --input: 30 8% 14%;
+    --border: 252 87% 63%;             /* base hue, alpha applied via utilities below */
+    --input: 252 30% 88%;
     --ring: var(--color-gold);
 
     --radius: 0.5rem;
@@ -52,16 +59,16 @@
     --crimson: var(--color-crimson);
     --crimson-glow: var(--color-crimson-glow);
     --dark-base: var(--color-void);
-    --dark-surface: 30 10% 5%;
-    --dark-elevated: 30 5% 10%;
-    --glass: 43 52% 54% / 0.06;
-    --glass-border: 43 52% 54% / 0.18;
+    --dark-surface: 39 22% 91%;        /* secondary surface */
+    --dark-elevated: 263 50% 95%;      /* lavender elevated */
+    --glass: 252 87% 63% / 0.06;
+    --glass-border: 252 87% 63% / 0.18;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border) / 0.12);
     cursor: none !important;
   }
 
@@ -70,9 +77,11 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body;
-    font-size: 17px;
-    line-height: 1.6;
+    @apply bg-background text-foreground;
+    font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    font-weight: 400;
   }
 
   /* Restore default cursor on touch devices */
@@ -85,6 +94,8 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', serif;
     letter-spacing: -0.03em;
+    font-weight: 600;
+    color: hsl(var(--color-cream));
   }
 
   p {
@@ -102,22 +113,20 @@
   }
 
   .font-body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
   }
 
   .font-accent {
     font-family: 'Bebas Neue', sans-serif;
   }
 
-  /* Word-level color psychology utilities */
+  /* Accent text utilities (preserved names) */
   .text-gold {
     color: hsl(var(--color-gold));
-    text-shadow: 0 0 20px hsla(43, 52%, 54%, 0.4);
   }
 
   .text-gold-bright {
     color: hsl(var(--color-gold-bright));
-    text-shadow: 0 0 20px hsla(43, 72%, 66%, 0.4);
   }
 
   .text-crimson {
@@ -130,13 +139,12 @@
   }
 
   .text-white-headline {
-    color: hsl(var(--color-white));
+    color: hsl(var(--color-cream));
   }
 
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--color-gold-bright)) 0%, hsl(var(--color-gold)) 50%, hsl(var(--color-gold-dim)) 100%);
-    filter: drop-shadow(0 0 20px hsla(43, 52%, 54%, 0.3));
   }
 
   .text-gradient-crimson {
@@ -144,7 +152,7 @@
     background-image: linear-gradient(135deg, hsl(var(--crimson-glow)) 0%, hsl(var(--crimson)) 100%);
   }
 
-  /* Section label style — Bebas Neue */
+  /* Section label */
   .section-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 12px;
@@ -161,70 +169,70 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
   }
 
   .glow-gold {
-    box-shadow: 0 0 20px hsl(var(--gold) / 0.3), 0 0 60px hsl(var(--gold) / 0.1);
+    box-shadow: 0 10px 30px -10px hsl(var(--gold) / 0.35), 0 0 0 1px hsl(var(--gold) / 0.15);
   }
 
   .glow-gold-strong {
-    box-shadow: 0 0 30px hsl(var(--gold) / 0.4), 0 0 80px hsl(var(--gold) / 0.15);
+    box-shadow: 0 18px 50px -12px hsl(var(--gold) / 0.5), 0 0 0 1px hsl(var(--gold) / 0.25);
   }
 
   .glow-crimson {
-    box-shadow: 0 0 20px hsla(355, 84%, 40%, 0.3), 0 0 60px hsla(355, 84%, 40%, 0.15);
+    box-shadow: 0 10px 30px -10px hsl(var(--crimson) / 0.4);
   }
 
   .border-gold {
-    border-color: hsl(var(--gold) / 0.3);
+    border-color: hsl(var(--gold) / 0.28);
   }
 
   .border-gold-strong {
-    border-color: hsl(var(--gold) / 0.6);
+    border-color: hsl(var(--gold) / 0.5);
   }
 
   .border-gold-dim {
-    border-color: hsl(var(--color-gold-dim));
+    border-color: hsl(var(--gold) / 0.18);
   }
 
   .bg-glass {
-    background: hsla(43, 52%, 54%, 0.06);
+    background: hsl(0 0% 100% / 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
   }
 
   .bg-glass-card {
-    background: hsla(43, 52%, 54%, 0.06);
-    border-color: hsla(43, 52%, 54%, 0.18);
+    background: hsl(0 0% 100% / 0.85);
+    border-color: hsl(var(--gold) / 0.18);
   }
 
   .bg-gradient-cta {
-    background: linear-gradient(135deg, #1A0004 0%, #080808 60%);
+    background: linear-gradient(135deg, hsl(263 50% 95%) 0%, hsl(36 35% 95%) 60%);
   }
 
   .bg-gradient-warm {
-    background: linear-gradient(180deg, #0D0B08 0%, #080808 100%);
+    background: linear-gradient(180deg, hsl(36 35% 95%) 0%, hsl(39 22% 91%) 100%);
   }
 }
 
 @keyframes glow-pulse-crimson {
   0%, 100% {
-    box-shadow: 0 0 20px hsla(355, 84%, 40%, 0.3), 0 0 60px hsla(355, 84%, 40%, 0.15);
+    box-shadow: 0 10px 30px -10px hsl(var(--crimson) / 0.35);
   }
   50% {
-    box-shadow: 0 0 35px hsla(355, 84%, 40%, 0.5), 0 0 100px hsla(355, 84%, 40%, 0.25);
+    box-shadow: 0 18px 50px -10px hsl(var(--crimson) / 0.55);
   }
 }
 
 @keyframes glow-pulse-gold {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(var(--gold) / 0.3), 0 0 60px hsl(var(--gold) / 0.1);
+    box-shadow: 0 10px 30px -10px hsl(var(--gold) / 0.35);
   }
   50% {
-    box-shadow: 0 0 35px hsl(var(--gold) / 0.5), 0 0 100px hsl(var(--gold) / 0.2);
+    box-shadow: 0 18px 50px -10px hsl(var(--gold) / 0.55);
   }
 }
 

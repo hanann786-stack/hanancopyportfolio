@@ -1,144 +1,137 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 import HeroBackground from './HeroBackground';
+import BookingModal from './BookingModal';
 
 const HeroSection = () => {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated hero background (canvas) */}
       <HeroBackground />
 
-      {/* Cinematic letterbox bars */}
-      <div className="absolute top-0 left-0 right-0 h-16 md:h-24 bg-gradient-to-b from-background to-transparent z-20 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-16 md:h-24 bg-gradient-to-t from-background to-transparent z-20 pointer-events-none" />
-
-      {/* Floating availability badge */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 2.8, duration: 0.6 }}
-        className="absolute top-24 right-6 md:right-12 z-20"
-      >
-        <div className="animate-slow-spin w-24 h-24 md:w-28 md:h-28 rounded-full border border-primary/30 flex items-center justify-center">
-          <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-primary/50 flex items-center justify-center text-center">
-            <span className="font-accent text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-gold leading-tight">
-              Available<br />for Projects<br />✦ 2025
-            </span>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Horizontal accent line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 0.2, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute top-1/2 left-0 right-0 h-px bg-primary/10 origin-left z-0"
-      />
-
-      <div className="container mx-auto px-6 text-center relative z-10">
-        {/* Eyebrow label */}
-        <motion.span
-          initial={{ opacity: 0, letterSpacing: '0.05em' }}
-          animate={{ opacity: 1, letterSpacing: '0.3em' }}
-          transition={{ delay: 0.1, duration: 1 }}
-          className="block font-accent text-[11px] md:text-[13px] uppercase tracking-[0.3em] text-gold/60 mb-8"
-        >
-          Email Marketing · Landing Pages · Social Ads
-        </motion.span>
-
-        <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-[110px] xl:text-[120px] leading-[0.9] mb-2 tracking-[-0.03em]">
-          <span className="block overflow-hidden">
-            {["I", "Don't", "Write", "Copy."].map((word, i) => (
-              <motion.span
-                key={`l1-${i}`}
-                initial={{ opacity: 0, y: 80, rotateX: 40 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ delay: 0.4 + i * 0.08, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block mr-3 md:mr-4 text-white-headline"
-                style={{ perspective: '600px' }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>
-          <span className="block mt-2 overflow-hidden">
-            {["I", "Write"].map((word, i) => (
-              <motion.span
-                key={`l2-${i}`}
-                initial={{ opacity: 0, y: 80, rotateX: 40 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ delay: 0.9 + i * 0.1, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block mr-3 md:mr-4 text-white-headline"
-                style={{ perspective: '600px' }}
-              >
-                {word}
-              </motion.span>
-            ))}
-            <motion.span
-              initial={{ opacity: 0, y: 80, rotateX: 40 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ delay: 1.1, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-block mr-3 md:mr-4 text-gold"
-              style={{ perspective: '600px' }}
-            >
-              Revenue.
-            </motion.span>
-          </span>
-        </h1>
-
-        {/* Gold accent divider */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="w-16 h-px bg-primary mx-auto my-8 origin-center"
-        />
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.7, duration: 0.6 }}
-          className="font-body text-base md:text-lg text-cream max-w-2xl mx-auto mb-12 leading-relaxed opacity-70"
-        >
-          Hi, I'm <span className="text-gold">Hanan Arif</span> — and the fact that you're still reading this?
-          <br className="hidden md:block" />
-          That's exactly what I do for your brand.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.1, duration: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a
-            href="#work"
-            data-clickable
-            className="font-accent text-[13px] uppercase tracking-[0.15em] bg-primary text-primary-foreground px-10 py-4 animate-glow-pulse hover:bg-primary/90 transition-colors font-medium"
-          >
-            See My Work →
-          </a>
-          <a
-            href="#contact"
-            data-clickable
-            className="font-accent text-[13px] uppercase tracking-[0.15em] border border-foreground/20 text-foreground px-10 py-4 hover:border-primary hover:text-primary transition-all duration-300 font-medium"
-          >
-            Let's Talk
-          </a>
-        </motion.div>
-
+      <div className="relative z-10 w-full max-w-[780px] mx-auto px-6 text-center">
+        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3.0, duration: 0.6 }}
-          className="mt-20"
+          transition={{ delay: 0.1, duration: 0.6 }}
+          className="flex items-center justify-center gap-3 mb-8"
         >
-          <a href="#credibility" data-clickable>
-            <ChevronDown className="mx-auto text-primary/50 animate-float" size={24} />
-          </a>
+          <span className="hero-blink-dot" />
+          <span className="hero-eyebrow relative">
+            Conversion Copywriter × AI Marketing Systems
+            <span className="hero-eyebrow-underline" />
+          </span>
+          <span className="hero-blink-dot" />
         </motion.div>
+
+        {/* Headline */}
+        <h1
+          className="font-display mb-7"
+          style={{
+            fontSize: 'clamp(3rem, 6.5vw, 5.8rem)',
+            lineHeight: 1.02,
+            letterSpacing: '-0.03em',
+            fontWeight: 600,
+          }}
+        >
+          <span className="hero-line-1 block" style={{ color: '#1A1523' }}>
+            Words That Sell.
+          </span>
+          <span
+            className="hero-line-2 block italic"
+            style={{
+              color: 'transparent',
+              WebkitTextStroke: '1.5px #6C4EF2',
+            }}
+          >
+            Silence That Sells More.
+          </span>
+        </h1>
+
+        {/* Subheadline */}
+        <p
+          className="hero-sub mx-auto mb-7"
+          style={{
+            fontSize: '18px',
+            color: '#5C5469',
+            lineHeight: 1.8,
+            maxWidth: '580px',
+          }}
+        >
+          I engineer revenue through conversion copy and AI marketing systems — for DTC brands and SaaS companies done leaving money on the table.
+        </p>
+
+        {/* Availability badge */}
+        <div
+          className="hero-badge inline-flex items-center gap-2 mb-8"
+          style={{
+            background: 'rgba(108,78,242,0.07)',
+            border: '1px solid rgba(108,78,242,0.2)',
+            borderRadius: '999px',
+            padding: '6px 16px',
+            fontSize: '12px',
+            color: '#6C4EF2',
+            fontWeight: 500,
+          }}
+        >
+          <span className="relative flex items-center justify-center">
+            <span
+              className="absolute inline-block w-2 h-2 rounded-full hero-pulse-dot"
+              style={{ background: '#22C55E' }}
+            />
+            <span
+              className="relative inline-block w-2 h-2 rounded-full"
+              style={{ background: '#22C55E' }}
+            />
+          </span>
+          Taking 2 new clients in May 2026
+        </div>
+
+        {/* CTAs */}
+        <div
+          className="hero-ctas flex flex-wrap justify-center items-center"
+          style={{ gap: '14px' }}
+        >
+          <button
+            type="button"
+            onClick={() => setBookingOpen(true)}
+            data-clickable
+            className="hero-cta-primary"
+          >
+            Book a Strategy Call
+          </button>
+          <a href="#work" data-clickable className="hero-cta-secondary">
+            See the Work
+          </a>
+        </div>
+
+        {/* Scroll indicator */}
+        <a
+          href="#credibility"
+          data-clickable
+          className="hero-scroll-indicator mt-16 inline-flex"
+          aria-label="Scroll down"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#6C4EF2"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="hero-scroll-arrow"
+          >
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </a>
       </div>
+
+      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </section>
   );
 };

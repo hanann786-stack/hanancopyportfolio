@@ -1,6 +1,8 @@
 import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
+import StatsBar from '@/components/StatsBar';
+import ProofStrip from '@/components/ProofStrip';
 import CredibilityBar from '@/components/CredibilityBar';
 import PainSection from '@/components/PainSection';
 import OfferSection from '@/components/OfferSection';
@@ -16,6 +18,8 @@ const Index = () => {
       <CustomCursor />
       <Navbar />
       <HeroSection />
+      <StatsBar />
+      <ProofStrip />
       <CredibilityBar />
       <PainSection />
       <OfferSection />

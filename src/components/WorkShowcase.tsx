@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback, lazy, Suspense } from 'react';
-import type { CaseStudy } from './WorkShowcase';
+import type { CaseStudy } from './CaseStudyModal';
 
 const CaseStudyModal = lazy(() => import('./CaseStudyModal'));
 

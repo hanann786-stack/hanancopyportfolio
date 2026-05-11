@@ -1,14 +1,63 @@
-import { useRef, useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const offerings = [
-  'Email sequences that feel like a conversation, not a broadcast',
-  'Landing pages built on buyer psychology — not guesswork',
-  'Social ads with hooks so sharp they stop mid-scroll',
-  'A brand voice people remember at 2am',
-  'Revisions until it converts — not just until it looks nice',
+type Card = {
+  number: string;
+  name: string;
+  tag: string;
+  description: string;
+  price: string;
+  isNew?: boolean;
+};
+
+const coreCards: Card[] = [
+  {
+    number: '01',
+    name: 'Email Marketing',
+    tag: 'Core Service',
+    description:
+      'Welcome sequences, abandoned cart flows, win-back campaigns. Every email built around one metric: revenue per recipient.',
+    price: 'From $800 / sequence',
+  },
+  {
+    number: '02',
+    name: 'Landing Pages',
+    tag: 'Core Service',
+    description:
+      "Sales pages, VSL scripts, opt-in pages that turn a visitor's doubt into a buyer's certainty. Built on psychology, not guesswork.",
+    price: 'From $1,200 / page',
+  },
+  {
+    number: '03',
+    name: 'Social Media Ads',
+    tag: 'Core Service',
+    description:
+      'Facebook, Instagram, TikTok copy that stops the scroll and starts the sale. Hook-first. Tested across DTC, fitness, and high-ticket offers.',
+    price: 'From $600 / campaign',
+  },
 ];
 
-const OfferSection = () => {
+const aiCards: Card[] = [
+  {
+    number: '04',
+    name: 'AI Email System Setup',
+    tag: 'NEW · AI Service',
+    description:
+      'I write the strategy and copy, then build your entire Klaviyo or ActiveCampaign flow using AI tools. You get a live, revenue-generating system — not just a Word doc.',
+    price: 'From $1,500 / system',
+    isNew: true,
+  },
+  {
+    number: '05',
+    name: 'AI Brand Voice & Prompt System',
+    tag: 'NEW · AI Service',
+    description:
+      'A custom GPT trained on your brand voice. Your team generates on-brand emails, ads, and content in seconds — all sounding like you at your best.',
+    price: 'From $1,200 / system',
+    isNew: true,
+  },
+];
+
+const ServiceCard = ({ card, index }: { card: Card; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -22,78 +71,74 @@ const OfferSection = () => {
           obs.unobserve(el);
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section id="services" className="py-20 md:py-32 relative z-10 bg-gradient-warm">
-      <div className="container mx-auto px-6">
-        <span
-          className="section-label block text-center mb-4 transition-opacity duration-500"
-          style={{ opacity: visible ? 1 : 0 }}
-        >
-          SERVICES
+    <div
+      ref={ref}
+      className={`service-card${card.isNew ? ' service-card-ai' : ''}${visible ? ' is-visible' : ''}`}
+      style={{ transitionDelay: `${index * 0.1}s` }}
+    >
+      <span className="service-card-accent" />
+      <div className="service-card-top">
+        <span className="service-card-number">{card.number}</span>
+        <span className={`service-card-tag${card.isNew ? ' service-card-tag-ai' : ''}`}>
+          {card.tag}
         </span>
-        <h2
-          ref={ref}
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-12 md:mb-16 text-white-headline tracking-[-0.03em] transition-all duration-500 ease-out"
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(30px)',
-          }}
-        >
-          What Working With Hanan{' '}
-          <span className="text-gradient-gold">Actually Gets You</span>
-        </h2>
+      </div>
+      <h3 className="service-card-name">{card.name}</h3>
+      <p className="service-card-desc">{card.description}</p>
+      <div className="service-card-price">{card.price}</div>
+    </div>
+  );
+};
 
-        <div
-          className="max-w-2xl mx-auto bg-glass-card border border-[hsla(43,52%,54%,0.18)] rounded-sm p-8 md:p-14 relative overflow-hidden transition-all duration-600 ease-out"
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(40px)',
-            transitionDelay: '0.2s',
-          }}
-        >
-          <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 blur-3xl rounded-full" />
-          <div className="absolute bottom-0 left-0 w-36 h-36 bg-primary/3 blur-3xl rounded-full" />
+const OfferSection = () => {
+  const titleRef = useRef<HTMLDivElement>(null);
+  const [titleVisible, setTitleVisible] = useState(false);
 
-          <ul className="space-y-6 relative z-10">
-            {offerings.map((item, i) => (
-              <li
-                key={i}
-                className="flex items-start gap-4 font-body text-cream transition-all duration-500 ease-out"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateX(0)' : 'translateX(-20px)',
-                  transitionDelay: `${0.4 + i * 0.1}s`,
-                }}
-              >
-                <span className="text-gold text-lg mt-0.5">✦</span>
-                <span className="text-base leading-relaxed">
-                  {item.includes('psychology') ? (
-                    <>
-                      {item.split('psychology')[0]}
-                      <span className="text-gold">psychology</span>
-                      {item.split('psychology')[1]}
-                    </>
-                  ) : item}
-                </span>
-              </li>
-            ))}
-          </ul>
+  useEffect(() => {
+    const el = titleRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTitleVisible(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
-          <p
-            className="mt-10 pt-8 border-t border-[hsla(43,52%,54%,0.18)] font-display text-center italic text-lg md:text-xl transition-opacity duration-500"
-            style={{ opacity: visible ? 1 : 0, transitionDelay: '1s' }}
-          >
-            <span className="text-cream">This isn't a service. It's your </span>
-            <span className="text-gold">unfair advantage</span>
-            <span className="text-cream">.</span>
-          </p>
+  return (
+    <section id="services" className="services-section">
+      <div ref={titleRef} className={`services-head${titleVisible ? ' is-visible' : ''}`}>
+        <div className="services-eyebrow">
+          <span className="services-eyebrow-line" />
+          <span className="services-eyebrow-text">What I Do</span>
         </div>
+        <h2 className="services-title">
+          Three weapons. Two <span className="services-title-accent">AI systems</span>. Infinite results.
+        </h2>
+      </div>
+
+      <div className="services-grid services-grid-core">
+        {coreCards.map((c, i) => (
+          <ServiceCard key={c.number} card={c} index={i} />
+        ))}
+      </div>
+
+      <div className="services-grid services-grid-ai">
+        {aiCards.map((c, i) => (
+          <ServiceCard key={c.number} card={c} index={coreCards.length + i} />
+        ))}
       </div>
     </section>
   );

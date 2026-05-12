@@ -10,8 +10,6 @@ import WorkShowcase from '@/components/WorkShowcase';
 import ProcessSection from '@/components/ProcessSection';
 import ManifestoSection from '@/components/ManifestoSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import SocialProofSection from '@/components/SocialProofSection';
-import AboutSection from '@/components/AboutSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 

@@ -7,6 +7,9 @@ import CredibilityBar from '@/components/CredibilityBar';
 import PainSection from '@/components/PainSection';
 import OfferSection from '@/components/OfferSection';
 import WorkShowcase from '@/components/WorkShowcase';
+import ProcessSection from '@/components/ProcessSection';
+import ManifestoSection from '@/components/ManifestoSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import SocialProofSection from '@/components/SocialProofSection';
 import AboutSection from '@/components/AboutSection';
 import CTASection from '@/components/CTASection';
@@ -24,8 +27,9 @@ const Index = () => {
       <PainSection />
       <OfferSection />
       <WorkShowcase />
-      <SocialProofSection />
-      <AboutSection />
+      <ProcessSection />
+      <ManifestoSection />
+      <TestimonialsSection />
       <CTASection />
       <Footer />
     </div>

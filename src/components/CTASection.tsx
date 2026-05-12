@@ -1,107 +1,219 @@
-import { useRef, useState, useEffect } from 'react';
-import { Mail, Linkedin, Instagram } from 'lucide-react';
-import { handleGmailClick } from '@/lib/gmail';
-import BookingModal from './BookingModal';
+import { useEffect, useRef, useState, FormEvent } from 'react';
+import emailjs from '@emailjs/browser';
 
-const socials = [
-  { icon: Mail, href: '#', label: 'Email', onClick: handleGmailClick },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/hanan-arif-03b526396', label: 'LinkedIn' },
-  { icon: Instagram, href: 'https://instagram.com/hanan.arif.here', label: 'Instagram' },
+const SERVICE_ID = 'service_hrohxo7';
+const TEMPLATE_ID = 'template_4hp5jtj';
+const PUBLIC_KEY = 'nfAJdaLTCdX7h-H-0';
+
+emailjs.init(PUBLIC_KEY);
+
+const SERVICE_OPTIONS = [
+  'Email Marketing',
+  'Landing Page',
+  'Social Media Ads',
+  'AI Email System',
+  'AI Brand Voice System',
+  'Full Funnel',
+  'Other',
+];
+
+const REVENUE_OPTIONS = [
+  'Just starting out',
+  '$1K – $5K / month',
+  '$5K – $15K / month',
+  '$15K – $50K / month',
+  '$50K+ / month',
 ];
 
 const CTASection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [bookingOpen, setBookingOpen] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    company: '',
+    service: '',
+    revenue: '',
+    message: '',
+  });
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      ([e]) => {
+        if (e.isIntersecting) {
           setVisible(true);
           obs.unobserve(el);
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
+  const update = (k: keyof typeof form, v: string) => setForm((p) => ({ ...p, [k]: v }));
+
+  const fallbackMailto = () => {
+    const subject = encodeURIComponent(`New Brief — ${form.name || 'Client'}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\nRevenue: ${form.revenue}\n\nMessage:\n${form.message}`
+    );
+    window.location.href = `mailto:hananhereat@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (sending) return;
+    setSending(true);
+
+    const params = {
+      from_name: form.name,
+      from_email: form.email,
+      business: form.company,
+      services: form.service,
+      revenue: form.revenue,
+      challenge: form.message,
+      to_email: 'hananhereat@gmail.com',
+    };
+
+    try {
+      if (typeof emailjs !== 'undefined') {
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, params, PUBLIC_KEY);
+        setSent(true);
+      } else {
+        fallbackMailto();
+        setSent(true);
+      }
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      fallbackMailto();
+      setSent(true);
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
-    <>
-      <section id="contact" className="relative z-10 py-20 md:py-32 bg-gradient-cta overflow-hidden">
-        <div className="bg-grain absolute inset-0" />
-
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <span
-            className="section-label block text-center mb-4 transition-opacity duration-500"
-            style={{ opacity: visible ? 1 : 0 }}
-          >
-            CONTACT
-          </span>
-          <h2
-            ref={ref}
-            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white-headline mb-6 max-w-4xl mx-auto leading-tight tracking-[-0.03em] transition-all duration-500 ease-out"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? 'translateY(0)' : 'translateY(30px)',
-            }}
-          >
-            Your Next <span className="text-gold">High-Converting</span> Campaign{' '}
-            Starts With <span className="text-gold">One Conversation.</span>
-          </h2>
-
-          <p
-            className="font-body text-cream/50 text-base mb-12 max-w-lg mx-auto italic transition-opacity duration-500"
-            style={{ opacity: visible ? 1 : 0, transitionDelay: '0.2s' }}
-          >
-            I take <span className="text-crimson">limited</span> projects each month. If you're reading this, there's
-            still a <span className="text-crimson">slot</span> open — but <span className="text-crimson">not for long</span>.
-          </p>
-
-          <button
-            onClick={() => setBookingOpen(true)}
-            data-cta
-            data-clickable
-            className="inline-block font-accent text-[13px] uppercase tracking-[0.15em] px-12 py-5 animate-glow-pulse-crimson hover:brightness-110 transition-all font-semibold text-white-headline"
-            style={{
-              backgroundColor: 'hsl(355, 84%, 40%)',
-              opacity: visible ? 1 : 0,
-              transform: visible ? 'scale(1)' : 'scale(0.9)',
-              transition: 'opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s',
-              willChange: 'transform, opacity',
-            }}
-          >
-            Book a Free Strategy Call →
-          </button>
-
-          <div
-            className="flex items-center justify-center gap-6 mt-12 transition-opacity duration-500"
-            style={{ opacity: visible ? 1 : 0, transitionDelay: '0.6s' }}
-          >
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={s.onClick}
-                data-clickable
-                className="w-12 h-12 rounded-full border border-[hsla(43,52%,54%,0.18)] flex items-center justify-center text-muted-foreground hover:text-gold hover:border-primary hover:glow-gold transition-all duration-300"
-                aria-label={s.label}
-              >
-                <s.icon size={18} />
-              </a>
-            ))}
-          </div>
+    <section id="contact" className="cta-section">
+      <div
+        ref={ref}
+        className="cta-inner"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'opacity 0.7s ease, transform 0.7s ease',
+        }}
+      >
+        <div className="cta-badge">
+          <span className="cta-badge-dot" />
+          <span>Accepting 2 new projects · May 2026</span>
         </div>
-      </section>
 
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
-    </>
+        <h2 className="cta-title">Ready to stop leaving money on the table?</h2>
+        <p className="cta-sub">
+          Send a short brief. If we're a fit, you'll hear back within 24 hours with next steps and a calendar link.
+        </p>
+
+        {sent ? (
+          <div className="cta-success" role="status" aria-live="polite">
+            Brief received. I'll be in touch within 24 hours.
+          </div>
+        ) : (
+          <form className="cta-form" onSubmit={handleSubmit} noValidate>
+            <div className="cta-row">
+              <label className="cta-field">
+                <span className="cta-label">Name</span>
+                <input
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => update('name', e.target.value)}
+                  className="cta-input"
+                  placeholder="Your full name"
+                />
+              </label>
+              <label className="cta-field">
+                <span className="cta-label">Email</span>
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => update('email', e.target.value)}
+                  className="cta-input"
+                  placeholder="you@brand.com"
+                />
+              </label>
+            </div>
+
+            <div className="cta-row">
+              <label className="cta-field">
+                <span className="cta-label">Brand / Company</span>
+                <input
+                  type="text"
+                  value={form.company}
+                  onChange={(e) => update('company', e.target.value)}
+                  className="cta-input"
+                  placeholder="Your brand"
+                />
+              </label>
+              <label className="cta-field">
+                <span className="cta-label">Service Needed</span>
+                <select
+                  required
+                  value={form.service}
+                  onChange={(e) => update('service', e.target.value)}
+                  className="cta-input cta-select"
+                >
+                  <option value="" disabled>Select a service</option>
+                  {SERVICE_OPTIONS.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <label className="cta-field">
+              <span className="cta-label">Revenue Range</span>
+              <select
+                required
+                value={form.revenue}
+                onChange={(e) => update('revenue', e.target.value)}
+                className="cta-input cta-select"
+              >
+                <option value="" disabled>Select monthly revenue</option>
+                {REVENUE_OPTIONS.map((r) => (
+                  <option key={r} value={r}>{r}</option>
+                ))}
+              </select>
+            </label>
+
+            <label className="cta-field">
+              <span className="cta-label">Message</span>
+              <textarea
+                required
+                value={form.message}
+                onChange={(e) => update('message', e.target.value)}
+                className="cta-input cta-textarea"
+                placeholder="What's the challenge? What does success look like in 90 days?"
+              />
+            </label>
+
+            <button
+              type="submit"
+              disabled={sending}
+              data-clickable
+              className="cta-submit"
+            >
+              {sending ? 'Sending…' : 'Send My Brief →'}
+            </button>
+          </form>
+        )}
+      </div>
+    </section>
   );
 };
 

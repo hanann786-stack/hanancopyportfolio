@@ -10,6 +10,7 @@ import WorkShowcase from '@/components/WorkShowcase';
 import ProcessSection from '@/components/ProcessSection';
 import ManifestoSection from '@/components/ManifestoSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import NotForYouSection from '@/components/NotForYouSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 
@@ -28,6 +29,7 @@ const Index = () => {
       <ProcessSection />
       <ManifestoSection />
       <TestimonialsSection />
+      <NotForYouSection />
       <CTASection />
       <Footer />
     </div>

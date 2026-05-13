@@ -559,7 +559,8 @@
 .services-title {
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   color: #1A1523;
-  font-weight: 600;
+  font-weight: 400;
+  font-family: 'DM Serif Display', serif;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }

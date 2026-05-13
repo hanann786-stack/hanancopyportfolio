@@ -79,7 +79,7 @@ const StatsBar = () => {
           >
             <div
               style={{
-                fontSize: '2.2rem',
+                fontSize: 'clamp(1.9rem, 3vw, 2.4rem)',
                 fontWeight: 600,
                 color: '#6C4EF2',
                 lineHeight: 1.1,

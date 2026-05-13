@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -78,9 +78,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.75;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.82;
     font-weight: 400;
   }
 
@@ -92,9 +92,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: -0.03em;
-    font-weight: 600;
+    font-family: 'DM Serif Display', serif;
+    letter-spacing: -0.02em;
+    font-weight: 400;
     color: hsl(var(--color-cream));
   }
 
@@ -109,15 +109,18 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'DM Serif Display', serif;
   }
 
   .font-body {
-    font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
 
   .font-accent {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   /* Accent text utilities (preserved names) */
@@ -154,11 +157,12 @@
 
   /* Section label */
   .section-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.42em;
     color: hsl(var(--color-gold));
+    font-weight: 500;
   }
 
   .bg-dot-grid {
@@ -303,10 +307,10 @@
 .hero-eyebrow {
   display: inline-block;
   font-size: 11px;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.42em;
   color: #9B93A8;
   text-transform: uppercase;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 500;
   padding-bottom: 6px;
 }
@@ -356,9 +360,10 @@
   border: none;
   border-radius: 6px;
   padding: 14px 32px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.08em;
   cursor: none;
   transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -373,9 +378,10 @@
   color: #6C4EF2;
   border-radius: 6px;
   padding: 14px 32px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
-  font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.08em;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -440,9 +446,10 @@
 .site-nav-link {
   position: relative;
   font-size: 13px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: #9B93A8;
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.2s ease;
 }
 .site-nav-link::after {
@@ -470,6 +477,7 @@
   padding: 9px 22px;
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.08em;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease;
 }
@@ -546,14 +554,16 @@
 }
 .services-eyebrow-text {
   font-size: 11px;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.42em;
   color: #9B93A8;
   text-transform: uppercase;
+  font-weight: 500;
 }
 .services-title {
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   color: #1A1523;
-  font-weight: 600;
+  font-weight: 400;
+  font-family: 'DM Serif Display', serif;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
@@ -666,15 +676,15 @@
   font-weight: 700;
 }
 .service-card-name {
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #1A1523;
   margin-bottom: 0.85rem;
   line-height: 1.3;
 }
 .service-card-desc {
-  font-size: 14.5px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.82;
   color: #5C5469;
   flex-grow: 1;
   margin-bottom: 1.5rem;
@@ -710,7 +720,8 @@
 .cs-section-title {
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   color: #1A1523;
-  font-weight: 600;
+  font-weight: 400;
+  font-family: 'DM Serif Display', serif;
   line-height: 1.2;
   letter-spacing: -0.01em;
   margin-bottom: 0.85rem;
@@ -813,7 +824,7 @@
 }
 .cs-metric { text-align: center; }
 .cs-metric-num {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
   color: #F4622A;
   line-height: 1.1;
@@ -835,15 +846,16 @@
 .process-head { max-width: 1100px; margin: 0 auto 3rem; text-align: center; }
 .process-eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px; letter-spacing: 0.4em; color: #9B93A8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0.42em; color: #9B93A8;
   text-transform: uppercase; margin-bottom: 1rem;
+  font-weight: 500;
 }
 .process-eyebrow i { display: inline-block; width: 24px; height: 1.5px; background: #6C4EF2; }
 .process-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  color: #1A1523; line-height: 1.15; font-weight: 500;
+  color: #1A1523; line-height: 1.15; font-weight: 400;
 }
 .process-block {
   max-width: 1200px; margin: 0 auto;
@@ -862,8 +874,8 @@
 .process-step:hover { background: rgba(108,78,242,0.03); }
 .process-step-bg-num {
   position: absolute; top: 1rem; right: 1.2rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem; font-weight: 700;
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.5rem; font-weight: 400;
   color: rgba(108,78,242,0.08); line-height: 1; pointer-events: none;
 }
 .process-step-dot {
@@ -885,9 +897,10 @@
   margin-bottom: 1.2rem;
 }
 .process-step-time {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px; text-transform: uppercase;
   letter-spacing: 0.2em; color: #F4622A;
+  font-weight: 500;
 }
 @media (max-width: 768px) {
   .process-section { padding: 5rem 1.5rem; }
@@ -908,11 +921,11 @@
 }
 .manifesto-quote-wrap { }
 .manifesto-quote {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-style: italic;
   font-size: 1.5rem;
   color: #1A1523;
-  line-height: 1.75;
+  line-height: 1.9;
   border-left: 3px solid #F4622A;
   padding-left: 2rem;
   margin: 0;
@@ -943,15 +956,16 @@
 .testi-head { max-width: 1100px; margin: 0 auto 3rem; text-align: center; }
 .testi-eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px; letter-spacing: 0.4em; color: #9B93A8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0.42em; color: #9B93A8;
   text-transform: uppercase; margin-bottom: 1rem;
+  font-weight: 500;
 }
 .testi-eyebrow i { display: inline-block; width: 24px; height: 1.5px; background: #6C4EF2; }
 .testi-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  color: #1A1523; font-weight: 500;
+  color: #1A1523; font-weight: 400;
 }
 .testi-grid {
   max-width: 1100px; margin: 0 auto;
@@ -967,9 +981,10 @@
 .testi-card:hover { border-color: rgba(108,78,242,0.25); }
 .testi-stars { color: #F4622A; font-size: 14px; letter-spacing: 2px; margin-bottom: 1rem; }
 .testi-quote {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 15px; color: #1A1523; font-style: italic;
-  line-height: 1.85; margin: 0 0 1.5rem; flex: 1;
+  font-weight: 400;
+  line-height: 1.9; margin: 0 0 1.5rem; flex: 1;
 }
 .testi-meta {
   display: flex; align-items: center; justify-content: space-between;
@@ -1006,9 +1021,9 @@
 .nfy-inner { max-width: 1100px; margin: 0 auto; }
 .nfy-head { text-align: center; margin-bottom: 3rem; }
 .nfy-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(1.8rem, 3vw, 2.6rem);
-  color: #F7F4EF; font-weight: 500; line-height: 1.15;
+  color: #F7F4EF; font-weight: 400; line-height: 1.15;
   margin: 0 0 1rem;
 }
 .nfy-sub {
@@ -1060,9 +1075,10 @@
   border: 1px solid rgba(108,78,242,0.2);
   border-radius: 999px;
   padding: 6px 14px; margin-bottom: 1.5rem;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px; letter-spacing: 0.22em; color: #6C4EF2;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0.42em; color: #6C4EF2;
   text-transform: uppercase;
+  font-weight: 500;
 }
 .cta-badge-dot {
   width: 7px; height: 7px; border-radius: 50%;
@@ -1075,9 +1091,9 @@
   50% { opacity: 0.55; }
 }
 .cta-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-  color: #1A1523; font-weight: 500; line-height: 1.18;
+  color: #1A1523; font-weight: 400; line-height: 1.18;
   margin: 0 0 1rem;
 }
 .cta-sub {
@@ -1091,7 +1107,7 @@
 .cta-label {
   font-family: 'DM Sans', sans-serif;
   font-size: 11px; text-transform: uppercase;
-  letter-spacing: 0.22em; color: #6C4EF2; font-weight: 600;
+  letter-spacing: 0.3em; color: #6C4EF2; font-weight: 500;
 }
 .cta-input {
   background: #F7F4EF;
@@ -1121,7 +1137,8 @@
   border-radius: 6px;
   padding: 16px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px; font-weight: 600;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.08em;
   cursor: pointer;
   margin-top: 0.5rem;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;

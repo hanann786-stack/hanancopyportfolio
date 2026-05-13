@@ -31,10 +31,10 @@ const HeroSection = () => {
         <h1
           className="font-display mb-7"
           style={{
-            fontSize: 'clamp(3rem, 6.5vw, 5.8rem)',
+            fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
             lineHeight: 1.02,
-            letterSpacing: '-0.03em',
-            fontWeight: 600,
+            letterSpacing: '-0.02em',
+            fontWeight: 400,
           }}
         >
           <span className="hero-line-1 block" style={{ color: '#1A1523' }}>
@@ -55,9 +55,9 @@ const HeroSection = () => {
         <p
           className="hero-sub mx-auto mb-7"
           style={{
-            fontSize: '18px',
+            fontSize: '15px',
             color: '#5C5469',
-            lineHeight: 1.8,
+            lineHeight: 1.82,
             maxWidth: '580px',
           }}
         >

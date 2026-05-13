@@ -78,9 +78,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.75;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.82;
     font-weight: 400;
   }
 
@@ -92,9 +92,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: -0.03em;
-    font-weight: 600;
+    font-family: 'DM Serif Display', serif;
+    letter-spacing: -0.02em;
+    font-weight: 400;
     color: hsl(var(--color-cream));
   }
 
@@ -109,15 +109,18 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'DM Serif Display', serif;
   }
 
   .font-body {
-    font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
 
   .font-accent {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   /* Accent text utilities (preserved names) */
@@ -154,11 +157,12 @@
 
   /* Section label */
   .section-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.42em;
     color: hsl(var(--color-gold));
+    font-weight: 500;
   }
 
   .bg-dot-grid {

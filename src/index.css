@@ -717,7 +717,8 @@
 .cs-section-title {
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   color: #1A1523;
-  font-weight: 600;
+  font-weight: 400;
+  font-family: 'DM Serif Display', serif;
   line-height: 1.2;
   letter-spacing: -0.01em;
   margin-bottom: 0.85rem;
@@ -820,7 +821,7 @@
 }
 .cs-metric { text-align: center; }
 .cs-metric-num {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
   color: #F4622A;
   line-height: 1.1;
@@ -842,15 +843,16 @@
 .process-head { max-width: 1100px; margin: 0 auto 3rem; text-align: center; }
 .process-eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px; letter-spacing: 0.4em; color: #9B93A8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0.42em; color: #9B93A8;
   text-transform: uppercase; margin-bottom: 1rem;
+  font-weight: 500;
 }
 .process-eyebrow i { display: inline-block; width: 24px; height: 1.5px; background: #6C4EF2; }
 .process-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  color: #1A1523; line-height: 1.15; font-weight: 500;
+  color: #1A1523; line-height: 1.15; font-weight: 400;
 }
 .process-block {
   max-width: 1200px; margin: 0 auto;
@@ -869,8 +871,8 @@
 .process-step:hover { background: rgba(108,78,242,0.03); }
 .process-step-bg-num {
   position: absolute; top: 1rem; right: 1.2rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem; font-weight: 700;
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.5rem; font-weight: 400;
   color: rgba(108,78,242,0.08); line-height: 1; pointer-events: none;
 }
 .process-step-dot {
@@ -892,9 +894,10 @@
   margin-bottom: 1.2rem;
 }
 .process-step-time {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 11px; text-transform: uppercase;
   letter-spacing: 0.2em; color: #F4622A;
+  font-weight: 500;
 }
 @media (max-width: 768px) {
   .process-section { padding: 5rem 1.5rem; }

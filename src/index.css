@@ -554,9 +554,10 @@
 }
 .services-eyebrow-text {
   font-size: 11px;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.42em;
   color: #9B93A8;
   text-transform: uppercase;
+  font-weight: 500;
 }
 .services-title {
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);

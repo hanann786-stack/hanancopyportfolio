@@ -918,11 +918,11 @@
 }
 .manifesto-quote-wrap { }
 .manifesto-quote {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-style: italic;
   font-size: 1.5rem;
   color: #1A1523;
-  line-height: 1.75;
+  line-height: 1.9;
   border-left: 3px solid #F4622A;
   padding-left: 2rem;
   margin: 0;
@@ -953,15 +953,16 @@
 .testi-head { max-width: 1100px; margin: 0 auto 3rem; text-align: center; }
 .testi-eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px; letter-spacing: 0.4em; color: #9B93A8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 0.42em; color: #9B93A8;
   text-transform: uppercase; margin-bottom: 1rem;
+  font-weight: 500;
 }
 .testi-eyebrow i { display: inline-block; width: 24px; height: 1.5px; background: #6C4EF2; }
 .testi-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  color: #1A1523; font-weight: 500;
+  color: #1A1523; font-weight: 400;
 }
 .testi-grid {
   max-width: 1100px; margin: 0 auto;
@@ -977,9 +978,10 @@
 .testi-card:hover { border-color: rgba(108,78,242,0.25); }
 .testi-stars { color: #F4622A; font-size: 14px; letter-spacing: 2px; margin-bottom: 1rem; }
 .testi-quote {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 15px; color: #1A1523; font-style: italic;
-  line-height: 1.85; margin: 0 0 1.5rem; flex: 1;
+  font-weight: 400;
+  line-height: 1.9; margin: 0 0 1.5rem; flex: 1;
 }
 .testi-meta {
   display: flex; align-items: center; justify-content: space-between;

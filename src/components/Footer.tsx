@@ -1,37 +1,41 @@
-import { Mail, Linkedin, Instagram } from 'lucide-react';
 import { handleGmailClick } from '@/lib/gmail';
 
-const Footer = () => (
-  <footer className="relative z-10 py-10 border-t border-[hsla(43,52%,54%,0.18)]">
-    <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <span className="font-display text-lg tracking-wide text-cream/60">
-        HANAN <span className="text-gold">ARIF</span>
-      </span>
-      <div className="flex items-center gap-4">
-        {[
-          { icon: Mail, href: '#', label: 'Email', onClick: handleGmailClick },
-          { icon: Linkedin, href: 'https://www.linkedin.com/in/hanan-arif-03b526396', label: 'LinkedIn' },
-          { icon: Instagram, href: 'https://instagram.com/hanan.arif.here', label: 'Instagram' },
-        ].map((s) => (
+const Footer = () => {
+  const scrollToContact = (e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <a href="#" className="site-nav-logo" aria-label="Hanan Arif">
+          <span className="logo-hanan" style={{ color: '#FFFFFF' }}>Hanan</span>
+          <span className="logo-dot" style={{ color: '#C9B8F5' }}>.</span>
+          <span className="logo-arif" style={{ color: 'rgba(247,244,239,0.55)' }}>Arif</span>
+        </a>
+
+        <nav className="site-footer-links" aria-label="Footer">
           <a
-            key={s.label}
-            href={s.href}
+            href="https://instagram.com/hanan.arif.here"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={s.onClick}
             data-clickable
-            className="text-muted-foreground hover:text-gold transition-colors"
-            aria-label={s.label}
           >
-            <s.icon size={16} />
+            INSTAGRAM
           </a>
-        ))}
+          <a href="#" onClick={handleGmailClick} data-clickable>
+            EMAIL
+          </a>
+          <a href="#contact" onClick={scrollToContact} data-clickable>
+            BOOK A CALL
+          </a>
+        </nav>
+
+        <p className="site-footer-copy">© 2026 Hanan Arif. All rights reserved.</p>
       </div>
-      <p className="font-body text-xs text-muted-foreground">
-        © 2026 Hanan Arif. Built to Convert.
-      </p>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 export default Footer;

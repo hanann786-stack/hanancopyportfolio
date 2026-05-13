@@ -446,9 +446,10 @@
 .site-nav-link {
   position: relative;
   font-size: 13px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: #9B93A8;
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.2s ease;
 }
 .site-nav-link::after {
@@ -476,6 +477,7 @@
   padding: 9px 22px;
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.08em;
   text-decoration: none;
   transition: background 0.2s ease, transform 0.2s ease;
 }
@@ -1104,7 +1106,7 @@
 .cta-label {
   font-family: 'DM Sans', sans-serif;
   font-size: 11px; text-transform: uppercase;
-  letter-spacing: 0.22em; color: #6C4EF2; font-weight: 600;
+  letter-spacing: 0.3em; color: #6C4EF2; font-weight: 500;
 }
 .cta-input {
   background: #F7F4EF;
@@ -1134,7 +1136,8 @@
   border-radius: 6px;
   padding: 16px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px; font-weight: 600;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.08em;
   cursor: pointer;
   margin-top: 0.5rem;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;

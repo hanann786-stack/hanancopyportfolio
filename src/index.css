@@ -1220,7 +1220,3 @@ button:active, .hero-cta-primary:active, .hero-cta-secondary:active,
   transform: scale(0.98);
 }
 
-/* Mobile responsive guards */
-@media (max-width: 767px) {
-  .grid { grid-template-columns: 1fr !important; }
-}

@@ -12,13 +12,12 @@ const HeroBackground = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
-  const scrollRef = useRef(0);
+  
   const rafRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const wrapper = wrapperRef.current;
-    if (!canvas || !wrapper) return;
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
@@ -39,7 +38,8 @@ const HeroBackground = memo(() => {
     resize();
 
     const isMobile = () => window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile() ? 80 : 160;
+    const mobile = isMobile();
+    const PARTICLE_COUNT = mobile ? 60 : 120;
 
     type Particle = {
       x: number;
@@ -90,13 +90,16 @@ const HeroBackground = memo(() => {
       { x: width * 0.25, y: height * 0.75, vx: -0.035, vy: -0.02, baseR: 240, color: '244, 98, 42', alpha: 0.03, phase: 6 },
     ];
 
-    const onResize = () => resize();
+    let resizeTimer = 0;
+    const onResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(resize, 150);
+    };
     window.addEventListener('resize', onResize, { passive: true });
 
     const onMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current.x = e.clientX - rect.left;
-      mouseRef.current.y = e.clientY - rect.top;
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
     };
     window.addEventListener('mousemove', onMouseMove, { passive: true });
 
@@ -106,12 +109,8 @@ const HeroBackground = memo(() => {
     };
     window.addEventListener('mouseout', onMouseLeave, { passive: true });
 
-    const onScroll = () => {
-      scrollRef.current = window.scrollY * 0.04;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-
     let lastTime = 0;
+    let frameSkip = 0;
     const FRAME_MIN = 1000 / 60;
 
     const draw = (time: number) => {
@@ -122,22 +121,25 @@ const HeroBackground = memo(() => {
       const dt = lastTime ? Math.min((time - lastTime) / 16.67, 2) : 1;
       lastTime = time;
 
-      ctx.clearRect(0, 0, width, height);
+      // On mobile, skip every other frame for particle updates
+      const skipUpdate = mobile && (++frameSkip % 2 === 0);
 
-      // Apply scroll parallax via transform on the wrapper element instead of canvas math
-      wrapper.style.transform = `translate3d(0, ${-scrollRef.current}px, 0)`;
+      // Trail/fade fill instead of clearRect
+      ctx.fillStyle = 'rgba(10, 10, 18, 0.18)';
+      ctx.fillRect(0, 0, width, height);
 
       // --- Orbs ---
       for (const orb of orbs) {
-        orb.x += orb.vx * dt;
-        orb.y += orb.vy * dt;
-        orb.phase += 0.0025 * dt;
-        if (orb.x < -orb.baseR) orb.x = width + orb.baseR;
-        if (orb.x > width + orb.baseR) orb.x = -orb.baseR;
-        if (orb.y < -orb.baseR) orb.y = height + orb.baseR;
-        if (orb.y > height + orb.baseR) orb.y = -orb.baseR;
-
-        const breathe = 0.95 + (Math.sin(orb.phase) * 0.5 + 0.5) * 0.1; // 0.95→1.05
+        if (!skipUpdate) {
+          orb.x += orb.vx * dt;
+          orb.y += orb.vy * dt;
+          orb.phase += 0.0025 * dt;
+          if (orb.x < -orb.baseR) orb.x = width + orb.baseR;
+          if (orb.x > width + orb.baseR) orb.x = -orb.baseR;
+          if (orb.y < -orb.baseR) orb.y = height + orb.baseR;
+          if (orb.y > height + orb.baseR) orb.y = -orb.baseR;
+        }
+        const breathe = 0.95 + (Math.sin(orb.phase) * 0.5 + 0.5) * 0.1;
         const r = orb.baseR * breathe;
         const grad = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, r);
         grad.addColorStop(0, `rgba(${orb.color}, ${orb.alpha})`);
@@ -146,35 +148,32 @@ const HeroBackground = memo(() => {
         ctx.fillRect(orb.x - r, orb.y - r, r * 2, r * 2);
       }
 
-      // --- Particles update + repulsion ---
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const REPEL = 90;
       const REPEL_SQ = REPEL * REPEL;
 
-      for (const p of particles) {
-        p.x += p.vx * dt;
-        p.y += p.vy * dt;
-
-        // wrap
-        if (p.x < -10) p.x = width + 10;
-        if (p.x > width + 10) p.x = -10;
-        if (p.y < -10) p.y = height + 10;
-        if (p.y > height + 10) p.y = -10;
-
-        // mouse repulsion
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const distSq = dx * dx + dy * dy;
-        if (distSq < REPEL_SQ && distSq > 0.01) {
-          const dist = Math.sqrt(distSq);
-          const force = (1 - dist / REPEL) * 0.6;
-          p.x += (dx / dist) * force;
-          p.y += (dy / dist) * force;
+      if (!skipUpdate) {
+        for (const p of particles) {
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+          if (p.y < -10) p.y = height + 10;
+          if (p.y > height + 10) p.y = -10;
+          const dx = p.x - mx;
+          const dy = p.y - my;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < REPEL_SQ && distSq > 0.01) {
+            const dist = Math.sqrt(distSq);
+            const force = (1 - dist / REPEL) * 0.6;
+            p.x += (dx / dist) * force;
+            p.y += (dy / dist) * force;
+          }
         }
       }
 
-      // --- Connection lines ---
+      // Connection lines (single path)
       const LINK = 110;
       const LINK_SQ = LINK * LINK;
       ctx.strokeStyle = 'rgba(108, 78, 242, 0.06)';
@@ -195,11 +194,20 @@ const HeroBackground = memo(() => {
       }
       ctx.stroke();
 
-      // --- Particles draw ---
+      // --- Particles draw, grouped by color to minimize fillStyle changes ---
+      const groups: Record<string, Particle[]> = {};
       for (const p of particles) {
-        ctx.fillStyle = `rgba(${p.color}, ${p.opacity})`;
+        (groups[p.color] ||= []).push(p);
+      }
+      for (const color in groups) {
+        ctx.fillStyle = `rgba(${color}, 0.5)`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        const arr = groups[color];
+        for (let i = 0; i < arr.length; i++) {
+          const p = arr[i];
+          ctx.moveTo(p.x + p.size, p.y);
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        }
         ctx.fill();
       }
 
@@ -220,10 +228,10 @@ const HeroBackground = memo(() => {
 
     return () => {
       cancelAnimationFrame(rafRef.current);
+      window.clearTimeout(resizeTimer);
       window.removeEventListener('resize', onResize);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseout', onMouseLeave);
-      window.removeEventListener('scroll', onScroll);
       document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);

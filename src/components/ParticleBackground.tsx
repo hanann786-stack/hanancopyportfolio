@@ -22,12 +22,17 @@ const ParticleBackground = memo(() => {
     });
     if (!ctx) return;
 
+    let resizeTimer = 0;
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     resize();
-    window.addEventListener('resize', resize, { passive: true });
+    const onResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(resize, 150);
+    };
+    window.addEventListener('resize', onResize, { passive: true });
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = {
@@ -51,8 +56,8 @@ const ParticleBackground = memo(() => {
       const w = canvas.width;
       const h = canvas.height;
 
-      // Clear with background color (no alpha = faster)
-      ctx.fillStyle = '#080808';
+      // Trail fade fill (avoids full clear+redraw cost)
+      ctx.fillStyle = 'rgba(8, 8, 8, 0.18)';
       ctx.fillRect(0, 0, w, h);
 
       const mx = mouseRef.current.x;
@@ -112,7 +117,8 @@ const ParticleBackground = memo(() => {
 
     return () => {
       cancelAnimationFrame(rafRef.current);
-      window.removeEventListener('resize', resize);
+      window.clearTimeout(resizeTimer);
+      window.removeEventListener('resize', onResize);
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('visibilitychange', onVisibility);
     };

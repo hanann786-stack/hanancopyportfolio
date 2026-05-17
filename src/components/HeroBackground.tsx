@@ -91,13 +91,16 @@ const HeroBackground = memo(() => {
       { x: width * 0.25, y: height * 0.75, vx: -0.035, vy: -0.02, baseR: 240, color: '244, 98, 42', alpha: 0.03, phase: 6 },
     ];
 
-    const onResize = () => resize();
+    let resizeTimer = 0;
+    const onResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(resize, 150);
+    };
     window.addEventListener('resize', onResize, { passive: true });
 
     const onMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current.x = e.clientX - rect.left;
-      mouseRef.current.y = e.clientY - rect.top;
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
     };
     window.addEventListener('mousemove', onMouseMove, { passive: true });
 
@@ -107,12 +110,8 @@ const HeroBackground = memo(() => {
     };
     window.addEventListener('mouseout', onMouseLeave, { passive: true });
 
-    const onScroll = () => {
-      scrollRef.current = window.scrollY * 0.04;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-
     let lastTime = 0;
+    let frameSkip = 0;
     const FRAME_MIN = 1000 / 60;
 
     const draw = (time: number) => {

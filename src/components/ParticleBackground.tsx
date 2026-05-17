@@ -117,7 +117,8 @@ const ParticleBackground = memo(() => {
 
     return () => {
       cancelAnimationFrame(rafRef.current);
-      window.removeEventListener('resize', resize);
+      window.clearTimeout(resizeTimer);
+      window.removeEventListener('resize', onResize);
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('visibilitychange', onVisibility);
     };

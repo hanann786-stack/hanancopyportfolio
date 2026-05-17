@@ -12,7 +12,7 @@ const HeroBackground = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
-  const scrollRef = useRef(0);
+  
   const rafRef = useRef(0);
 
   useEffect(() => {

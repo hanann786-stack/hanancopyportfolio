@@ -1,29 +1,43 @@
 import { useEffect, useRef, useState } from 'react';
 
-const testimonials = [
+type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  badge: string;
+  metric?: { value: string; label: string };
+};
+
+const testimonials: Testimonial[] = [
   {
-    quote: "He didn't just write copy. He rewired how we talk to our customers. Conversions jumped 3.2x in 60 days.",
-    name: 'Sarah Chen',
-    role: 'CMO, Velostra',
-    badge: '3.2× conversions',
-  },
-  {
-    quote: "Our email open rate went from 18% to 47%. I didn't think that was possible without changing our entire list.",
-    name: 'Marcus Webb',
-    role: 'Founder, NovaBrand',
-    badge: '47% open rate',
-  },
-  {
-    quote: "He writes like he's inside your customer's head. It's unsettling — and incredibly effective.",
+    quote:
+      "It feels like you write as if you're inside the customer's head. At first it's a bit unsettling, but in the best way — because it shows how deeply you understand the audience. And more importantly, it actually works. The messaging was clear, engaging, and very well aligned with what I was hoping to achieve.",
     name: 'Elena Rossi',
-    role: 'Head of Growth, Arcline',
-    badge: '2.4× CTR',
+    role: 'Email Client',
+    badge: 'Highly recommended · Would work again',
   },
   {
-    quote: "The AI brand voice system Hanan built saved my team 15 hours a week. Our content finally sounds consistent — and on-brand.",
-    name: 'David Park',
-    role: 'CEO, Lumenar',
-    badge: '15 hrs/week saved',
+    quote:
+      "Our email open rate jumped from 18% to 47%. I honestly didn't expect that without changing our whole list. Really impressed with the results. Let's work on something even bigger next time.",
+    name: 'Marcus Webb',
+    role: 'Email Marketing Client',
+    badge: 'Open rate: 18% → 47%',
+    metric: { value: '18% → 47%', label: 'Email open rate' },
+  },
+  {
+    quote:
+      "This wasn't just copywriting. It genuinely changed how we communicate with our customers. The feedback we got was incredible. We saw conversions jump 3.2× in just 60 days.",
+    name: 'Sarah Chen',
+    role: 'E-commerce Brand Owner',
+    badge: '3.2× conversions in 60 days',
+    metric: { value: '3.2×', label: 'Conversions in 60 days' },
+  },
+  {
+    quote:
+      "The quality genuinely impressed me. Design was clean, professional, and perfectly aligned with my brand — in some aspects even better than I expected. What stood out most was the attention to detail and perfect content alignment. Communication was smooth, revisions were handled quickly, and everything was delivered on time.",
+    name: 'Tripta Sports',
+    role: 'Sports Brand (Pakistan)',
+    badge: 'On-time · Perfect brand alignment',
   },
 ];
 
@@ -41,32 +55,50 @@ const TestimonialsSection = () => {
           obs.unobserve(el);
         }
       },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section id="clients" className="testi-section">
+    <section id="clients" className="testi-section" data-reveal>
       <div className="testi-head">
-        <span className="testi-eyebrow"><i /> Testimonials</span>
-        <h2 className="testi-title">What clients actually say.</h2>
+        <span className="testi-eyebrow"><i /> Client Results</span>
+        <h2 className="testi-title">Don't take my word for it.</h2>
+        <p className="testi-sub">Real feedback from real clients. Unedited.</p>
       </div>
       <div ref={ref} className="testi-grid">
         {testimonials.map((t, i) => (
-          <div
+          <article
             key={t.name}
             className="testi-card"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(24px)',
-              transition: 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease',
+              transition:
+                'opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1), border-color 0.2s ease',
               transitionDelay: `${i * 0.1}s`,
             }}
           >
-            <div className="testi-stars">★★★★★</div>
+            <div className="testi-top">
+              <div className="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <span className="testi-verified">
+                <span className="testi-verified-check">✓</span> Real screenshot
+              </span>
+            </div>
+
+            {t.metric && (
+              <div className="testi-metric">
+                <span className="testi-metric-value">{t.metric.value}</span>
+                <span className="testi-metric-label">{t.metric.label}</span>
+              </div>
+            )}
+
             <p className="testi-quote">"{t.quote}"</p>
+
+            <div className="testi-divider" />
+
             <div className="testi-meta">
               <div>
                 <p className="testi-name">{t.name}</p>
@@ -74,7 +106,7 @@ const TestimonialsSection = () => {
               </div>
               <span className="testi-badge"><b>↑</b>{t.badge}</span>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>

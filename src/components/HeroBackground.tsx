@@ -39,7 +39,8 @@ const HeroBackground = memo(() => {
     resize();
 
     const isMobile = () => window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile() ? 80 : 160;
+    const mobile = isMobile();
+    const PARTICLE_COUNT = mobile ? 60 : 120;
 
     type Particle = {
       x: number;

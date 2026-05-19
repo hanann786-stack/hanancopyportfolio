@@ -5,13 +5,15 @@ type Stat = {
   suffix?: string;
   prefix?: string;
   label: string;
+  subNote?: string;
+  decimals?: number;
 };
 
 const stats: Stat[] = [
+  { value: 47, suffix: '%', label: 'Peak email open rate achieved', subNote: '↑ from 18% baseline · Marcus Webb' },
+  { value: 3.2, suffix: '×', label: 'Conversion increase (60 days)', subNote: 'Sarah Chen · E-commerce', decimals: 1 },
   { value: 6, suffix: '+', label: 'Industries served' },
-  { value: 2, prefix: '$', suffix: 'M+', label: 'Revenue influenced' },
-  { value: 40, suffix: '+', label: 'Projects delivered' },
-  { value: 97, suffix: '%', label: 'Client retention' },
+  { value: 100, suffix: '%', label: 'Clients who returned', subNote: 'All 4 clients expressed intent to continue' },
 ];
 
 const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
@@ -47,8 +49,8 @@ const StatsBar = () => {
   }, []);
 
   const format = (s: Stat, current: number) => {
-    const isInt = Number.isInteger(s.value);
-    const display = isInt ? Math.round(current).toString() : current.toFixed(1);
+    const d = s.decimals ?? (Number.isInteger(s.value) ? 0 : 1);
+    const display = current.toFixed(d);
     return `${s.prefix ?? ''}${display}${s.suffix ?? ''}`;
   };
 
@@ -92,13 +94,27 @@ const StatsBar = () => {
               style={{
                 fontSize: '11px',
                 letterSpacing: '0.2em',
-                color: '#9B93A8',
+                color: '#1A1523',
                 textTransform: 'uppercase',
                 marginTop: '0.75rem',
+                fontWeight: 500,
               }}
             >
               {s.label}
             </div>
+            {s.subNote && (
+              <div
+                style={{
+                  fontSize: '10px',
+                  fontWeight: 300,
+                  color: '#9B93A8',
+                  marginTop: '4px',
+                  fontFamily: '"DM Sans", sans-serif',
+                }}
+              >
+                {s.subNote}
+              </div>
+            )}
           </div>
         ))}
       </div>

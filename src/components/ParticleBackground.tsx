@@ -77,15 +77,15 @@ const ParticleBackground = memo(() => {
           blob.cx * w, blob.cy * h, 0,
           blob.cx * w, blob.cy * h, blob.r * Math.max(w, h)
         );
-        gradient.addColorStop(0, `rgba(201, 168, 76, ${blob.alpha})`);
-        gradient.addColorStop(0.5, `rgba(201, 168, 76, ${blob.alpha * 0.3})`);
-        gradient.addColorStop(1, 'rgba(201, 168, 76, 0)');
+        gradient.addColorStop(0, `rgba(108, 78, 242, ${blob.alpha})`);
+        gradient.addColorStop(0.5, `rgba(108, 78, 242, ${blob.alpha * 0.3})`);
+        gradient.addColorStop(1, 'rgba(108, 78, 242, 0)');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, w, h);
       }
 
       // Batched grid lines — single beginPath + single stroke
-      ctx.strokeStyle = 'rgba(201, 168, 76, 0.03)';
+      ctx.strokeStyle = 'rgba(108, 78, 242, 0.03)';
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       const gridSize = 80;
@@ -130,7 +130,7 @@ const ParticleBackground = memo(() => {
       <div
         className="fixed inset-0 pointer-events-none z-0 md:hidden"
         style={{
-          background: 'radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 30% 50%, rgba(108,78,242,0.08) 0%, transparent 60%)',
         }}
       />
       <canvas

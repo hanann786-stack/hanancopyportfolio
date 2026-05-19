@@ -15,14 +15,14 @@ const FashionLandingContent = () => (
       </p>
       <h2
         className="font-display text-3xl md:text-5xl text-white-headline leading-[1.1] tracking-[-0.03em] mb-5"
-        style={{ textShadow: '0 0 30px rgba(201,168,76,0.15)' }}
+        style={{ textShadow: '0 0 30px rgba(108,78,242,0.15)' }}
       >
         This Isn't Fashion. This Is <span className="text-gold">a Declaration.</span>
       </h2>
       <p className="font-body text-cream/80 text-base md:text-lg max-w-[54ch] mx-auto mb-8 leading-relaxed">
         27 pieces. One philosophy. For the ones who don't follow trends — they set the standard and let the world catch up.
       </p>
-      <span className="inline-block bg-[#C1121F] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
+      <span className="inline-block bg-[#F4622A] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
         Explore the Collection →
       </span>
     </div>
@@ -72,7 +72,7 @@ const FashionLandingContent = () => (
           <div key={p.name} className="bg-[hsla(43,52%,54%,0.05)] border border-[hsla(43,52%,54%,0.12)] p-6 rounded-sm">
             <h4 className="font-display text-lg text-white-headline mb-3">{p.name}</h4>
             <p className="font-body text-cream/80 text-[14px] leading-[1.7] mb-4">{p.desc}</p>
-            <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(201,168,76,0.4)' }}>{p.price}</span>
+            <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(108,78,242,0.4)' }}>{p.price}</span>
           </div>
         ))}
       </div>
@@ -102,12 +102,12 @@ const FashionLandingContent = () => (
     {/* SCARCITY + FINAL CTA */}
     <div className="text-center">
       <h3 className="font-display text-2xl md:text-3xl text-white-headline mb-4 tracking-[-0.02em]">
-        27 Pieces. <span className="text-[#C1121F] font-bold">Limited</span> Inventory. No Restocks.
+        27 Pieces. <span className="text-[#F4622A] font-bold">Limited</span> Inventory. No Restocks.
       </h3>
       <p className="font-body text-cream/70 text-base max-w-[50ch] mx-auto mb-8 leading-relaxed">
         When they're gone, they're gone. This isn't artificial scarcity — it's intentional craft. Every piece is produced in limited runs because quality at this level doesn't scale.
       </p>
-      <span className="inline-block bg-[#C1121F] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
+      <span className="inline-block bg-[#F4622A] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
         Shop the Collection Before It's Gone →
       </span>
     </div>

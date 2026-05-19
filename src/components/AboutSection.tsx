@@ -59,7 +59,7 @@ const AboutSection = () => {
                 <div
                   className="absolute inset-0 pointer-events-none mix-blend-color"
                   style={{
-                    background: 'linear-gradient(180deg, rgba(201,168,76,0.08) 0%, rgba(40,60,80,0.12) 100%)',
+                    background: 'linear-gradient(180deg, rgba(108,78,242,0.08) 0%, rgba(108,78,242,0.05) 100%)',
                   }}
                 />
                 <div className="absolute inset-0 pointer-events-none opacity-30 bg-grain" />

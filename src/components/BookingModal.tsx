@@ -105,9 +105,9 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
   };
 
   const inputClass = (field: string) =>
-    `w-full bg-[rgba(201,168,76,0.04)] border-0 border-b ${
-      errors[field] ? "border-[#C1121F]" : "border-[rgba(201,168,76,0.3)]"
-    } focus:border-[#C9A84C] text-[#F2EDE4] font-body placeholder:text-[rgba(242,237,228,0.3)] px-1 py-3 text-sm outline-none transition-colors duration-200`;
+    `w-full bg-[rgba(108,78,242,0.04)] border-0 border-b ${
+      errors[field] ? "border-[#F4622A]" : "border-[rgba(108,78,242,0.3)]"
+    } focus:border-[#6C4EF2] text-[#1A1523] font-body placeholder:text-[rgba(242,237,228,0.3)] px-1 py-3 text-sm outline-none transition-colors duration-200`;
 
   return (
     <AnimatePresence>
@@ -121,7 +121,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
           onClick={handleClose}
         >
           {/* Overlay */}
-          <div className="absolute inset-0 bg-[#0D0B08]/90 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-[rgba(26,21,35,0.5)] backdrop-blur-sm" />
 
           {/* Modal */}
           <motion.div
@@ -130,14 +130,14 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
             exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-[#0D0B08] border border-[rgba(201,168,76,0.15)] rounded-sm"
-            style={{ borderTop: "2px solid #C9A84C" }}
+            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-[#FFFFFF] border border-[rgba(108,78,242,0.15)] rounded-sm"
+            style={{ borderTop: "2px solid #6C4EF2" }}
           >
             {/* Close */}
             <button
               onClick={handleClose}
               data-clickable
-              className="absolute top-4 right-4 text-[#C9A84C] hover:text-[#F2EDE4] transition-colors z-10"
+              className="absolute top-4 right-4 text-[#6C4EF2] hover:text-[#1A1523] transition-colors z-10"
               aria-label="Close"
             >
               <X size={20} />
@@ -148,10 +148,10 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                 /* ——— STEP 1: FORM ——— */
                 <>
                   <div className="text-center mb-8">
-                    <p className="font-accent text-[11px] uppercase tracking-[0.25em] text-[#C9A84C]/70 mb-3">
+                    <p className="font-accent text-[11px] uppercase tracking-[0.25em] text-[#6C4EF2]/70 mb-3">
                       ✦&nbsp; BOOK YOUR FREE STRATEGY CALL &nbsp;✦
                     </p>
-                    <p className="font-body text-sm text-[#F2EDE4]/50 italic">"20 minutes. No pitch. Just clarity."</p>
+                    <p className="font-body text-sm text-[#1A1523]/50 italic">"20 minutes. No pitch. Just clarity."</p>
                   </div>
 
                   <div className="space-y-5">
@@ -164,7 +164,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                         onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
                         className={inputClass("name")}
                       />
-                      {errors.name && <p className="text-[#C9A84C] text-xs mt-1 font-body">{errors.name}</p>}
+                      {errors.name && <p className="text-[#6C4EF2] text-xs mt-1 font-body">{errors.name}</p>}
                     </div>
 
                     {/* Email */}
@@ -176,7 +176,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                         onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
                         className={inputClass("email")}
                       />
-                      {errors.email && <p className="text-[#C9A84C] text-xs mt-1 font-body">{errors.email}</p>}
+                      {errors.email && <p className="text-[#6C4EF2] text-xs mt-1 font-body">{errors.email}</p>}
                     </div>
 
                     {/* Business */}
@@ -197,11 +197,11 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                         onChange={(e) => setFormData((p) => ({ ...p, revenue: e.target.value }))}
                         className={`${inputClass("revenue")} appearance-none bg-transparent`}
                       >
-                        <option value="" disabled className="bg-[#0D0B08] text-[#F2EDE4]/50">
+                        <option value="" disabled className="bg-[#FFFFFF] text-[#1A1523]/50">
                           Monthly revenue range
                         </option>
                         {REVENUE_OPTIONS.map((r) => (
-                          <option key={r} value={r} className="bg-[#0D0B08] text-[#F2EDE4]">
+                          <option key={r} value={r} className="bg-[#FFFFFF] text-[#1A1523]">
                             {r}
                           </option>
                         ))}
@@ -210,7 +210,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
 
                     {/* Services */}
                     <div>
-                      <p className="font-body text-xs text-[#F2EDE4]/40 mb-3">What do you need help with?</p>
+                      <p className="font-body text-xs text-[#1A1523]/40 mb-3">What do you need help with?</p>
                       <div className="flex flex-wrap gap-2">
                         {SERVICE_OPTIONS.map((s) => (
                           <button
@@ -220,8 +220,8 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                             onClick={() => toggleService(s)}
                             className={`rounded-full px-5 py-2 text-xs font-body transition-all duration-200 border ${
                               formData.services.includes(s)
-                                ? "bg-[#C9A84C] text-[#080808] border-[#C9A84C] font-bold"
-                                : "bg-transparent text-[#F2EDE4] border-[rgba(201,168,76,0.3)] hover:border-[#C9A84C]/60"
+                                ? "bg-[#6C4EF2] text-[#FFFFFF] border-[#6C4EF2] font-bold"
+                                : "bg-transparent text-[#1A1523] border-[rgba(108,78,242,0.3)] hover:border-[#6C4EF2]/60"
                             }`}
                           >
                             {s}
@@ -246,11 +246,11 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                       />
                       <div className="flex justify-between mt-1">
                         {errors.challenge ? (
-                          <p className="text-[#C9A84C] text-xs font-body">{errors.challenge}</p>
+                          <p className="text-[#6C4EF2] text-xs font-body">{errors.challenge}</p>
                         ) : (
                           <span />
                         )}
-                        <span className="text-[#F2EDE4]/30 text-xs font-body">{formData.challenge.length}/300</span>
+                        <span className="text-[#1A1523]/30 text-xs font-body">{formData.challenge.length}/300</span>
                       </div>
                     </div>
                   </div>
@@ -261,13 +261,13 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                     disabled={sending}
                     data-cta
                     data-clickable
-                    className="w-full mt-8 font-accent text-[13px] uppercase tracking-[0.15em] px-10 py-4 text-[#F2EDE4] font-semibold animate-glow-pulse-crimson hover:brightness-110 transition-all disabled:opacity-50"
-                    style={{ backgroundColor: "hsl(355, 84%, 40%)" }}
+                    className="w-full mt-8 font-accent text-[13px] uppercase tracking-[0.15em] px-10 py-4 text-[#1A1523] font-semibold hover:brightness-110 transition-all disabled:opacity-50"
+                    style={{ backgroundColor: "#6C4EF2" }}
                   >
                     {sending ? "Sending..." : "Let's Talk — Book My Call →"}
                   </button>
 
-                  <p className="text-center font-body text-xs text-[#F2EDE4]/40 italic mt-4">
+                  <p className="text-center font-body text-xs text-[#1A1523]/40 italic mt-4">
                     Hanan personally reviews every request. You'll hear back within 24 hours.
                   </p>
                 </>
@@ -279,26 +279,26 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="w-20 h-20 rounded-full border-2 border-[#C9A84C] flex items-center justify-center mx-auto mb-6"
+                    className="w-20 h-20 rounded-full border-2 border-[#6C4EF2] flex items-center justify-center mx-auto mb-6"
                   >
                     <motion.div
                       initial={{ pathLength: 0, opacity: 0 }}
                       animate={{ pathLength: 1, opacity: 1 }}
                       transition={{ delay: 0.3, duration: 0.5 }}
                     >
-                      <Check size={36} className="text-[#C9A84C]" />
+                      <Check size={36} className="text-[#6C4EF2]" />
                     </motion.div>
                   </motion.div>
 
-                  <h3 className="font-display text-4xl text-[#F2EDE4] mb-4">You're in.</h3>
-                  <p className="font-body text-sm text-[#F2EDE4]/60 max-w-sm mx-auto mb-8 leading-relaxed">
+                  <h3 className="font-display text-4xl text-[#1A1523] mb-4">You're in.</h3>
+                  <p className="font-body text-sm text-[#1A1523]/60 max-w-sm mx-auto mb-8 leading-relaxed">
                     Hanan has received your request and will personally reach out to{" "}
-                    <span className="text-[#C9A84C]">{formData.email}</span> within 24 hours to confirm your call time.
+                    <span className="text-[#6C4EF2]">{formData.email}</span> within 24 hours to confirm your call time.
                   </p>
 
-                  <div className="w-12 h-px bg-[#C9A84C]/30 mx-auto mb-8" />
+                  <div className="w-12 h-px bg-[#6C4EF2]/30 mx-auto mb-8" />
 
-                  <p className="font-body text-xs text-[#F2EDE4]/40 mb-5 uppercase tracking-widest">
+                  <p className="font-body text-xs text-[#1A1523]/40 mb-5 uppercase tracking-widest">
                     While you wait — connect with Hanan
                   </p>
 
@@ -308,7 +308,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-clickable
-                      className="flex items-center gap-2 px-5 py-2.5 border border-[rgba(201,168,76,0.3)] rounded-sm text-[#F2EDE4] font-accent text-[11px] uppercase tracking-wider hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all"
+                      className="flex items-center gap-2 px-5 py-2.5 border border-[rgba(108,78,242,0.3)] rounded-sm text-[#1A1523] font-accent text-[11px] uppercase tracking-wider hover:border-[#6C4EF2] hover:text-[#6C4EF2] transition-all"
                     >
                       <Instagram size={14} />
                       Instagram
@@ -318,7 +318,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-clickable
-                      className="flex items-center gap-2 px-5 py-2.5 border border-[rgba(201,168,76,0.3)] rounded-sm text-[#F2EDE4] font-accent text-[11px] uppercase tracking-wider hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all"
+                      className="flex items-center gap-2 px-5 py-2.5 border border-[rgba(108,78,242,0.3)] rounded-sm text-[#1A1523] font-accent text-[11px] uppercase tracking-wider hover:border-[#6C4EF2] hover:text-[#6C4EF2] transition-all"
                     >
                       <Linkedin size={14} />
                       LinkedIn
@@ -327,7 +327,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                       href="#"
                       onClick={handleGmailClick}
                       data-clickable
-                      className="flex items-center gap-2 px-5 py-2.5 border border-[rgba(201,168,76,0.3)] rounded-sm text-[#F2EDE4] font-accent text-[11px] uppercase tracking-wider hover:border-[#C9A84C] hover:text-[#C9A84C] transition-all"
+                      className="flex items-center gap-2 px-5 py-2.5 border border-[rgba(108,78,242,0.3)] rounded-sm text-[#1A1523] font-accent text-[11px] uppercase tracking-wider hover:border-[#6C4EF2] hover:text-[#6C4EF2] transition-all"
                     >
                       <Mail size={14} />
                       Email

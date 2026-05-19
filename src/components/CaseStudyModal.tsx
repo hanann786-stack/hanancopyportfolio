@@ -45,7 +45,7 @@ const CaseStudyModal = ({ study, cardIndex, onClose }: CaseStudyModalProps) => {
           onClick={onClose}
         >
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-[#080808]/95 backdrop-blur-md" />
+          <div className="absolute inset-0 bg-[rgba(26,21,35,0.55)] backdrop-blur-md" />
 
           {/* Modal */}
           <motion.div
@@ -53,14 +53,14 @@ const CaseStudyModal = ({ study, cardIndex, onClose }: CaseStudyModalProps) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-full max-w-[860px] max-h-[90vh] overflow-y-auto mx-4 bg-[#0D0B08] rounded-sm"
-            style={{ borderTop: '2px solid #C9A84C' }}
+            className="relative z-10 w-full max-w-[860px] max-h-[90vh] overflow-y-auto mx-4 bg-[#FFFFFF] rounded-sm"
+            style={{ borderTop: '2px solid #6C4EF2' }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 z-20 text-gold hover:text-white transition-colors"
+              className="absolute top-6 right-6 z-20 text-[#6C4EF2] hover:text-[#1A1523] transition-colors"
               data-clickable
             >
               <X size={24} />

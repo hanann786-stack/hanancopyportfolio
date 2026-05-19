@@ -10,7 +10,7 @@ const AdCard = ({ platform, primaryText, headline, cta }: { platform: string; pr
       ))}
     </div>
     <p className="font-display text-lg text-white-headline mb-4">{headline}</p>
-    <span className="inline-block bg-[#C1121F] text-white font-accent text-[10px] uppercase tracking-[0.1em] px-5 py-2.5 rounded-sm">
+    <span className="inline-block bg-[#F4622A] text-white font-accent text-[10px] uppercase tracking-[0.1em] px-5 py-2.5 rounded-sm">
       {cta}
     </span>
   </div>
@@ -66,7 +66,7 @@ const LandingPageTab = () => (
     <div className="text-center mb-2">
       <h2
         className="font-display text-3xl md:text-4xl text-white-headline leading-[1.15] tracking-[-0.03em] mb-5"
-        style={{ textShadow: '0 0 30px rgba(201,168,76,0.15)' }}
+        style={{ textShadow: '0 0 30px rgba(108,78,242,0.15)' }}
       >
         You Don't Need More Advice. You Need{' '}
         <span className="text-gold">the Right Conversation.</span>
@@ -74,7 +74,7 @@ const LandingPageTab = () => (
       <p className="font-body text-cream/80 text-base md:text-lg max-w-[52ch] mx-auto mb-8 leading-relaxed">
         High-performance coaching for founders, executives, and leaders who've outgrown every framework — and are ready to build from the inside out.
       </p>
-      <span className="inline-block bg-[#C1121F] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
+      <span className="inline-block bg-[#F4622A] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
         Book Your Discovery Call →
       </span>
     </div>
@@ -85,7 +85,7 @@ const LandingPageTab = () => (
     <div className="mb-2">
       <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-gold/50 mb-4 block">The Problem</span>
       <h3 className="font-display text-2xl text-white-headline mb-5 tracking-[-0.02em]">
-        You've Won the Game. So Why Does It Feel Like <span className="text-[#C1121F] font-bold">You're Losing?</span>
+        You've Won the Game. So Why Does It Feel Like <span className="text-[#F4622A] font-bold">You're Losing?</span>
       </h3>
       <p className="font-body text-cream text-[16px] leading-[1.7] max-w-[64ch] mb-4">
         You've built something real. Revenue. Team. Reputation. By every external measure, you've made it. But internally? Something shifted. The drive that used to fuel you now feels like a treadmill. The success you chased is here — and it's not enough.
@@ -149,7 +149,7 @@ const LandingPageTab = () => (
       <p className="font-body text-cream/70 text-base max-w-[48ch] mx-auto mb-8 leading-relaxed">
         Discovery calls are free, confidential, and zero-pressure. If it's not the right fit, we'll both know in 15 minutes.
       </p>
-      <span className="inline-block bg-[#C1121F] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
+      <span className="inline-block bg-[#F4622A] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
         Book Your Discovery Call →
       </span>
     </div>
@@ -166,12 +166,12 @@ const CoachingFunnelContent = () => {
       </span>
       <h2
         className="font-display text-2xl sm:text-3xl md:text-4xl text-gold mb-4 leading-[1.2] tracking-[-0.02em]"
-        style={{ textShadow: '0 0 30px rgba(201,168,76,0.3)' }}
+        style={{ textShadow: '0 0 30px rgba(108,78,242,0.3)' }}
       >
         47 Discovery Calls in 14 Days. No Discounts. No Desperation. Just Copy.
       </h2>
       <div className="inline-block bg-[hsla(43,52%,54%,0.1)] border border-[hsla(43,52%,54%,0.2)] rounded-sm px-4 py-2 mb-8">
-        <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(201,168,76,0.4)' }}>
+        <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(108,78,242,0.4)' }}>
           47 Discovery Calls in 14 Days
         </span>
       </div>
@@ -182,7 +182,7 @@ const CoachingFunnelContent = () => {
           onClick={() => setActiveTab('ads')}
           className={`font-accent text-[12px] uppercase tracking-[0.12em] px-5 py-2.5 rounded-sm border transition-all ${
             activeTab === 'ads'
-              ? 'bg-gold text-[#0D0B08] border-gold'
+              ? 'bg-gold text-[#FFFFFF] border-gold'
               : 'bg-transparent text-gold border-gold/40 hover:border-gold'
           }`}
           data-clickable
@@ -193,7 +193,7 @@ const CoachingFunnelContent = () => {
           onClick={() => setActiveTab('landing')}
           className={`font-accent text-[12px] uppercase tracking-[0.12em] px-5 py-2.5 rounded-sm border transition-all ${
             activeTab === 'landing'
-              ? 'bg-gold text-[#0D0B08] border-gold'
+              ? 'bg-gold text-[#FFFFFF] border-gold'
               : 'bg-transparent text-gold border-gold/40 hover:border-gold'
           }`}
           data-clickable

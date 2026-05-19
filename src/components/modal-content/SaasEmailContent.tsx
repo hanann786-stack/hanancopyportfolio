@@ -116,7 +116,7 @@ const EmailAccordion = ({ email, index }: { email: Email; index: number }) => {
         <span className="font-accent text-[11px] uppercase tracking-[0.12em] text-cream/50 shrink-0">
           {email.label}
         </span>
-        <span className="font-body text-sm text-[#C1121F] font-semibold truncate">
+        <span className="font-body text-sm text-[#F4622A] font-semibold truncate">
           Subject: "{email.subject}"
         </span>
       </button>
@@ -138,7 +138,7 @@ const EmailAccordion = ({ email, index }: { email: Email; index: number }) => {
               ))}
               {email.cta && (
                 <div className="mt-6">
-                  <span className="inline-block bg-[#C1121F] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-6 py-3 rounded-sm">
+                  <span className="inline-block bg-[#F4622A] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-6 py-3 rounded-sm">
                     {email.cta}
                   </span>
                 </div>
@@ -158,12 +158,12 @@ const SaasEmailContent = () => (
     </span>
     <h2
       className="font-display text-2xl sm:text-3xl md:text-4xl text-gold mb-4 leading-[1.2] tracking-[-0.02em]"
-      style={{ textShadow: '0 0 30px rgba(201,168,76,0.3)' }}
+      style={{ textShadow: '0 0 30px rgba(108,78,242,0.3)' }}
     >
       You Had 7 Days to Lose Them Forever. We Used Every Single One.
     </h2>
     <div className="inline-block bg-[hsla(43,52%,54%,0.1)] border border-[hsla(43,52%,54%,0.2)] rounded-sm px-4 py-2 mb-10">
-      <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(201,168,76,0.4)' }}>
+      <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(108,78,242,0.4)' }}>
         Open Rate 21% → 54%
       </span>
     </div>

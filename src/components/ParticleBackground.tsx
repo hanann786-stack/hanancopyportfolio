@@ -17,7 +17,7 @@ const ParticleBackground = memo(() => {
     }
 
     const ctx = canvas.getContext('2d', {
-      alpha: false,
+      alpha: true,
       desynchronized: true,
     });
     if (!ctx) return;
@@ -57,7 +57,8 @@ const ParticleBackground = memo(() => {
       const h = canvas.height;
 
       // Trail fade fill (avoids full clear+redraw cost)
-      ctx.fillStyle = 'rgba(8, 8, 8, 0.18)';
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(250, 250, 248, 0.2)';
       ctx.fillRect(0, 0, w, h);
 
       const mx = mouseRef.current.x;
@@ -66,10 +67,10 @@ const ParticleBackground = memo(() => {
 
       // Aurora blobs
       const blobs = [
-        { cx: 0.3 + Math.sin(t) * 0.15 + (mx - 0.5) * 0.25, cy: 0.35 + Math.cos(t * 0.7) * 0.12 + (my - 0.5) * 0.2, r: 0.5, alpha: 0.12 },
-        { cx: 0.7 + Math.cos(t * 0.8) * 0.18 + (mx - 0.5) * 0.2, cy: 0.6 + Math.sin(t * 0.6) * 0.1 + (my - 0.5) * 0.18, r: 0.45, alpha: 0.1 },
-        { cx: 0.5 + Math.sin(t * 1.2) * 0.12 + (mx - 0.5) * 0.3, cy: 0.25 + Math.cos(t * 0.9) * 0.15 + (my - 0.5) * 0.25, r: 0.4, alpha: 0.08 },
-        { cx: mx * 0.8 + 0.1 + Math.sin(t * 1.5) * 0.05, cy: my * 0.8 + 0.1 + Math.cos(t * 1.3) * 0.05, r: 0.3, alpha: 0.07 },
+        { cx: 0.3 + Math.sin(t) * 0.15 + (mx - 0.5) * 0.25, cy: 0.35 + Math.cos(t * 0.7) * 0.12 + (my - 0.5) * 0.2, r: 0.5, alpha: 0.12, color: '108, 78, 242' },
+        { cx: 0.7 + Math.cos(t * 0.8) * 0.18 + (mx - 0.5) * 0.2, cy: 0.6 + Math.sin(t * 0.6) * 0.1 + (my - 0.5) * 0.18, r: 0.45, alpha: 0.10, color: '108, 78, 242' },
+        { cx: 0.5 + Math.sin(t * 1.2) * 0.12 + (mx - 0.5) * 0.3, cy: 0.25 + Math.cos(t * 0.9) * 0.15 + (my - 0.5) * 0.25, r: 0.4, alpha: 0.08, color: '244, 98, 42' },
+        { cx: mx * 0.8 + 0.1 + Math.sin(t * 1.5) * 0.05, cy: my * 0.8 + 0.1 + Math.cos(t * 1.3) * 0.05, r: 0.3, alpha: 0.06, color: '244, 98, 42' },
       ];
 
       for (const blob of blobs) {
@@ -77,15 +78,15 @@ const ParticleBackground = memo(() => {
           blob.cx * w, blob.cy * h, 0,
           blob.cx * w, blob.cy * h, blob.r * Math.max(w, h)
         );
-        gradient.addColorStop(0, `rgba(108, 78, 242, ${blob.alpha})`);
-        gradient.addColorStop(0.5, `rgba(108, 78, 242, ${blob.alpha * 0.3})`);
-        gradient.addColorStop(1, 'rgba(108, 78, 242, 0)');
+        gradient.addColorStop(0, `rgba(${blob.color}, ${blob.alpha})`);
+        gradient.addColorStop(0.5, `rgba(${blob.color}, ${blob.alpha * 0.3})`);
+        gradient.addColorStop(1, `rgba(${blob.color}, 0)`);
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, w, h);
       }
 
       // Batched grid lines — single beginPath + single stroke
-      ctx.strokeStyle = 'rgba(108, 78, 242, 0.03)';
+      ctx.strokeStyle = 'rgba(108, 78, 242, 0.07)';
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       const gridSize = 80;

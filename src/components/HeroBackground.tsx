@@ -84,10 +84,10 @@ const HeroBackground = memo(() => {
       phase: number;
     };
     const orbs: Orb[] = [
-      { x: width * 0.2, y: height * 0.3, vx: 0.05, vy: 0.03, baseR: 320, color: '108, 78, 242', alpha: 0.04, phase: 0 },
-      { x: width * 0.8, y: height * 0.7, vx: -0.04, vy: -0.025, baseR: 320, color: '108, 78, 242', alpha: 0.04, phase: 2 },
-      { x: width * 0.7, y: height * 0.25, vx: 0.03, vy: 0.04, baseR: 240, color: '244, 98, 42', alpha: 0.03, phase: 4 },
-      { x: width * 0.25, y: height * 0.75, vx: -0.035, vy: -0.02, baseR: 240, color: '244, 98, 42', alpha: 0.03, phase: 6 },
+      { x: width * 0.2, y: height * 0.3, vx: 0.05, vy: 0.03, baseR: 320, color: '108, 78, 242', alpha: 0.12, phase: 0 },
+      { x: width * 0.8, y: height * 0.7, vx: -0.04, vy: -0.025, baseR: 320, color: '108, 78, 242', alpha: 0.10, phase: 2 },
+      { x: width * 0.7, y: height * 0.25, vx: 0.03, vy: 0.04, baseR: 240, color: '244, 98, 42', alpha: 0.08, phase: 4 },
+      { x: width * 0.25, y: height * 0.75, vx: -0.035, vy: -0.02, baseR: 240, color: '244, 98, 42', alpha: 0.06, phase: 6 },
     ];
 
     let resizeTimer = 0;
@@ -125,7 +125,8 @@ const HeroBackground = memo(() => {
       const skipUpdate = mobile && (++frameSkip % 2 === 0);
 
       // Trail/fade fill instead of clearRect
-      ctx.fillStyle = 'rgba(10, 10, 18, 0.18)';
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(250, 250, 248, 0.2)';
       ctx.fillRect(0, 0, width, height);
 
       // --- Orbs ---
@@ -176,7 +177,7 @@ const HeroBackground = memo(() => {
       // Connection lines (single path)
       const LINK = 110;
       const LINK_SQ = LINK * LINK;
-      ctx.strokeStyle = 'rgba(108, 78, 242, 0.06)';
+      ctx.strokeStyle = 'rgba(108, 78, 242, 0.07)';
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (let i = 0; i < particles.length; i++) {
@@ -200,7 +201,7 @@ const HeroBackground = memo(() => {
         (groups[p.color] ||= []).push(p);
       }
       for (const color in groups) {
-        ctx.fillStyle = `rgba(${color}, 0.5)`;
+        ctx.fillStyle = `rgba(${color}, 0.3)`;
         ctx.beginPath();
         const arr = groups[color];
         for (let i = 0; i < arr.length; i++) {

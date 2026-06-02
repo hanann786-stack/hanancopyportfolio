@@ -53,7 +53,7 @@ const AboutSection = () => {
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: 'radial-gradient(ellipse at center, transparent 50%, rgba(8,8,8,0.7) 100%)',
+                    background: 'radial-gradient(ellipse at center, transparent 55%, rgba(247,244,239,0.55) 100%)',
                   }}
                 />
                 <div

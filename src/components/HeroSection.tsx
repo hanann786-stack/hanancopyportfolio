@@ -87,7 +87,7 @@ const HeroSection = () => {
               style={{ background: '#22C55E' }}
             />
           </span>
-          Taking 2 new clients in May 2026
+          Taking 2 new clients in June 2026
         </div>
 
         {/* CTAs */}

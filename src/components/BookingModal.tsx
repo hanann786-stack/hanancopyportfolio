@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { handleGmailClick } from "@/lib/gmail";
 
-// Replace with your EmailJS credentials from emailjs.com — free account, takes 5 minutes to set up.
-const SERVICE_ID = 'service_hrohxo7';
-const TEMPLATE_ID = 'template_4hp5jtj';
-const PUBLIC_KEY = 'nfAJdaLTCdX7h-H-0';
+// EmailJS credentials sourced from environment variables (see .env)
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 // Initialize EmailJS once at module level
 emailjs.init(PUBLIC_KEY);

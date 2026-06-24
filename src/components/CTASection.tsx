@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 
-const SERVICE_ID = 'service_hrohxo7';
-const TEMPLATE_ID = 'template_4hp5jtj';
-const PUBLIC_KEY = 'nfAJdaLTCdX7h-H-0';
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 emailjs.init(PUBLIC_KEY);
 

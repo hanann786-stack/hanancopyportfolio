@@ -1,17 +1,19 @@
 import { useEffect, useRef, memo } from 'react';
 
+interface HeroBackgroundProps {
+  /** When true, runs a lighter version: fewer particles, no connection lines, no orbs. */
+  reduced?: boolean;
+}
+
 /**
- * Hero-only animated background:
- *  - 4 soft blur orbs (violet + persimmon) drifting and breathing
- *  - 160 (or 80 on mobile) drifting particles in violet / persimmon / lavender
- *  - Nearby particles connect with thin lines
- *  - Mouse repulsion within 90px
- *  - Light scroll parallax (0.04x)
+ * Hero-only animated background. In `reduced` mode (video present),
+ * we skip orbs + connection lines and cap particles at 40.
  */
-const HeroBackground = memo(() => {
+const HeroBackground = memo(({ reduced = false }: HeroBackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
+
   
   const rafRef = useRef(0);
 

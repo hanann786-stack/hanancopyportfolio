@@ -7,53 +7,82 @@ import heroPoster from '@/assets/hero-poster.jpg.asset.json';
 
 const HeroSection = () => {
   const [bookingOpen, setBookingOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
+    const mq = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
   }, []);
+
+  // Only start playback once the hero is actually in view
+  useEffect(() => {
+    if (isMobile !== false) return;
+    const sec = sectionRef.current;
+    const vid = videoRef.current;
+    if (!sec || !vid) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            vid.play().catch(() => {});
+          } else {
+            vid.pause();
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(sec);
+    return () => io.disconnect();
+  }, [isMobile]);
 
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={
+        isMobile
+          ? {
+              backgroundImage: `url(${heroPoster.url})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundAttachment: 'scroll',
+            }
+          : undefined
+      }
     >
-      {/* Video background (desktop) / poster image (mobile) */}
-      {!isMobile ? (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={heroPoster.url}
-          className="hero-bg-video"
-        >
-          <source src={heroVideo.url} type="video/mp4" />
-        </video>
-      ) : (
-        <div
-          className="hero-bg-video"
-          style={{
-            backgroundImage: `url(${heroPoster.url})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+      {/* Video background (desktop only). Opacity controlled via wrapper. */}
+      {isMobile === false && (
+        <div className="hero-bg-video-wrap" style={{ opacity: 1 }}>
+          <video
+            ref={videoRef}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroPoster.url}
+            className="hero-bg-video"
+          >
+            <source src={heroVideo.url} type="video/mp4" />
+          </video>
+        </div>
       )}
 
-      {/* Particle canvas above video, below overlay text — opacity reduced via wrapper */}
+      {/* Particle canvas — reduced mode when video is present */}
       <div className="absolute inset-0 z-[1] pointer-events-none" style={{ opacity: 0.5 }}>
-        <HeroBackground />
+        <HeroBackground reduced={isMobile === false} />
       </div>
 
       {/* Brand overlay for readability */}
       <div className="hero-overlay" />
 
       <div className="relative z-[2] w-full max-w-[780px] mx-auto px-6 text-center">
-        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -71,7 +100,6 @@ const HeroSection = () => {
           <span className="hero-blink-dot" />
         </motion.div>
 
-        {/* Headline */}
         <h1
           className="hero-h1 font-display mb-7"
           style={{
@@ -96,7 +124,6 @@ const HeroSection = () => {
           </span>
         </h1>
 
-        {/* Subheadline */}
         <p
           className="hero-sub mx-auto mb-7"
           style={{
@@ -110,7 +137,6 @@ const HeroSection = () => {
           I engineer revenue through conversion copy and AI marketing systems — for DTC brands and SaaS companies done leaving money on the table.
         </p>
 
-        {/* Availability badge */}
         <div
           className="hero-badge inline-flex items-center gap-2 mb-8"
           style={{
@@ -137,7 +163,6 @@ const HeroSection = () => {
           Taking 2 new clients in June 2026
         </div>
 
-        {/* CTAs */}
         <div
           className="hero-ctas flex flex-wrap justify-center items-center"
           style={{ gap: '14px' }}
@@ -155,7 +180,6 @@ const HeroSection = () => {
           </a>
         </div>
 
-        {/* Scroll indicator */}
         <a
           href="#credibility"
           data-clickable

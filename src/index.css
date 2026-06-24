@@ -323,6 +323,13 @@ html, body {
 }
 
 /* ===== Hero video background ===== */
+.hero-bg-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
 .hero-bg-video {
   position: absolute;
   top: 0;
@@ -330,8 +337,10 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
   pointer-events: none;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .hero-overlay {
   position: absolute;
@@ -346,6 +355,8 @@ html, body {
   z-index: 1;
   pointer-events: none;
 }
+html, body { -webkit-overflow-scrolling: touch; }
+
 
 /* ===== Hero section animations ===== */
 @keyframes hero-eyebrow-underline {

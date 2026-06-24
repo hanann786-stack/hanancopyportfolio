@@ -1,17 +1,19 @@
 import { useEffect, useRef, memo } from 'react';
 
+interface HeroBackgroundProps {
+  /** When true, runs a lighter version: fewer particles, no connection lines, no orbs. */
+  reduced?: boolean;
+}
+
 /**
- * Hero-only animated background:
- *  - 4 soft blur orbs (violet + persimmon) drifting and breathing
- *  - 160 (or 80 on mobile) drifting particles in violet / persimmon / lavender
- *  - Nearby particles connect with thin lines
- *  - Mouse repulsion within 90px
- *  - Light scroll parallax (0.04x)
+ * Hero-only animated background. In `reduced` mode (video present),
+ * we skip orbs + connection lines and cap particles at 40.
  */
-const HeroBackground = memo(() => {
+const HeroBackground = memo(({ reduced = false }: HeroBackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
+
   
   const rafRef = useRef(0);
 
@@ -39,7 +41,8 @@ const HeroBackground = memo(() => {
 
     const isMobile = () => window.innerWidth < 768;
     const mobile = isMobile();
-    const PARTICLE_COUNT = mobile ? 60 : 120;
+    const PARTICLE_COUNT = reduced ? 40 : (mobile ? 60 : 120);
+
 
     type Particle = {
       x: number;
@@ -129,25 +132,28 @@ const HeroBackground = memo(() => {
       ctx.fillStyle = 'rgba(250, 250, 248, 0.2)';
       ctx.fillRect(0, 0, width, height);
 
-      // --- Orbs ---
-      for (const orb of orbs) {
-        if (!skipUpdate) {
-          orb.x += orb.vx * dt;
-          orb.y += orb.vy * dt;
-          orb.phase += 0.0025 * dt;
-          if (orb.x < -orb.baseR) orb.x = width + orb.baseR;
-          if (orb.x > width + orb.baseR) orb.x = -orb.baseR;
-          if (orb.y < -orb.baseR) orb.y = height + orb.baseR;
-          if (orb.y > height + orb.baseR) orb.y = -orb.baseR;
+      // --- Orbs (skipped in reduced/video mode) ---
+      if (!reduced) {
+        for (const orb of orbs) {
+          if (!skipUpdate) {
+            orb.x += orb.vx * dt;
+            orb.y += orb.vy * dt;
+            orb.phase += 0.0025 * dt;
+            if (orb.x < -orb.baseR) orb.x = width + orb.baseR;
+            if (orb.x > width + orb.baseR) orb.x = -orb.baseR;
+            if (orb.y < -orb.baseR) orb.y = height + orb.baseR;
+            if (orb.y > height + orb.baseR) orb.y = -orb.baseR;
+          }
+          const breathe = 0.95 + (Math.sin(orb.phase) * 0.5 + 0.5) * 0.1;
+          const r = orb.baseR * breathe;
+          const grad = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, r);
+          grad.addColorStop(0, `rgba(${orb.color}, ${orb.alpha})`);
+          grad.addColorStop(1, `rgba(${orb.color}, 0)`);
+          ctx.fillStyle = grad;
+          ctx.fillRect(orb.x - r, orb.y - r, r * 2, r * 2);
         }
-        const breathe = 0.95 + (Math.sin(orb.phase) * 0.5 + 0.5) * 0.1;
-        const r = orb.baseR * breathe;
-        const grad = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, r);
-        grad.addColorStop(0, `rgba(${orb.color}, ${orb.alpha})`);
-        grad.addColorStop(1, `rgba(${orb.color}, 0)`);
-        ctx.fillStyle = grad;
-        ctx.fillRect(orb.x - r, orb.y - r, r * 2, r * 2);
       }
+
 
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
@@ -174,28 +180,31 @@ const HeroBackground = memo(() => {
         }
       }
 
-      // Connection lines (single path)
-      const LINK = 110;
-      const LINK_SQ = LINK * LINK;
-      ctx.strokeStyle = 'rgba(108, 78, 242, 0.07)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      for (let i = 0; i < particles.length; i++) {
-        const a = particles[i];
-        for (let j = i + 1; j < particles.length; j++) {
-          const b = particles[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < LINK_SQ) {
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
+      // Connection lines (skipped entirely in reduced/video mode)
+      if (!reduced) {
+        const LINK = 110;
+        const LINK_SQ = LINK * LINK;
+        ctx.strokeStyle = 'rgba(108, 78, 242, 0.07)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let i = 0; i < particles.length; i++) {
+          const a = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const d2 = dx * dx + dy * dy;
+            if (d2 < LINK_SQ) {
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+            }
           }
         }
+        ctx.stroke();
       }
-      ctx.stroke();
 
       // --- Particles draw, grouped by color to minimize fillStyle changes ---
+
       const groups: Record<string, Particle[]> = {};
       for (const p of particles) {
         (groups[p.color] ||= []).push(p);
@@ -235,7 +244,7 @@ const HeroBackground = memo(() => {
       window.removeEventListener('mouseout', onMouseLeave);
       document.removeEventListener('visibilitychange', onVisibility);
     };
-  }, []);
+  }, [reduced]);
 
   return (
     <div

@@ -15,18 +15,21 @@ const Navbar = memo(() => {
   const ticking = useRef(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      if (!ticking.current) {
-        requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 60);
-          ticking.current = false;
-        });
-        ticking.current = true;
-      }
+    // Use IntersectionObserver on a top-of-page sentinel instead of a scroll listener
+    const sentinel = document.createElement('div');
+    sentinel.style.cssText = 'position:absolute;top:60px;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.appendChild(sentinel);
+    const io = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    io.observe(sentinel);
+    return () => {
+      io.disconnect();
+      sentinel.remove();
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
 
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };

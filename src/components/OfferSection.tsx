@@ -77,11 +77,13 @@ const ServiceCard = ({ card, index }: { card: Card; index: number }) => {
     return () => obs.disconnect();
   }, []);
 
+  const dir = index % 2 === 0 ? 'ed-from-left' : 'ed-from-right';
+  const masonClass = `service-card-mason-${index + 1}`;
   return (
     <div
       ref={ref}
-      className={`service-card${card.isNew ? ' service-card-ai' : ''}${visible ? ' is-visible' : ''}`}
-      style={{ transitionDelay: `${index * 0.1}s` }}
+      className={`service-card ed-enter ${dir} ${masonClass}${card.isNew ? ' service-card-ai' : ''}${visible ? ' is-visible' : ''}`}
+      style={{ animationDelay: `${index * 0.08}s` }}
     >
       <span className="service-card-accent" />
       <div className="service-card-top">

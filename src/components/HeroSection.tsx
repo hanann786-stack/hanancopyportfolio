@@ -19,7 +19,6 @@ const HeroSection = () => {
     return () => mq.removeEventListener('change', update);
   }, []);
 
-  // Only start playback once the hero is actually in view
   useEffect(() => {
     if (isMobile !== false) return;
     const sec = sectionRef.current;
@@ -28,11 +27,8 @@ const HeroSection = () => {
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          if (e.isIntersecting) {
-            vid.play().catch(() => {});
-          } else {
-            vid.pause();
-          }
+          if (e.isIntersecting) vid.play().catch(() => {});
+          else vid.pause();
         }
       },
       { threshold: 0.1 }
@@ -45,7 +41,7 @@ const HeroSection = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen overflow-hidden"
       style={
         isMobile
           ? {
@@ -57,7 +53,6 @@ const HeroSection = () => {
           : undefined
       }
     >
-      {/* Video background (desktop only). Opacity controlled via wrapper. */}
       {isMobile === false && (
         <div className="hero-bg-video-wrap" style={{ opacity: 1 }}>
           <video
@@ -74,20 +69,52 @@ const HeroSection = () => {
         </div>
       )}
 
-      {/* Particle canvas — reduced mode when video is present */}
       <div className="absolute inset-0 z-[1] pointer-events-none" style={{ opacity: 0.5 }}>
         <HeroBackground reduced={isMobile === false} />
       </div>
 
-      {/* Brand overlay for readability */}
       <div className="hero-overlay" />
 
-      <div className="relative z-[2] w-full max-w-[780px] mx-auto px-6 text-center">
+      {/* Floating availability badge — top-right, rotated */}
+      <motion.div
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="hero-badge-floating"
+      >
+        <div
+          className="inline-flex items-center gap-2"
+          style={{
+            background: 'rgba(108,78,242,0.18)',
+            border: '1px solid rgba(201,184,245,0.4)',
+            backdropFilter: 'blur(8px)',
+            borderRadius: '999px',
+            padding: '6px 16px',
+            fontSize: '12px',
+            color: '#FFFFFF',
+            fontWeight: 500,
+          }}
+        >
+          <span className="relative flex items-center justify-center">
+            <span
+              className="absolute inline-block w-2 h-2 rounded-full hero-pulse-dot"
+              style={{ background: '#22C55E' }}
+            />
+            <span
+              className="relative inline-block w-2 h-2 rounded-full"
+              style={{ background: '#22C55E' }}
+            />
+          </span>
+          Taking 2 new clients in June 2026
+        </div>
+      </motion.div>
+
+      <div className="hero-editorial">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1, duration: 0.6 }}
-          className="flex items-center justify-center gap-3 mb-8"
+          className="hero-eyebrow-row flex items-center gap-3 mb-7"
         >
           <span className="hero-blink-dot" />
           <span
@@ -97,7 +124,6 @@ const HeroSection = () => {
             Conversion Copywriter × AI Marketing Systems
             <span className="hero-eyebrow-underline" />
           </span>
-          <span className="hero-blink-dot" />
         </motion.div>
 
         <h1
@@ -125,82 +151,58 @@ const HeroSection = () => {
         </h1>
 
         <p
-          className="hero-sub mx-auto mb-7"
+          className="hero-sub mb-8"
           style={{
             fontSize: '15px',
             color: 'rgba(255,255,255,0.85)',
             lineHeight: 1.82,
-            maxWidth: '580px',
+            maxWidth: '500px',
             textShadow: '0 1px 12px rgba(0,0,0,0.3)',
           }}
         >
           I engineer revenue through conversion copy and AI marketing systems — for DTC brands and SaaS companies done leaving money on the table.
         </p>
 
-        <div
-          className="hero-badge inline-flex items-center gap-2 mb-8"
-          style={{
-            background: 'rgba(108,78,242,0.18)',
-            border: '1px solid rgba(201,184,245,0.4)',
-            backdropFilter: 'blur(8px)',
-            borderRadius: '999px',
-            padding: '6px 16px',
-            fontSize: '12px',
-            color: '#FFFFFF',
-            fontWeight: 500,
-          }}
-        >
-          <span className="relative flex items-center justify-center">
-            <span
-              className="absolute inline-block w-2 h-2 rounded-full hero-pulse-dot"
-              style={{ background: '#22C55E' }}
-            />
-            <span
-              className="relative inline-block w-2 h-2 rounded-full"
-              style={{ background: '#22C55E' }}
-            />
-          </span>
-          Taking 2 new clients in June 2026
+        {/* Stacked, overlapping CTAs — secondary above-left, primary lower-right */}
+        <div className="hero-cta-stack hero-ctas">
+          <div>
+            <a href="#work" data-clickable className="hero-cta-secondary">
+              See the Work
+            </a>
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={() => setBookingOpen(true)}
+              data-clickable
+              className="hero-cta-primary"
+            >
+              Book a Strategy Call
+            </button>
+          </div>
         </div>
-
-        <div
-          className="hero-ctas flex flex-wrap justify-center items-center"
-          style={{ gap: '14px' }}
-        >
-          <button
-            type="button"
-            onClick={() => setBookingOpen(true)}
-            data-clickable
-            className="hero-cta-primary"
-          >
-            Book a Strategy Call
-          </button>
-          <a href="#work" data-clickable className="hero-cta-secondary">
-            See the Work
-          </a>
-        </div>
-
-        <a
-          href="#credibility"
-          data-clickable
-          className="hero-scroll-indicator mt-16 inline-flex"
-          aria-label="Scroll down"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#FFFFFF"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="hero-scroll-arrow"
-          >
-            <path d="M12 5v14M5 12l7 7 7-7" />
-          </svg>
-        </a>
       </div>
+
+      <a
+        href="#credibility"
+        data-clickable
+        className="hero-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-[2]"
+        aria-label="Scroll down"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#FFFFFF"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="hero-scroll-arrow"
+        >
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
+      </a>
 
       <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </section>

@@ -141,10 +141,12 @@ const StudyCard = ({ card, onOpen, index }: { card: Card; onOpen: () => void; in
     return () => obs.disconnect();
   }, [index]);
 
+  const mirror = index % 2 === 1;
+  const dir = index % 2 === 0 ? 'ed-from-left' : 'ed-from-right';
   return (
     <div
       ref={ref}
-      className={`cs-card${visible ? ' is-visible' : ''}`}
+      className={`cs-card ed-enter ${dir}${mirror ? ' cs-card--mirror' : ''}${visible ? ' is-visible' : ''}`}
       onClick={onOpen}
       data-clickable
     >

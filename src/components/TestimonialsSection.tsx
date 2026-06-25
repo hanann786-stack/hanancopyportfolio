@@ -68,46 +68,43 @@ const TestimonialsSection = () => {
         <h2 className="testi-title">Don't take my word for it.</h2>
         <p className="testi-sub">Real feedback from real clients. Unedited.</p>
       </div>
-      <div ref={ref} className="testi-grid">
-        {testimonials.map((t, i) => (
-          <article
-            key={t.name}
-            className="testi-card"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? 'translateY(0)' : 'translateY(24px)',
-              transition:
-                'opacity 0.6s cubic-bezier(.16,1,.3,1), transform 0.6s cubic-bezier(.16,1,.3,1), border-color 0.2s ease',
-              transitionDelay: `${i * 0.1}s`,
-            }}
-          >
-            <div className="testi-top">
-              <div className="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
-              <span className="testi-verified">
-                <span className="testi-verified-check">✓</span> Real screenshot
-              </span>
-            </div>
-
-            {t.metric && (
-              <div className="testi-metric">
-                <span className="testi-metric-value">{t.metric.value}</span>
-                <span className="testi-metric-label">{t.metric.label}</span>
+      <div ref={ref} className="testi-grid testi-grid--asym">
+        {testimonials.map((t, i) => {
+          const dir = ['ed-from-top', 'ed-from-bottom', 'ed-from-top', 'ed-from-bottom'][i];
+          return (
+            <article
+              key={t.name}
+              className={`testi-card ed-enter ${dir} ${visible ? 'is-visible' : ''}`}
+              style={{ animationDelay: `${i * 0.12}s` }}
+            >
+              <div className="testi-top">
+                <div className="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <span className="testi-verified">
+                  <span className="testi-verified-check">✓</span> Real screenshot
+                </span>
               </div>
-            )}
 
-            <p className="testi-quote">"{t.quote}"</p>
+              {t.metric && (
+                <div className="testi-metric">
+                  <span className="testi-metric-value">{t.metric.value}</span>
+                  <span className="testi-metric-label">{t.metric.label}</span>
+                </div>
+              )}
 
-            <div className="testi-divider" />
+              <p className="testi-quote">"{t.quote}"</p>
 
-            <div className="testi-meta">
-              <div>
-                <p className="testi-name">{t.name}</p>
-                <p className="testi-role">{t.role}</p>
+              <div className="testi-divider" />
+
+              <div className="testi-meta">
+                <div>
+                  <p className="testi-name">{t.name}</p>
+                  <p className="testi-role">{t.role}</p>
+                </div>
+                <span className="testi-badge"><b>↑</b>{t.badge}</span>
               </div>
-              <span className="testi-badge"><b>↑</b>{t.badge}</span>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </section>
   );

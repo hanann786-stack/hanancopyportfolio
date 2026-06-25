@@ -53,25 +53,24 @@ const ProcessSection = () => {
         <span className="process-eyebrow"><i /> How We Work</span>
         <h2 className="process-title">A clear path from brief to revenue.</h2>
       </div>
-      <div ref={ref} className="process-block">
-        {steps.map((s, i) => (
-          <div
-            key={s.n}
-            className="process-step"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? 'translateY(0)' : 'translateY(24px)',
-              transition: 'opacity 0.6s ease, transform 0.6s ease',
-              transitionDelay: `${i * 0.12}s`,
-            }}
-          >
-            <span className="process-step-bg-num">{s.n}</span>
-            <div className="process-step-dot">{s.n}</div>
-            <h3 className="process-step-title">{s.title}</h3>
-            <p className="process-step-desc">{s.desc}</p>
-            <span className="process-step-time">{s.time}</span>
-          </div>
-        ))}
+      <div ref={ref} className="process-block process-block--zigzag">
+        {steps.map((s, i) => {
+          const down = i % 2 === 1;
+          const dir = ['ed-from-left', 'ed-from-top', 'ed-from-right', 'ed-from-bottom'][i];
+          return (
+            <div
+              key={s.n}
+              className={`process-step ed-enter ${dir} ${down ? 'process-step--down' : ''} ${visible ? 'is-visible' : ''}`}
+              style={{ animationDelay: `${i * 0.12}s` }}
+            >
+              <span className="process-step-bg-num">{s.n}</span>
+              <div className="process-step-dot">{s.n}</div>
+              <h3 className="process-step-title">{s.title}</h3>
+              <p className="process-step-desc">{s.desc}</p>
+              <span className="process-step-time">{s.time}</span>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -108,13 +108,13 @@ const CTASection = () => {
           transition: 'opacity 0.7s ease, transform 0.7s ease',
         }}
       >
-        <div className="cta-badge">
+        <div className="cta-badge booking-badge-offset">
           <span className="cta-badge-dot" />
-          <span>Accepting 2 new projects · May 2026</span>
+          <span>Accepting 2 new projects · June 2026</span>
         </div>
 
-        <h2 className="cta-title">Ready to stop leaving money on the table?</h2>
-        <p className="cta-sub">
+        <h2 className="cta-title booking-heading-left">Ready to stop leaving money on the table?</h2>
+        <p className="cta-sub booking-heading-left">
           Send a short brief. If we're a fit, you'll hear back within 24 hours with next steps and a calendar link.
         </p>
 

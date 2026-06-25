@@ -54,6 +54,8 @@ const StatsBar = () => {
     return `${s.prefix ?? ''}${display}${s.suffix ?? ''}`;
   };
 
+  const dirs = ['ed-from-left', 'ed-from-top', 'ed-from-bottom', 'ed-from-right'];
+  const sizeClass = ['stat-cell--lg', 'stat-cell--sm', 'stat-cell--lg', 'stat-cell--sm'];
   return (
     <section
       ref={ref}
@@ -64,13 +66,14 @@ const StatsBar = () => {
         borderBottom: '1px solid rgba(108,78,242,0.1)',
       }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 stats-bar-asym">
         {stats.map((s, i) => (
           <div
             key={s.label}
-            className="text-center"
+            className={`text-center ed-enter ${dirs[i]} ${sizeClass[i]} ${startedRef.current ? 'is-visible' : ''}`}
             style={{
               padding: '2.5rem 1rem',
+              animationDelay: `${i * 0.15}s`,
               borderRight:
                 i < stats.length - 1
                   ? '1px solid rgba(108,78,242,0.1)'
@@ -80,6 +83,7 @@ const StatsBar = () => {
             }}
           >
             <div
+              className="stat-value"
               style={{
                 fontSize: 'clamp(1.9rem, 3vw, 2.4rem)',
                 fontWeight: 600,

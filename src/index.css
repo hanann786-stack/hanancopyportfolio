@@ -1359,3 +1359,176 @@ button:active, .hero-cta-primary:active, .hero-cta-secondary:active,
   transform: scale(0.98);
 }
 
+
+/* ============================================================
+   EDITORIAL LAYOUT OVERRIDES — asymmetric, off-center, zigzag.
+   Breaks the "centered box" template feel across all sections.
+   ============================================================ */
+
+/* Direction-aware entrance keyframes */
+@keyframes ed-in-left   { from { opacity: 0; transform: translate3d(-60px, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes ed-in-right  { from { opacity: 0; transform: translate3d( 60px, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes ed-in-top    { from { opacity: 0; transform: translate3d(0, -40px, 0); } to { opacity: 1; transform: none; } }
+@keyframes ed-in-bottom { from { opacity: 0; transform: translate3d(0,  40px, 0); } to { opacity: 1; transform: none; } }
+
+.ed-enter { opacity: 0; will-change: transform, opacity; }
+.ed-enter.is-visible.ed-from-left   { animation: ed-in-left   0.75s cubic-bezier(.16,1,.3,1) forwards; }
+.ed-enter.is-visible.ed-from-right  { animation: ed-in-right  0.75s cubic-bezier(.16,1,.3,1) forwards; }
+.ed-enter.is-visible.ed-from-top    { animation: ed-in-top    0.75s cubic-bezier(.16,1,.3,1) forwards; }
+.ed-enter.is-visible.ed-from-bottom { animation: ed-in-bottom 0.75s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* ---------- HERO: off-center left, stacked CTAs ---------- */
+.hero-editorial {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  max-width: 540px;
+  width: calc(100% - 16%);
+  text-align: left !important;
+  z-index: 2;
+}
+.hero-editorial .hero-eyebrow-row { justify-content: flex-start !important; }
+.hero-editorial .hero-h1 { text-align: left; }
+.hero-editorial .hero-sub { margin-left: 0 !important; margin-right: 0 !important; text-align: left; }
+
+.hero-badge-floating {
+  position: absolute;
+  top: -14px;
+  right: 8%;
+  transform: rotate(-2deg);
+  z-index: 3;
+}
+@media (max-width: 768px) {
+  .hero-editorial { left: 5%; right: 5%; width: auto; max-width: none; transform: translateY(-50%); }
+  .hero-badge-floating { right: 5%; }
+}
+
+.hero-line-1 { animation: ed-in-left 0.8s cubic-bezier(.16,1,.3,1) 0.30s forwards !important; }
+.hero-line-2 { animation: ed-in-bottom 0.8s cubic-bezier(.16,1,.3,1) 0.55s forwards !important; }
+
+.hero-cta-stack {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+.hero-cta-stack .hero-cta-primary {
+  position: relative;
+  z-index: 2;
+  padding: 18px 40px;
+  font-size: 14px;
+  margin-top: 12px;
+  margin-left: 80px;
+}
+.hero-cta-stack .hero-cta-secondary {
+  position: relative;
+  z-index: 1;
+  padding: 11px 24px;
+  font-size: 12px;
+  display: inline-flex;
+}
+@media (max-width: 480px) {
+  .hero-cta-stack .hero-cta-primary { margin-left: 24px; }
+}
+
+/* ---------- STATS BAR: asymmetric 1.3/0.7/1.3/0.7 ---------- */
+.stats-bar-asym { grid-template-columns: 1.3fr 0.7fr 1.3fr 0.7fr !important; }
+@media (max-width: 768px) {
+  .stats-bar-asym { grid-template-columns: 1fr 1fr !important; }
+}
+.stats-bar-asym .stat-cell--lg .stat-value { font-size: clamp(2.4rem, 4vw, 3.2rem) !important; }
+.stats-bar-asym .stat-cell--sm .stat-value { font-size: clamp(1.6rem, 2.4vw, 2rem) !important; }
+
+/* ---------- SERVICES: staggered masonry feel ---------- */
+.service-card-mason-1 { margin-top: 0; }
+.service-card-mason-2 { margin-top: 20px; padding-top: 2.8rem; padding-bottom: 2.8rem; }
+.service-card-mason-3 { margin-top: 0; }
+.service-card-mason-4 { margin-top: -15px; }
+.service-card-mason-5 { margin-top: 20px; padding-top: 2.8rem; padding-bottom: 2.8rem; }
+@media (max-width: 900px) {
+  .service-card-mason-1, .service-card-mason-2, .service-card-mason-3,
+  .service-card-mason-4, .service-card-mason-5 { margin-top: 0; }
+}
+.service-card:hover { transform: translateY(-4px) rotate(-1deg); }
+
+.service-card.ed-enter { opacity: 0; transform: none; }
+.service-card.ed-enter.is-visible.ed-from-left   { animation: ed-in-left   0.7s cubic-bezier(.16,1,.3,1) forwards; }
+.service-card.ed-enter.is-visible.ed-from-right  { animation: ed-in-right  0.7s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* ---------- CASE STUDIES: alternate mirrored split ---------- */
+.cs-card--mirror { grid-template-columns: 1fr 1.5fr !important; }
+.cs-card--mirror .cs-left { order: 2; border-right: 0; border-left: 1px solid rgba(26,21,35,0.06); }
+.cs-card--mirror .cs-right { order: 1; }
+@media (max-width: 880px) {
+  .cs-card--mirror { grid-template-columns: 1fr !important; }
+  .cs-card--mirror .cs-left, .cs-card--mirror .cs-right { order: 0; border-left: 0; }
+}
+.cs-card.ed-enter.is-visible.ed-from-left   { animation: ed-in-left   0.75s cubic-bezier(.16,1,.3,1) forwards; }
+.cs-card.ed-enter.is-visible.ed-from-right  { animation: ed-in-right  0.75s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* ---------- PROCESS: zigzag with dashed connector ---------- */
+.process-block--zigzag {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  position: relative;
+  padding: 2rem 0;
+}
+.process-block--zigzag .process-step {
+  background: #F7F4EF;
+  border: 1px solid rgba(108,78,242,0.12);
+  border-right: 1px solid rgba(108,78,242,0.12);
+  border-radius: 14px;
+  margin: 0 6px;
+}
+.process-block--zigzag .process-step--down { margin-top: 24px; }
+.process-block--zigzag::before {
+  content: '';
+  position: absolute;
+  left: 8%; right: 8%; top: 50%;
+  height: 28px;
+  background-image: linear-gradient(90deg, rgba(108,78,242,0.4) 50%, transparent 50%);
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+  background-position: 0 0, 0 100%;
+  pointer-events: none;
+  z-index: 0;
+  clip-path: polygon(0% 0%, 25% 0%, 25% 100%, 50% 100%, 50% 0%, 75% 0%, 75% 100%, 100% 100%, 100% calc(100% + 1px), 0 calc(100% + 1px));
+}
+@media (max-width: 768px) {
+  .process-block--zigzag { display: grid; grid-template-columns: 1fr; }
+  .process-block--zigzag .process-step--down { margin-top: 0; }
+  .process-block--zigzag::before { display: none; }
+}
+
+/* ---------- TESTIMONIALS: asymmetric grid ---------- */
+.testi-grid--asym {
+  grid-template-columns: 1.15fr 0.85fr !important;
+}
+.testi-grid--asym > :nth-child(3) { grid-column: 1 / 2; }
+.testi-grid--asym > :nth-child(4) { grid-column: 2 / 3; }
+.testi-grid--asym > :nth-child(3) { /* small */ }
+/* mirror row 2: make 3rd small, 4th large via column-span trick */
+.testi-grid--asym {
+  grid-template-areas:
+    "a a a a a a a b b b b b"
+    "c c c c c d d d d d d d";
+  grid-template-columns: repeat(12, 1fr);
+}
+.testi-grid--asym > :nth-child(1) { grid-area: a; }
+.testi-grid--asym > :nth-child(2) { grid-area: b; }
+.testi-grid--asym > :nth-child(3) { grid-area: c; }
+.testi-grid--asym > :nth-child(4) { grid-area: d; }
+@media (max-width: 768px) {
+  .testi-grid--asym { grid-template-areas: none; grid-template-columns: 1fr; }
+  .testi-grid--asym > * { grid-area: auto !important; }
+}
+
+/* ---------- BOOKING MODAL ---------- */
+.booking-heading-left { text-align: left !important; }
+.booking-badge-offset {
+  display: inline-block;
+  transform: rotate(-3deg) translateX(-8px);
+  transform-origin: left center;
+}

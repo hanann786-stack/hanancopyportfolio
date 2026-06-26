@@ -91,7 +91,7 @@ const HeroSection = () => {
             borderRadius: '999px',
             padding: '6px 16px',
             fontSize: '12px',
-            color: '#FFFFFF',
+            color: '#F5F0E8',
             fontWeight: 500,
           }}
         >
@@ -136,7 +136,7 @@ const HeroSection = () => {
             textShadow: '0 2px 20px rgba(0,0,0,0.25)',
           }}
         >
-          <span className="hero-line-1 block" style={{ color: '#FFFFFF' }}>
+          <span className="hero-line-1 block" style={{ color: '#F5F0E8' }}>
             Words That Sell.
           </span>
           <span
@@ -194,7 +194,7 @@ const HeroSection = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#FFFFFF"
+          stroke="#F5F0E8"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"

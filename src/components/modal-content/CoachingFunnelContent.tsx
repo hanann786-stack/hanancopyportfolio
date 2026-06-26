@@ -182,7 +182,7 @@ const CoachingFunnelContent = () => {
           onClick={() => setActiveTab('ads')}
           className={`font-accent text-[12px] uppercase tracking-[0.12em] px-5 py-2.5 rounded-sm border transition-all ${
             activeTab === 'ads'
-              ? 'bg-gold text-[#FFFFFF] border-gold'
+              ? 'bg-gold text-[#F5F0E8] border-gold'
               : 'bg-transparent text-gold border-gold/40 hover:border-gold'
           }`}
           data-clickable
@@ -193,7 +193,7 @@ const CoachingFunnelContent = () => {
           onClick={() => setActiveTab('landing')}
           className={`font-accent text-[12px] uppercase tracking-[0.12em] px-5 py-2.5 rounded-sm border transition-all ${
             activeTab === 'landing'
-              ? 'bg-gold text-[#FFFFFF] border-gold'
+              ? 'bg-gold text-[#F5F0E8] border-gold'
               : 'bg-transparent text-gold border-gold/40 hover:border-gold'
           }`}
           data-clickable

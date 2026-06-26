@@ -130,7 +130,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
             exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-[#FFFFFF] border border-[rgba(184, 112, 63,0.15)] rounded-sm"
+            className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-[#F5F0E8] border border-[rgba(184, 112, 63,0.15)] rounded-sm"
             style={{ borderTop: "2px solid #B8703F" }}
           >
             {/* Close */}
@@ -197,11 +197,11 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                         onChange={(e) => setFormData((p) => ({ ...p, revenue: e.target.value }))}
                         className={`${inputClass("revenue")} appearance-none bg-transparent`}
                       >
-                        <option value="" disabled className="bg-[#FFFFFF] text-[#1C1815]/50">
+                        <option value="" disabled className="bg-[#F5F0E8] text-[#1C1815]/50">
                           Monthly revenue range
                         </option>
                         {REVENUE_OPTIONS.map((r) => (
-                          <option key={r} value={r} className="bg-[#FFFFFF] text-[#1C1815]">
+                          <option key={r} value={r} className="bg-[#F5F0E8] text-[#1C1815]">
                             {r}
                           </option>
                         ))}
@@ -220,7 +220,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                             onClick={() => toggleService(s)}
                             className={`rounded-full px-5 py-2 text-xs font-body transition-all duration-200 border ${
                               formData.services.includes(s)
-                                ? "bg-[#B8703F] text-[#FFFFFF] border-[#B8703F] font-bold"
+                                ? "bg-[#B8703F] text-[#F5F0E8] border-[#B8703F] font-bold"
                                 : "bg-transparent text-[#1C1815] border-[rgba(184, 112, 63,0.3)] hover:border-[#B8703F]/60"
                             }`}
                           >

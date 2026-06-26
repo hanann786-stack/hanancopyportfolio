@@ -12,7 +12,7 @@
   --bg: #E8DFD2;
   --bg-2: #DDD2C0;
   --bg-3: #DDD2C0;
-  --bg-card: #FFFFFF;
+  --bg-card: #F5F0E8;
   --bg-accent: #F5F0E8;
   --bg-dark: #1C1815;
   --violet: #B8703F;
@@ -39,7 +39,7 @@ html, body {
 #hero, #work { background-color: var(--bg) !important; }
 .stats-bar, #services, .services-section,
 #process, .process-section,
-#booking, #contact, .cta-section { background-color: #FFFFFF !important; }
+#booking, #contact, .cta-section { background-color: #F5F0E8 !important; }
 #manifesto, .manifesto-section,
 #testimonials, #clients, .testi-section { background-color: var(--bg-2) !important; }
 #notforyou, .nfy-section, footer, .site-footer { background-color: var(--bg-dark) !important; }
@@ -432,7 +432,7 @@ html, body { -webkit-overflow-scrolling: touch; }
 
 .hero-cta-primary {
   background: #B8703F;
-  color: #FFFFFF;
+  color: #F5F0E8;
   border: none;
   border-radius: 6px;
   padding: 14px 32px;
@@ -548,7 +548,7 @@ html, body { -webkit-overflow-scrolling: touch; }
   align-items: center;
   justify-content: center;
   background: #B8703F;
-  color: #fff;
+  color: #F5F0E8;
   border-radius: 5px;
   padding: 9px 22px;
   font-size: 13px;
@@ -580,7 +580,7 @@ html, body { -webkit-overflow-scrolling: touch; }
   top: 68px;
   left: 0;
   right: 0;
-  background: #FFFFFF;
+  background: #F5F0E8;
   border-bottom: 1px solid rgba(184, 112, 63, 0.1);
   max-height: 0;
   overflow: hidden;
@@ -600,7 +600,7 @@ html, body { -webkit-overflow-scrolling: touch; }
 
 /* ===== Services Section ===== */
 .services-section {
-  background: #FFFFFF;
+  background: #F5F0E8;
   padding: 8rem 4rem;
   position: relative;
   z-index: 1;
@@ -668,7 +668,7 @@ html, body { -webkit-overflow-scrolling: touch; }
 
 .service-card {
   position: relative;
-  background: #FFFFFF;
+  background: #F5F0E8;
   border: 1px solid rgba(28, 24, 21, 0.08);
   border-radius: 12px;
   padding: 2.2rem 2rem;
@@ -713,7 +713,7 @@ html, body { -webkit-overflow-scrolling: touch; }
   padding: 1px;
   background: linear-gradient(110deg, transparent 30%, rgba(184, 112, 63,0.55) 50%, transparent 70%);
   background-size: 250% 100%;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#1C1815 0 0) content-box, linear-gradient(#1C1815 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
   pointer-events: none;
@@ -816,7 +816,7 @@ html, body { -webkit-overflow-scrolling: touch; }
   gap: 2rem;
 }
 .cs-card {
-  background: #FFFFFF;
+  background: #F5F0E8;
   border: 1px solid rgba(28, 24, 21,0.08);
   border-radius: 16px;
   display: grid;
@@ -916,7 +916,7 @@ html, body { -webkit-overflow-scrolling: touch; }
 
 /* ============ Process Section ============ */
 .process-section {
-  background: #FFFFFF;
+  background: #F5F0E8;
   padding: 8rem 4rem;
 }
 .process-head { max-width: 1100px; margin: 0 auto 3rem; text-align: center; }
@@ -960,7 +960,7 @@ html, body { -webkit-overflow-scrolling: touch; }
   display: flex; align-items: center; justify-content: center;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px; color: #B8703F; font-weight: 600;
-  margin-bottom: 1.4rem; background: #FFFFFF;
+  margin-bottom: 1.4rem; background: #F5F0E8;
 }
 .process-step-title {
   font-family: 'DM Sans', sans-serif;
@@ -1053,7 +1053,7 @@ html, body { -webkit-overflow-scrolling: touch; }
   margin: 0.85rem 0 0;
 }
 .testi-card {
-  background: #FFFFFF;
+  background: #F5F0E8;
   border: 1px solid rgba(28, 24, 21,0.08);
   border-radius: 14px;
   padding: 2.2rem;
@@ -1081,7 +1081,7 @@ html, body { -webkit-overflow-scrolling: touch; }
 .testi-verified-check {
   display: inline-flex; align-items: center; justify-content: center;
   width: 12px; height: 12px; border-radius: 50%;
-  background: #B8703F; color: #fff;
+  background: #B8703F; color: #F5F0E8;
   font-size: 8px; font-weight: 700; line-height: 1;
 }
 .testi-metric {
@@ -1185,7 +1185,7 @@ html, body { -webkit-overflow-scrolling: touch; }
 
 /* ============ CTA Booking Form ============ */
 .cta-section {
-  background: #FFFFFF;
+  background: #F5F0E8;
   padding: 7rem 4rem;
 }
 .cta-inner {
@@ -1249,12 +1249,12 @@ html, body { -webkit-overflow-scrolling: touch; }
   box-shadow: 0 0 0 3px rgba(184, 112, 63,0.1);
 }
 .cta-select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, #B8703F 50%), linear-gradient(135deg, #B8703F 50%, transparent 50%); background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 32px; cursor: pointer; }
-.cta-select option { background: #FFFFFF; color: #1C1815; }
+.cta-select option { background: #F5F0E8; color: #1C1815; }
 .cta-textarea { min-height: 130px; resize: vertical; font-family: 'DM Sans', sans-serif; line-height: 1.6; }
 .cta-submit {
   width: 100%;
   background: #B8703F;
-  color: #FFFFFF;
+  color: #F5F0E8;
   border: none;
   border-radius: 6px;
   padding: 16px;

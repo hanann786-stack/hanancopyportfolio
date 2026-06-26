@@ -53,7 +53,7 @@ const CaseStudyModal = ({ study, cardIndex, onClose }: CaseStudyModalProps) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 w-full max-w-[860px] max-h-[90vh] overflow-y-auto mx-4 bg-[#FFFFFF] rounded-sm"
+            className="relative z-10 w-full max-w-[860px] max-h-[90vh] overflow-y-auto mx-4 bg-[#F5F0E8] rounded-sm"
             style={{ borderTop: '2px solid #B8703F' }}
             onClick={(e) => e.stopPropagation()}
           >

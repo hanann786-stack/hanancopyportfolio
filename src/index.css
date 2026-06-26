@@ -9,86 +9,93 @@
    These tokens supersede any earlier dark values site-wide.
    ============================================================ */
 :root {
-  --bg: #E8DFD2;
-  --bg-2: #DDD2C0;
-  --bg-3: #DDD2C0;
+  /* === New copper/tan palette (matches hero video) === */
+  --bg-warm: #E8DFD2;
+  --bg-warm-2: #DDD2C0;
   --bg-card: #F5F0E8;
-  --bg-accent: #F5F0E8;
   --bg-dark: #1C1815;
-  --violet: #B8703F;
-  --violet-2: #D49566;
-  --violet-light: #F5F0E8;
-  --orange: #B8703F;
-  --orange-light: #F5F0E8;
-  --text-1: #1C1815;
-  --text-2: #5C5248;
-  --text-3: #918878;
-  --border: rgba(184, 112, 63,0.13);
-  --border-card: rgba(28, 24, 21,0.09);
-  --shadow: 0 2px 16px rgba(184, 112, 63,0.08);
-  --shadow-hover: 0 8px 32px rgba(184, 112, 63,0.14);
+  --copper: #B8703F;
+  --copper-light: #D49566;
+  --copper-deep: #8A4F2B;
+  --ink: #2A2420;
+  --ink-soft: #5C5248;
+  --ink-muted: #918878;
+  --shadow-warm: 0 8px 32px rgba(138,79,43,0.12);
+
+  /* Legacy aliases — keep for backward compatibility */
+  --bg: var(--bg-warm);
+  --bg-2: var(--bg-warm-2);
+  --bg-3: var(--bg-warm-2);
+  --bg-accent: var(--bg-card);
+  --violet: var(--copper);
+  --violet-2: var(--copper-light);
+  --violet-light: var(--bg-card);
+  --orange: var(--copper);
+  --orange-light: var(--bg-card);
+  --text-1: var(--ink);
+  --text-2: var(--ink-soft);
+  --text-3: var(--ink-muted);
+  --border: rgba(184,112,63,0.18);
+  --border-card: rgba(28,24,21,0.12);
+  --shadow: 0 2px 16px rgba(138,79,43,0.08);
+  --shadow-hover: var(--shadow-warm);
   color-scheme: light;
 }
 
 html, body {
-  background-color: var(--bg) !important;
-  color: var(--text-1) !important;
+  background-color: var(--bg-warm) !important;
+  color: var(--ink) !important;
 }
 
-/* Section background lock — only #notforyou + footer stay dark */
-#hero, #work { background-color: var(--bg) !important; }
+/* Section background lock — alternate warm tans; only #notforyou + footer stay dark */
+#hero, #work { background-color: var(--bg-warm) !important; }
 .stats-bar, #services, .services-section,
 #process, .process-section,
-#booking, #contact, .cta-section { background-color: #F5F0E8 !important; }
+#booking, #contact, .cta-section { background-color: var(--bg-warm) !important; }
 #manifesto, .manifesto-section,
-#testimonials, #clients, .testi-section { background-color: var(--bg-2) !important; }
-#notforyou, .nfy-section, footer, .site-footer { background-color: var(--bg-dark) !important; }
+#testimonials, #clients, .testi-section { background-color: var(--bg-warm-2) !important; }
+#notforyou, .nfy-section, footer, .site-footer { background-color: var(--bg-dark) !important; color: var(--bg-card) !important; }
 
 @layer base {
   :root {
-    /* New light, editorial color system
-       (token names preserved for backwards compatibility — values remapped) */
+    /* Shadcn HSL tokens remapped to copper/tan palette */
+    --color-void: 33 32% 87%;          /* #E8DFD2 bg-warm */
+    --color-cream: 24 14% 15%;         /* #2A2420 ink */
+    --color-white: 35 39% 93%;         /* #F5F0E8 card */
 
-    /* Surfaces */
-    --color-void: 36 35% 95%;          /* parchment primary bg #E8DFD2 */
-    --color-cream: 261 24% 11%;        /* primary text #1C1815 (was light, now dark) */
-    --color-white: 0 0% 100%;          /* pure white for cards */
+    --color-gold: 24 49% 49%;          /* #B8703F copper */
+    --color-gold-bright: 24 56% 62%;   /* #D49566 copper-light */
+    --color-gold-dim: 22 52% 35%;      /* #8A4F2B copper-deep */
 
-    /* Primary accent — electric violet (was gold) */
-    --color-gold: 252 87% 63%;         /* #B8703F */
-    --color-gold-bright: 252 87% 63%;  /* same — used for emphasis */
-    --color-gold-dim: 251 67% 53%;     /* #8A4F2B hover */
-
-    /* Secondary accent — warm persimmon (was crimson) */
-    --color-crimson: 16 90% 56%;       /* #B8703F */
-    --color-crimson-glow: 16 90% 56%;
+    --color-crimson: 24 49% 49%;       /* alias to copper */
+    --color-crimson-glow: 24 56% 62%;
 
     --background: var(--color-void);
     --foreground: var(--color-cream);
 
-    --card: 0 0% 100%;                 /* pure white cards */
+    --card: 35 39% 93%;
     --card-foreground: var(--color-cream);
 
-    --popover: 0 0% 100%;
+    --popover: 35 39% 93%;
     --popover-foreground: var(--color-cream);
 
     --primary: var(--color-gold);
-    --primary-foreground: 0 0% 100%;
+    --primary-foreground: 35 39% 93%;
 
-    --secondary: 39 22% 91%;           /* #DDD2C0 deeper warm surface */
+    --secondary: 35 32% 81%;           /* #DDD2C0 */
     --secondary-foreground: var(--color-cream);
 
-    --muted: 39 22% 91%;
-    --muted-foreground: 263 12% 37%;   /* #5C5248 */
+    --muted: 35 32% 81%;
+    --muted-foreground: 26 13% 32%;    /* #5C5248 */
 
-    --accent: 263 50% 95%;             /* #F5F0E8 lavender highlight */
+    --accent: 35 39% 93%;              /* card-warm */
     --accent-foreground: var(--color-cream);
 
     --destructive: var(--color-crimson);
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 35 39% 93%;
 
-    --border: 252 87% 63%;             /* base hue, alpha applied via utilities below */
-    --input: 252 30% 88%;
+    --border: 24 49% 49%;
+    --input: 35 32% 81%;
     --ring: var(--color-gold);
 
     --radius: 0.5rem;
@@ -99,12 +106,13 @@ html, body {
     --crimson: var(--color-crimson);
     --crimson-glow: var(--color-crimson-glow);
     --dark-base: var(--color-void);
-    --dark-surface: 39 22% 91%;        /* secondary surface */
-    --dark-elevated: 263 50% 95%;      /* lavender elevated */
-    --glass: 252 87% 63% / 0.06;
-    --glass-border: 252 87% 63% / 0.18;
+    --dark-surface: 35 32% 81%;
+    --dark-elevated: 35 39% 93%;
+    --glass: 24 49% 49% / 0.06;
+    --glass-border: 24 49% 49% / 0.18;
   }
 }
+
 
 @layer base {
   * {

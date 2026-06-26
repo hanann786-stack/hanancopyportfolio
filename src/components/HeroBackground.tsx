@@ -56,9 +56,9 @@ const HeroBackground = memo(({ reduced = false }: HeroBackgroundProps) => {
 
     const pickColor = () => {
       const r = Math.random();
-      if (r < 0.6) return '108, 78, 242';      // violet
-      if (r < 0.85) return '201, 184, 245';    // light lavender (25%)
-      return '244, 98, 42';                    // persimmon (15%)
+      if (r < 0.6) return '184, 112, 63';      // violet
+      if (r < 0.85) return '212, 149, 102';    // light lavender (25%)
+      return '184, 112, 63';                    // persimmon (15%)
     };
 
     const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, () => {
@@ -87,10 +87,10 @@ const HeroBackground = memo(({ reduced = false }: HeroBackgroundProps) => {
       phase: number;
     };
     const orbs: Orb[] = [
-      { x: width * 0.2, y: height * 0.3, vx: 0.05, vy: 0.03, baseR: 320, color: '108, 78, 242', alpha: 0.12, phase: 0 },
-      { x: width * 0.8, y: height * 0.7, vx: -0.04, vy: -0.025, baseR: 320, color: '108, 78, 242', alpha: 0.10, phase: 2 },
-      { x: width * 0.7, y: height * 0.25, vx: 0.03, vy: 0.04, baseR: 240, color: '244, 98, 42', alpha: 0.08, phase: 4 },
-      { x: width * 0.25, y: height * 0.75, vx: -0.035, vy: -0.02, baseR: 240, color: '244, 98, 42', alpha: 0.06, phase: 6 },
+      { x: width * 0.2, y: height * 0.3, vx: 0.05, vy: 0.03, baseR: 320, color: '184, 112, 63', alpha: 0.12, phase: 0 },
+      { x: width * 0.8, y: height * 0.7, vx: -0.04, vy: -0.025, baseR: 320, color: '184, 112, 63', alpha: 0.10, phase: 2 },
+      { x: width * 0.7, y: height * 0.25, vx: 0.03, vy: 0.04, baseR: 240, color: '184, 112, 63', alpha: 0.08, phase: 4 },
+      { x: width * 0.25, y: height * 0.75, vx: -0.035, vy: -0.02, baseR: 240, color: '184, 112, 63', alpha: 0.06, phase: 6 },
     ];
 
     let resizeTimer = 0;
@@ -129,7 +129,7 @@ const HeroBackground = memo(({ reduced = false }: HeroBackgroundProps) => {
 
       // Trail/fade fill instead of clearRect
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = 'rgba(250, 250, 248, 0.2)';
+      ctx.fillStyle = 'rgba(232, 223, 210, 0.2)';
       ctx.fillRect(0, 0, width, height);
 
       // --- Orbs (skipped in reduced/video mode) ---
@@ -184,7 +184,7 @@ const HeroBackground = memo(({ reduced = false }: HeroBackgroundProps) => {
       if (!reduced) {
         const LINK = 110;
         const LINK_SQ = LINK * LINK;
-        ctx.strokeStyle = 'rgba(108, 78, 242, 0.07)';
+        ctx.strokeStyle = 'rgba(184, 112, 63, 0.07)';
         ctx.lineWidth = 1;
         ctx.beginPath();
         for (let i = 0; i < particles.length; i++) {

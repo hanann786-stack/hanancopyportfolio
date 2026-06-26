@@ -53,13 +53,13 @@ const AboutSection = () => {
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: 'radial-gradient(ellipse at center, transparent 55%, rgba(247,244,239,0.55) 100%)',
+                    background: 'radial-gradient(ellipse at center, transparent 55%, rgba(232, 223, 210,0.55) 100%)',
                   }}
                 />
                 <div
                   className="absolute inset-0 pointer-events-none mix-blend-color"
                   style={{
-                    background: 'linear-gradient(180deg, rgba(108,78,242,0.08) 0%, rgba(108,78,242,0.05) 100%)',
+                    background: 'linear-gradient(180deg, rgba(184, 112, 63,0.08) 0%, rgba(184, 112, 63,0.05) 100%)',
                   }}
                 />
                 <div className="absolute inset-0 pointer-events-none opacity-30 bg-grain" />

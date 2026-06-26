@@ -85,13 +85,13 @@ const HeroSection = () => {
         <div
           className="inline-flex items-center gap-2"
           style={{
-            background: 'rgba(108,78,242,0.18)',
-            border: '1px solid rgba(201,184,245,0.4)',
+            background: 'rgba(184, 112, 63,0.18)',
+            border: '1px solid rgba(212, 149, 102,0.4)',
             backdropFilter: 'blur(8px)',
             borderRadius: '999px',
             padding: '6px 16px',
             fontSize: '12px',
-            color: '#FFFFFF',
+            color: '#F5F0E8',
             fontWeight: 500,
           }}
         >
@@ -119,7 +119,7 @@ const HeroSection = () => {
           <span className="hero-blink-dot" />
           <span
             className="hero-eyebrow relative"
-            style={{ color: 'rgba(255,255,255,0.85)' }}
+            style={{ color: 'rgba(245, 240, 232,0.85)' }}
           >
             Conversion Copywriter × AI Marketing Systems
             <span className="hero-eyebrow-underline" />
@@ -136,14 +136,14 @@ const HeroSection = () => {
             textShadow: '0 2px 20px rgba(0,0,0,0.25)',
           }}
         >
-          <span className="hero-line-1 block" style={{ color: '#FFFFFF' }}>
+          <span className="hero-line-1 block" style={{ color: '#F5F0E8' }}>
             Words That Sell.
           </span>
           <span
             className="hero-line-2 block italic"
             style={{
               color: 'transparent',
-              WebkitTextStroke: '1.5px #C9B8F5',
+              WebkitTextStroke: '1.5px #D49566',
             }}
           >
             Silence That Sells More.
@@ -154,7 +154,7 @@ const HeroSection = () => {
           className="hero-sub mb-8"
           style={{
             fontSize: '15px',
-            color: 'rgba(255,255,255,0.85)',
+            color: 'rgba(245, 240, 232,0.85)',
             lineHeight: 1.82,
             maxWidth: '500px',
             textShadow: '0 1px 12px rgba(0,0,0,0.3)',
@@ -194,7 +194,7 @@ const HeroSection = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#FFFFFF"
+          stroke="#F5F0E8"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"

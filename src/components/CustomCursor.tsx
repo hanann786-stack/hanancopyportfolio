@@ -60,11 +60,11 @@ const CustomCursor = () => {
 
       // Dot follows pointer instantly
       const dotScale = state === 'clickable' ? 1.5 : 1;
-      const dotColor = state === 'clickable' ? '#F4622A' : '#6C4EF2';
+      const dotColor = state === 'clickable' ? '#B8703F' : '#B8703F';
       const ringSize = state === 'card' ? 48 : 32;
       const ringBorder = state === 'card'
-        ? '1px solid rgba(108,78,242,0.5)'
-        : '1px solid rgba(108,78,242,0.3)';
+        ? '1px solid rgba(184, 112, 63,0.5)'
+        : '1px solid rgba(184, 112, 63,0.3)';
 
       dot.style.transform = `translate3d(${targetX - 4}px, ${targetY - 4}px, 0) scale(${dotScale})`;
       ring.style.transform = `translate3d(${curX - ringSize / 2}px, ${curY - ringSize / 2}px, 0)`;
@@ -99,7 +99,7 @@ const CustomCursor = () => {
           width: 8,
           height: 8,
           borderRadius: '50%',
-          backgroundColor: '#6C4EF2',
+          backgroundColor: '#B8703F',
           pointerEvents: 'none',
           zIndex: 9999,
           opacity: 0,
@@ -116,8 +116,8 @@ const CustomCursor = () => {
           width: 32,
           height: 32,
           borderRadius: '50%',
-          backgroundColor: 'rgba(108, 78, 242, 0.15)',
-          border: '1px solid rgba(108,78,242,0.3)',
+          backgroundColor: 'rgba(184, 112, 63, 0.15)',
+          border: '1px solid rgba(184, 112, 63,0.3)',
           pointerEvents: 'none',
           zIndex: 9999,
           opacity: 0,

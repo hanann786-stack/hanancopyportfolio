@@ -58,7 +58,7 @@ const ParticleBackground = memo(() => {
 
       // Trail fade fill (avoids full clear+redraw cost)
       ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = 'rgba(250, 250, 248, 0.2)';
+      ctx.fillStyle = 'rgba(232, 223, 210, 0.2)';
       ctx.fillRect(0, 0, w, h);
 
       const mx = mouseRef.current.x;
@@ -67,10 +67,10 @@ const ParticleBackground = memo(() => {
 
       // Aurora blobs
       const blobs = [
-        { cx: 0.3 + Math.sin(t) * 0.15 + (mx - 0.5) * 0.25, cy: 0.35 + Math.cos(t * 0.7) * 0.12 + (my - 0.5) * 0.2, r: 0.5, alpha: 0.12, color: '108, 78, 242' },
-        { cx: 0.7 + Math.cos(t * 0.8) * 0.18 + (mx - 0.5) * 0.2, cy: 0.6 + Math.sin(t * 0.6) * 0.1 + (my - 0.5) * 0.18, r: 0.45, alpha: 0.10, color: '108, 78, 242' },
-        { cx: 0.5 + Math.sin(t * 1.2) * 0.12 + (mx - 0.5) * 0.3, cy: 0.25 + Math.cos(t * 0.9) * 0.15 + (my - 0.5) * 0.25, r: 0.4, alpha: 0.08, color: '244, 98, 42' },
-        { cx: mx * 0.8 + 0.1 + Math.sin(t * 1.5) * 0.05, cy: my * 0.8 + 0.1 + Math.cos(t * 1.3) * 0.05, r: 0.3, alpha: 0.06, color: '244, 98, 42' },
+        { cx: 0.3 + Math.sin(t) * 0.15 + (mx - 0.5) * 0.25, cy: 0.35 + Math.cos(t * 0.7) * 0.12 + (my - 0.5) * 0.2, r: 0.5, alpha: 0.12, color: '184, 112, 63' },
+        { cx: 0.7 + Math.cos(t * 0.8) * 0.18 + (mx - 0.5) * 0.2, cy: 0.6 + Math.sin(t * 0.6) * 0.1 + (my - 0.5) * 0.18, r: 0.45, alpha: 0.10, color: '184, 112, 63' },
+        { cx: 0.5 + Math.sin(t * 1.2) * 0.12 + (mx - 0.5) * 0.3, cy: 0.25 + Math.cos(t * 0.9) * 0.15 + (my - 0.5) * 0.25, r: 0.4, alpha: 0.08, color: '184, 112, 63' },
+        { cx: mx * 0.8 + 0.1 + Math.sin(t * 1.5) * 0.05, cy: my * 0.8 + 0.1 + Math.cos(t * 1.3) * 0.05, r: 0.3, alpha: 0.06, color: '184, 112, 63' },
       ];
 
       for (const blob of blobs) {
@@ -86,7 +86,7 @@ const ParticleBackground = memo(() => {
       }
 
       // Batched grid lines — single beginPath + single stroke
-      ctx.strokeStyle = 'rgba(108, 78, 242, 0.07)';
+      ctx.strokeStyle = 'rgba(184, 112, 63, 0.07)';
       ctx.lineWidth = 0.5;
       ctx.beginPath();
       const gridSize = 80;
@@ -131,7 +131,7 @@ const ParticleBackground = memo(() => {
       <div
         className="fixed inset-0 pointer-events-none z-0 md:hidden"
         style={{
-          background: 'radial-gradient(ellipse at 30% 50%, rgba(108,78,242,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 30% 50%, rgba(184, 112, 63,0.08) 0%, transparent 60%)',
         }}
       />
       <canvas

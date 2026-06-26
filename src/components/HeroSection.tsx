@@ -142,8 +142,7 @@ const HeroSection = () => {
           <span
             className="hero-line-2 block italic"
             style={{
-              color: 'transparent',
-              WebkitTextStroke: '1.5px #D49566',
+              color: '#D49566',
             }}
           >
             Silence That Sells More.

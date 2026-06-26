@@ -128,8 +128,10 @@ html, body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
-    line-height: 1.82;
+    line-height: 1.75;
     font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Restore default cursor on touch devices */
@@ -141,9 +143,20 @@ html, body {
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
     letter-spacing: -0.02em;
     font-weight: 400;
     color: hsl(var(--color-cream));
+  }
+
+  h1 { font-size: clamp(2.6rem, 5.5vw, 5rem); letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+
+  blockquote {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-style: italic;
+    font-weight: 400;
   }
 
   p {

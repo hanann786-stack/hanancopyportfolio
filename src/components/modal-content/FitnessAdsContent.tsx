@@ -7,7 +7,7 @@ const AdCard = ({ platform, primaryText, headline, cta }: { platform: string; pr
       ))}
     </div>
     <p className="font-display text-lg text-white-headline mb-4">{headline}</p>
-    <span className="inline-block bg-[#F4622A] text-white font-accent text-[10px] uppercase tracking-[0.1em] px-5 py-2.5 rounded-sm">
+    <span className="inline-block bg-[#B8703F] text-white font-accent text-[10px] uppercase tracking-[0.1em] px-5 py-2.5 rounded-sm">
       {cta}
     </span>
   </div>
@@ -27,12 +27,12 @@ const FitnessAdsContent = () => (
     </span>
     <h2
       className="font-display text-2xl sm:text-3xl md:text-4xl text-gold mb-4 leading-[1.2] tracking-[-0.02em]"
-      style={{ textShadow: '0 0 30px rgba(108,78,242,0.3)' }}
+      style={{ textShadow: '0 0 30px rgba(184, 112, 63,0.3)' }}
     >
       Ads So Sharp, They Cut the Cost Before Anyone Even Clicked.
     </h2>
     <div className="inline-block bg-[hsla(43,52%,54%,0.1)] border border-[hsla(43,52%,54%,0.2)] rounded-sm px-4 py-2 mb-12">
-      <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(108,78,242,0.4)' }}>
+      <span className="font-accent text-sm text-gold" style={{ textShadow: '0 0 20px rgba(184, 112, 63,0.4)' }}>
         CPA Cut 62% in 30 Days
       </span>
     </div>
@@ -93,7 +93,7 @@ const FitnessAdsContent = () => (
           { label: 'Close', text: '"[App Name] — Fitness that doesn\'t feel like punishment. Link in bio."' },
         ].map((part) => (
           <div key={part.label} className="mb-5 last:mb-0">
-            <span className="font-accent text-[10px] uppercase tracking-[0.15em] text-[#F4622A] font-bold block mb-1">{part.label}</span>
+            <span className="font-accent text-[10px] uppercase tracking-[0.15em] text-[#B8703F] font-bold block mb-1">{part.label}</span>
             <p className="font-body text-cream text-[14px] leading-[1.7] whitespace-pre-line">{part.text}</p>
           </div>
         ))}

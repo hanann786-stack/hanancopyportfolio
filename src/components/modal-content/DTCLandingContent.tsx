@@ -15,7 +15,7 @@ const DTCLandingContent = () => (
       </p>
       <h2
         className="font-display text-3xl md:text-5xl text-white-headline leading-[1.15] tracking-[-0.03em] mb-5"
-        style={{ textShadow: '0 0 30px rgba(108,78,242,0.15)' }}
+        style={{ textShadow: '0 0 30px rgba(184, 112, 63,0.15)' }}
       >
         Your Skin Doesn't Need More Products.{' '}
         <span className="text-gold">It Needs the Right One.</span>
@@ -23,7 +23,7 @@ const DTCLandingContent = () => (
       <p className="font-body text-cream/80 text-base md:text-lg max-w-[52ch] mx-auto mb-8 leading-relaxed">
         The 3-step system that replaced 9 products on her shelf — and gave her the best skin of her life in 21 days.
       </p>
-      <span className="inline-block bg-[#F4622A] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm cursor-pointer hover:bg-[#D44E1F] transition-colors">
+      <span className="inline-block bg-[#B8703F] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm cursor-pointer hover:bg-[#8A4F2B] transition-colors">
         Get the System — 30-Day Risk-Free →
       </span>
     </div>
@@ -34,7 +34,7 @@ const DTCLandingContent = () => (
     <div className="mb-2">
       <span className="font-accent text-[11px] uppercase tracking-[0.15em] text-gold/50 mb-4 block">The Problem</span>
       <h3 className="font-display text-2xl md:text-3xl text-white-headline mb-5 tracking-[-0.02em]">
-        You've Tried Everything. Your Skin Still Isn't <span className="text-[#F4622A] font-bold">Listening.</span>
+        You've Tried Everything. Your Skin Still Isn't <span className="text-[#B8703F] font-bold">Listening.</span>
       </h3>
       <p className="font-body text-cream text-[16px] leading-[1.7] max-w-[64ch] mb-4">
         You've bought the serums. You've followed the routines. You've watched 47 skincare TikToks and still woke up wondering why your skin looks tired, uneven, and quietly angry.
@@ -125,7 +125,7 @@ const DTCLandingContent = () => (
         ))}
       </ul>
       <p className="font-body text-cream/60 text-sm mb-2">Total value: $171</p>
-      <p className="font-display text-2xl text-gold" style={{ textShadow: '0 0 20px rgba(108,78,242,0.4)' }}>
+      <p className="font-display text-2xl text-gold" style={{ textShadow: '0 0 20px rgba(184, 112, 63,0.4)' }}>
         Today: $89
       </p>
     </div>
@@ -140,7 +140,7 @@ const DTCLandingContent = () => (
       <p className="font-body text-cream/70 text-base max-w-[48ch] mx-auto mb-8 leading-relaxed">
         Join 14,000+ women who stopped guessing and started glowing. Risk-free. Refund if you don't love it.
       </p>
-      <span className="inline-block bg-[#F4622A] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
+      <span className="inline-block bg-[#B8703F] text-white font-accent text-[12px] uppercase tracking-[0.1em] px-8 py-3.5 rounded-sm">
         Get the System — 30-Day Risk-Free →
       </span>
     </div>

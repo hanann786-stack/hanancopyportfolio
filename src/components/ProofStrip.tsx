@@ -27,14 +27,14 @@ const ProofStrip = () => {
       ref={ref}
       aria-label="Industries trusted by"
       className="relative z-10 w-full"
-      style={{ background: '#F7F4EF', padding: '1.5rem 1rem' }}
+      style={{ background: '#E8DFD2', padding: '1.5rem 1rem' }}
     >
       <p
         className="text-center"
         style={{
           fontSize: '11px',
           letterSpacing: '0.2em',
-          color: '#9B93A8',
+          color: '#918878',
           textTransform: 'uppercase',
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateX(0)' : 'translateX(-24px)',
@@ -48,7 +48,7 @@ const ProofStrip = () => {
               <span
                 aria-hidden
                 style={{
-                  color: '#6C4EF2',
+                  color: '#B8703F',
                   margin: '0 0.6em',
                   display: 'inline-block',
                 }}

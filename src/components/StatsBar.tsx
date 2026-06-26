@@ -62,8 +62,8 @@ const StatsBar = () => {
       aria-label="Key results"
       className="relative z-10 w-full bg-white"
       style={{
-        borderTop: '1px solid rgba(108,78,242,0.1)',
-        borderBottom: '1px solid rgba(108,78,242,0.1)',
+        borderTop: '1px solid rgba(184, 112, 63,0.1)',
+        borderBottom: '1px solid rgba(184, 112, 63,0.1)',
       }}
     >
       <div className="grid grid-cols-2 md:grid-cols-4 stats-bar-asym">
@@ -76,10 +76,10 @@ const StatsBar = () => {
               animationDelay: `${i * 0.15}s`,
               borderRight:
                 i < stats.length - 1
-                  ? '1px solid rgba(108,78,242,0.1)'
+                  ? '1px solid rgba(184, 112, 63,0.1)'
                   : 'none',
               borderBottom:
-                i < 2 ? '1px solid rgba(108,78,242,0.1)' : 'none',
+                i < 2 ? '1px solid rgba(184, 112, 63,0.1)' : 'none',
             }}
           >
             <div
@@ -87,7 +87,7 @@ const StatsBar = () => {
               style={{
                 fontSize: 'clamp(1.9rem, 3vw, 2.4rem)',
                 fontWeight: 600,
-                color: '#6C4EF2',
+                color: '#B8703F',
                 lineHeight: 1.1,
                 fontVariantNumeric: 'tabular-nums',
               }}
@@ -98,7 +98,7 @@ const StatsBar = () => {
               style={{
                 fontSize: '11px',
                 letterSpacing: '0.2em',
-                color: '#1A1523',
+                color: '#1C1815',
                 textTransform: 'uppercase',
                 marginTop: '0.75rem',
                 fontWeight: 500,
@@ -111,7 +111,7 @@ const StatsBar = () => {
                 style={{
                   fontSize: '10px',
                   fontWeight: 300,
-                  color: '#9B93A8',
+                  color: '#918878',
                   marginTop: '4px',
                   fontFamily: '"DM Sans", sans-serif',
                 }}

@@ -11,8 +11,8 @@ const Footer = () => {
       <div className="site-footer-inner">
         <a href="#" className="site-nav-logo" aria-label="Hanan Arif">
           <span className="logo-hanan" style={{ color: '#FFFFFF' }}>Hanan</span>
-          <span className="logo-dot" style={{ color: '#C9B8F5' }}>.</span>
-          <span className="logo-arif" style={{ color: 'rgba(247,244,239,0.55)' }}>Arif</span>
+          <span className="logo-dot" style={{ color: '#D49566' }}>.</span>
+          <span className="logo-arif" style={{ color: 'rgba(232, 223, 210,0.55)' }}>Arif</span>
         </a>
 
         <nav className="site-footer-links" aria-label="Footer">

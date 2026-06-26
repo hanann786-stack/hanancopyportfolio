@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'serif'],
-        body: ['"Plus Jakarta Sans"', '"DM Sans"', 'sans-serif'],
-        accent: ['"Bebas Neue"', 'sans-serif'],
+        display: ['"Fraunces"', 'serif'],
+        body: ['"Inter"', 'sans-serif'],
+        accent: ['"Inter"', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

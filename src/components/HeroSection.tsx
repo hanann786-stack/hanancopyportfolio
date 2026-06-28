@@ -185,7 +185,7 @@ const HeroSection = () => {
       <a
         href="#credibility"
         data-clickable
-        className="hero-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-[2]"
+        className="hero-scroll-indicator hero-scroll-indicator--br absolute z-[2]"
         aria-label="Scroll down"
       >
         <svg

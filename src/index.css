@@ -1553,3 +1553,155 @@ button:active, .hero-cta-primary:active, .hero-cta-secondary:active,
   transform: rotate(-3deg) translateX(-8px);
   transform-origin: left center;
 }
+
+/* ============================================================
+   STRUCTURAL ASYMMETRY OVERRIDES (static, not animation-only)
+   ============================================================ */
+
+/* ---------- HERO: true asymmetric split ---------- */
+@media (min-width: 769px) {
+  #hero { display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: center; padding: 0 4rem; }
+  .hero-editorial {
+    position: relative !important;
+    top: auto !important; left: auto !important; right: auto !important;
+    transform: none !important;
+    grid-column: 1 / 2;
+    max-width: none;
+    text-align: left;
+    z-index: 3;
+  }
+  .hero-editorial .hero-h1 { max-width: 480px; text-align: left; }
+  .hero-editorial .hero-sub { margin-left: 0 !important; max-width: 460px; text-align: left; }
+  .hero-cta-stack, .hero-ctas {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: flex-start;
+  }
+  .hero-badge-floating {
+    top: 15% !important;
+    right: 8% !important;
+    left: auto !important;
+    transform: rotate(-4deg) !important;
+  }
+  .hero-scroll-indicator--br {
+    bottom: 2rem !important;
+    right: 4rem !important;
+    left: auto !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- STATS BAR: uneven columns + vertical offset ---------- */
+@media (min-width: 768px) {
+  .stats-bar-asym {
+    grid-template-columns: 1.3fr 0.8fr 1.1fr 0.8fr !important;
+  }
+  .stats-bar-asym > :nth-child(2),
+  .stats-bar-asym > :nth-child(4) {
+    position: relative;
+    top: 14px;
+  }
+}
+
+/* ---------- MANIFESTO: lopsided, tilted, offset rows ---------- */
+@media (min-width: 769px) {
+  .manifesto-grid {
+    grid-template-columns: 0.9fr 1.3fr !important;
+    align-items: start !important;
+  }
+  .manifesto-quote-wrap {
+    transform: rotate(-1.2deg);
+    margin-top: -20px;
+    transform-origin: left center;
+  }
+  .manifesto-body { margin-top: 40px; }
+}
+
+/* ---------- SERVICES: real masonry stagger + overlap ---------- */
+@media (min-width: 901px) {
+  .services-grid-core,
+  .services-grid-ai {
+    display: grid !important;
+  }
+  .services-grid-core { grid-template-columns: repeat(3, 1fr) !important; gap: 1.5rem !important; }
+  .services-grid-ai   { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem !important; }
+
+  .services-grid-core > .service-card:nth-child(1) { margin-top: 0 !important; }
+  .services-grid-core > .service-card:nth-child(2) { margin-top: 32px !important; }
+  .services-grid-core > .service-card:nth-child(3) { margin-top: -16px !important; }
+
+  /* AI cards visually overlap the row above */
+  .services-grid-ai {
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+  }
+  .services-grid-ai > .service-card:nth-child(1) {
+    margin-top: 20px !important;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 12px 40px rgba(138, 79, 43, 0.18);
+  }
+  .services-grid-ai > .service-card:nth-child(2) {
+    margin-top: -8px !important;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 12px 40px rgba(138, 79, 43, 0.18);
+  }
+}
+
+/* ---------- CASE STUDIES: alternating direction, tilt, offset ---------- */
+@media (min-width: 881px) {
+  .cs-card:nth-child(odd) {
+    transform: rotate(0.4deg);
+    margin-right: 24px;
+  }
+  .cs-card:nth-child(even) {
+    transform: rotate(-0.4deg);
+    margin-left: 24px;
+  }
+  .cs-card.is-visible:nth-child(odd) { transform: rotate(0.4deg) !important; }
+  .cs-card.is-visible:nth-child(even) { transform: rotate(-0.4deg) !important; }
+}
+
+/* ---------- PROCESS STEPS: permanent zigzag ---------- */
+@media (min-width: 769px) {
+  .process-block--zigzag .process-step:nth-child(odd)  { margin-top: 0 !important; }
+  .process-block--zigzag .process-step:nth-child(even) { margin-top: 36px !important; }
+}
+
+/* ---------- TESTIMONIALS: asymmetric stagger ---------- */
+@media (min-width: 769px) {
+  .testi-grid--asym {
+    grid-template-columns: 1.15fr 0.85fr !important;
+    grid-template-areas: none !important;
+  }
+  .testi-grid--asym > * { grid-area: auto !important; grid-column: auto !important; }
+  .testi-grid--asym > :nth-child(1) { margin-top: 0;   transform: rotate(-0.6deg); }
+  .testi-grid--asym > :nth-child(2) { margin-top: 40px; transform: rotate(0.6deg); }
+  .testi-grid--asym > :nth-child(3) { margin-top: -20px; transform: rotate(-0.6deg); }
+  .testi-grid--asym > :nth-child(4) { margin-top: 20px;  transform: rotate(0.6deg); }
+  .testi-grid--asym > .testi-card.is-visible:nth-child(2n)   { transform: rotate(0.6deg) !important; }
+  .testi-grid--asym > .testi-card.is-visible:nth-child(2n+1) { transform: rotate(-0.6deg) !important; }
+}
+
+/* ---------- SECTION EYEBROW LABELS: stop centering ---------- */
+.services-head,
+.cs-head,
+.process-head,
+.testi-head,
+#about .text-center,
+#about .manifesto-head {
+  text-align: left !important;
+  margin-left: 0 !important;
+}
+.services-head .services-eyebrow,
+.cs-head .services-eyebrow,
+.process-head .services-eyebrow,
+.testi-head .testi-eyebrow {
+  margin-left: 0 !important;
+}
+/* Keep booking/CTA centered */
+#contact .services-head,
+#contact .cs-head,
+.cta-section .services-head { text-align: center !important; }

@@ -1,43 +1,45 @@
 import { useEffect, useRef, useState } from 'react';
+import elenaImg from '@/assets/testimonial-elena-rossi.jpeg.asset.json';
+import marcusImg from '@/assets/testimonial-marcus-webb.jpeg.asset.json';
+import sarahImg from '@/assets/testimonial-sarah-chen.jpeg.asset.json';
+import triptaImg from '@/assets/testimonial-tripta-sports.jpeg.asset.json';
 
-type Testimonial = {
-  quote: string;
+type Item = {
   name: string;
-  role: string;
-  badge: string;
-  metric?: { value: string; label: string };
+  src: string;
+  alt: string;
+  source: 'Email' | 'WhatsApp';
+  dir: string;
 };
 
-const testimonials: Testimonial[] = [
+const items: Item[] = [
   {
-    quote:
-      "It feels like you write as if you're inside the customer's head. At first it's a bit unsettling, but in the best way — because it shows how deeply you understand the audience. And more importantly, it actually works. The messaging was clear, engaging, and very well aligned with what I was hoping to achieve.",
     name: 'Elena Rossi',
-    role: 'Email Client',
-    badge: 'Highly recommended · Would work again',
+    src: elenaImg.url,
+    alt: 'Client testimonial from Elena Rossi',
+    source: 'Email',
+    dir: 'ed-from-top',
   },
   {
-    quote:
-      "Our email open rate jumped from 18% to 47%. I honestly didn't expect that without changing our whole list. Really impressed with the results. Let's work on something even bigger next time.",
     name: 'Marcus Webb',
-    role: 'Email Marketing Client',
-    badge: 'Open rate: 18% → 47%',
-    metric: { value: '18% → 47%', label: 'Email open rate' },
+    src: marcusImg.url,
+    alt: 'Client testimonial from Marcus Webb - 18% to 47% open rate increase',
+    source: 'Email',
+    dir: 'ed-from-right',
   },
   {
-    quote:
-      "This wasn't just copywriting. It genuinely changed how we communicate with our customers. The feedback we got was incredible. We saw conversions jump 3.2× in just 60 days.",
     name: 'Sarah Chen',
-    role: 'E-commerce Brand Owner',
-    badge: '3.2× conversions in 60 days',
-    metric: { value: '3.2×', label: 'Conversions in 60 days' },
+    src: sarahImg.url,
+    alt: 'Client testimonial from Sarah Chen - 3.2x conversion increase',
+    source: 'Email',
+    dir: 'ed-from-left',
   },
   {
-    quote:
-      "The quality genuinely impressed me. Design was clean, professional, and perfectly aligned with my brand — in some aspects even better than I expected. What stood out most was the attention to detail and perfect content alignment. Communication was smooth, revisions were handled quickly, and everything was delivered on time.",
     name: 'Tripta Sports',
-    role: 'Sports Brand (Pakistan)',
-    badge: 'On-time · Perfect brand alignment',
+    src: triptaImg.url,
+    alt: 'Client testimonial from Tripta Sports',
+    source: 'WhatsApp',
+    dir: 'ed-from-bottom',
   },
 ];
 
@@ -62,49 +64,47 @@ const TestimonialsSection = () => {
   }, []);
 
   return (
-    <section id="clients" className="testi-section" data-reveal>
+    <section id="clients" className="testi-section testi-proof" data-reveal>
       <div className="testi-head">
         <span className="testi-eyebrow"><i /> Client Results</span>
         <h2 className="testi-title">Don't take my word for it.</h2>
-        <p className="testi-sub">Real feedback from real clients. Unedited.</p>
+        <p
+          className="testi-sub"
+          style={{ fontStyle: 'italic', fontSize: '14px', opacity: 0.7 }}
+        >
+          Real feedback. Real screenshots. Unedited.
+        </p>
       </div>
-      <div ref={ref} className="testi-grid testi-grid--asym">
-        {testimonials.map((t, i) => {
-          const dir = ['ed-from-top', 'ed-from-bottom', 'ed-from-top', 'ed-from-bottom'][i];
-          return (
-            <article
-              key={t.name}
-              className={`testi-card ed-enter ${dir} ${visible ? 'is-visible' : ''}`}
-              style={{ animationDelay: `${i * 0.12}s` }}
-            >
-              <div className="testi-top">
-                <div className="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                <span className="testi-verified">
-                  <span className="testi-verified-check">✓</span> Real screenshot
-                </span>
-              </div>
 
-              {t.metric && (
-                <div className="testi-metric">
-                  <span className="testi-metric-value">{t.metric.value}</span>
-                  <span className="testi-metric-label">{t.metric.label}</span>
-                </div>
-              )}
+      <div ref={ref} className="testi-proof-grid">
+        {items.map((t, i) => (
+          <article
+            key={t.name}
+            className={`testi-proof-card ed-enter ${t.dir} ${visible ? 'is-visible' : ''}`}
+            style={{ animationDelay: `${i * 0.1}s` }}
+          >
+            <span className="testi-proof-verified">✓ Verified</span>
 
-              <p className="testi-quote">"{t.quote}"</p>
+            <div className="testi-proof-imgwrap">
+              <img
+                src={t.src}
+                alt={t.alt}
+                loading="lazy"
+                className="testi-proof-img"
+              />
+            </div>
 
-              <div className="testi-divider" />
+            <div className="testi-proof-divider" />
 
-              <div className="testi-meta">
-                <div>
-                  <p className="testi-name">{t.name}</p>
-                  <p className="testi-role">{t.role}</p>
-                </div>
-                <span className="testi-badge"><b>↑</b>{t.badge}</span>
-              </div>
-            </article>
-          );
-        })}
+            <div className="testi-proof-attr">
+              <span className="testi-proof-name">{t.name}</span>
+              <span className="testi-proof-tag">
+                <span aria-hidden>{t.source === 'Email' ? '✉' : '💬'}</span>
+                {t.source}
+              </span>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

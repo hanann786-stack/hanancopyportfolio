@@ -1,63 +1,46 @@
 import { useEffect, useRef, useState } from 'react';
 
-type Card = {
-  number: string;
-  name: string;
-  tag: string;
-  description: string;
-  price: string;
-  isNew?: boolean;
-};
+type Row = { number: string; name: string; price: string; description: string };
 
-const coreCards: Card[] = [
+const rows: Row[] = [
   {
     number: '01',
-    name: 'Email Marketing',
-    tag: 'Core Service',
-    description:
-      'Welcome sequences, abandoned cart flows, win-back campaigns. Every email built around one metric: revenue per recipient.',
+    name: 'Email marketing',
     price: 'From $800 / sequence',
+    description:
+      'Welcome flows, abandoned cart, win-back. Built around one metric: revenue per recipient.',
   },
   {
     number: '02',
-    name: 'Landing Pages',
-    tag: 'Core Service',
-    description:
-      "Sales pages, VSL scripts, opt-in pages that turn a visitor's doubt into a buyer's certainty. Built on psychology, not guesswork.",
+    name: 'Landing pages',
     price: 'From $1,200 / page',
+    description:
+      "Sales pages and VSL scripts that turn a visitor's doubt into a buyer's certainty.",
   },
   {
     number: '03',
-    name: 'Social Media Ads',
-    tag: 'Core Service',
-    description:
-      'Facebook, Instagram, TikTok copy that stops the scroll and starts the sale. Hook-first. Tested across DTC, fitness, and high-ticket offers.',
+    name: 'Social media ads',
     price: 'From $600 / campaign',
+    description:
+      'Hook-first ad copy that stops the scroll and pre-qualifies the click.',
   },
-];
-
-const aiCards: Card[] = [
   {
     number: '04',
-    name: 'AI Email System Setup',
-    tag: 'NEW · AI Service',
-    description:
-      'I write the strategy and copy, then build your entire Klaviyo or ActiveCampaign flow using AI tools. You get a live, revenue-generating system — not just a Word doc.',
+    name: 'AI email system setup',
     price: 'From $1,500 / system',
-    isNew: true,
+    description:
+      'I write the strategy and copy, then build the live Klaviyo or ActiveCampaign system with AI tools.',
   },
   {
     number: '05',
-    name: 'AI Brand Voice & Prompt System',
-    tag: 'NEW · AI Service',
-    description:
-      'A custom GPT trained on your brand voice. Your team generates on-brand emails, ads, and content in seconds — all sounding like you at your best.',
+    name: 'AI brand voice system',
     price: 'From $1,200 / system',
-    isNew: true,
+    description:
+      'A custom GPT trained on your voice. Your team ships on-brand emails, ads, and content in seconds.',
   },
 ];
 
-const ServiceCard = ({ card, index }: { card: Card; index: number }) => {
+const OfferSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -65,81 +48,36 @@ const ServiceCard = ({ card, index }: { card: Card; index: number }) => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.unobserve(el);
-        }
+      ([e]) => {
+        if (e.isIntersecting) { setVisible(true); obs.unobserve(el); }
       },
-      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  const dir = index % 2 === 0 ? 'ed-from-left' : 'ed-from-right';
-  const masonClass = `service-card-mason-${index + 1}`;
-  return (
-    <div
-      ref={ref}
-      className={`service-card ed-enter ${dir} ${masonClass}${card.isNew ? ' service-card-ai' : ''}${visible ? ' is-visible' : ''}`}
-      style={{ animationDelay: `${index * 0.08}s` }}
-    >
-      <span className="service-card-accent" />
-      <div className="service-card-top">
-        <span className="service-card-number">{card.number}</span>
-        <span className={`service-card-tag${card.isNew ? ' service-card-tag-ai' : ''}`}>
-          {card.tag}
-        </span>
-      </div>
-      <h3 className="service-card-name">{card.name}</h3>
-      <p className="service-card-desc">{card.description}</p>
-      <div className="service-card-price">{card.price}</div>
-    </div>
-  );
-};
-
-const OfferSection = () => {
-  const titleRef = useRef<HTMLDivElement>(null);
-  const [titleVisible, setTitleVisible] = useState(false);
-
-  useEffect(() => {
-    const el = titleRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTitleVisible(true);
-          obs.unobserve(el);
-        }
-      },
-      { threshold: 0.2 }
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
 
   return (
-    <section id="services" className="services-section">
-      <div ref={titleRef} className={`services-head${titleVisible ? ' is-visible' : ''}`}>
-        <div className="services-eyebrow">
-          <span className="services-eyebrow-line" />
-          <span className="services-eyebrow-text">What I Do</span>
-        </div>
-        <h2 className="services-title">
-          Three weapons. Two <span className="services-title-accent">AI systems</span>. Infinite results.
-        </h2>
-      </div>
-
-      <div className="services-grid services-grid-core">
-        {coreCards.map((c, i) => (
-          <ServiceCard key={c.number} card={c} index={i} />
-        ))}
-      </div>
-
-      <div className="services-grid services-grid-ai">
-        {aiCards.map((c, i) => (
-          <ServiceCard key={c.number} card={c} index={coreCards.length + i} />
+    <section id="services" className="offer-editorial">
+      <h2 className="offer-editorial-title">Here is what I actually do.</h2>
+      <div ref={ref} className={`offer-list ${visible ? 'is-visible' : ''}`}>
+        {rows.map((r, i) => (
+          <a
+            key={r.number}
+            href="#contact"
+            data-clickable
+            className="offer-row"
+            style={{ transitionDelay: `${i * 60}ms` }}
+          >
+            <span className="offer-row-num" aria-hidden>{r.number}</span>
+            <div className="offer-row-body">
+              <div className="offer-row-head">
+                <h3 className="offer-row-name">{r.name}</h3>
+                <span className="offer-row-price">{r.price}</span>
+              </div>
+              <p className="offer-row-desc">{r.description}</p>
+            </div>
+          </a>
         ))}
       </div>
     </section>

@@ -1,10 +1,8 @@
 import CustomCursor from '@/components/CustomCursor';
-import Navbar from '@/components/Navbar';
+import SideNav from '@/components/SideNav';
 import HeroSection from '@/components/HeroSection';
 import StatsBar from '@/components/StatsBar';
 import ProofStrip from '@/components/ProofStrip';
-import CredibilityBar from '@/components/CredibilityBar';
-import PainSection from '@/components/PainSection';
 import OfferSection from '@/components/OfferSection';
 import WorkShowcase from '@/components/WorkShowcase';
 import ProcessSection from '@/components/ProcessSection';
@@ -16,18 +14,16 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="bg-grain bg-dot-grid min-h-screen relative">
+    <div className="bg-dot-grid min-h-screen relative">
       <CustomCursor />
-      <Navbar />
+      <SideNav />
       <HeroSection />
       <StatsBar />
       <ProofStrip />
-      <CredibilityBar />
-      <PainSection />
+      <ManifestoSection />
       <OfferSection />
       <WorkShowcase />
       <ProcessSection />
-      <ManifestoSection />
       <TestimonialsSection />
       <NotForYouSection />
       <CTASection />

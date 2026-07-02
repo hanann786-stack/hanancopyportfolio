@@ -1,13 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import BookingModal from './BookingModal';
+import { useEffect, useRef, useState } from 'react';
 import heroVideo from '@/assets/hero-bg.mp4.asset.json';
 import heroPoster from '@/assets/hero-poster.jpg.asset.json';
 
-const words = ['Words', 'That', 'Sell.'];
-const words2 = ['Silence', 'That', 'Sells', 'More.'];
-
 const HeroSection = () => {
-  const [bookingOpen, setBookingOpen] = useState(false);
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -42,27 +37,20 @@ const HeroSection = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="hero-masthead"
+      className="hero"
       style={
         isMobile
-          ? {
-              backgroundImage: `url(${heroPoster.url})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }
+          ? { backgroundImage: `url(${heroPoster.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }
           : undefined
       }
     >
       {isMobile === false && (
-        <div className="hero-bg-video-wrap">
+        <div className="hero-video-wrap">
           <video
             ref={videoRef}
-            muted
-            loop
-            playsInline
-            preload="metadata"
+            muted loop playsInline preload="metadata"
             poster={heroPoster.url}
-            className="hero-bg-video"
+            className="hero-video"
           >
             <source src={heroVideo.url} type="video/mp4" />
           </video>
@@ -70,44 +58,23 @@ const HeroSection = () => {
       )}
       <div className="hero-overlay" />
 
-      <div className="hero-masthead-inner">
-        <h1 className="hero-masthead-h1">
-          <span className="hero-masthead-line hero-masthead-line-1">
-            {words.map((w, i) => (
-              <span key={i} className="hero-masthead-word" style={{ ['--wy' as string]: `${(i % 2 === 0 ? -1 : 1) * (2 + i)}px` }}>
-                {w}{i < words.length - 1 ? '\u00A0' : ''}
-              </span>
-            ))}
-          </span>
-          <span className="hero-masthead-line hero-masthead-line-2">
-            {words2.map((w, i) => (
-              <span key={i} className="hero-masthead-word" style={{ ['--wy' as string]: `${(i % 2 === 0 ? 2 : -3) + i}px` }}>
-                {w}{i < words2.length - 1 ? '\u00A0' : ''}
-              </span>
-            ))}
-          </span>
-        </h1>
+      <div className="hero-content">
+        <div className="hero-tl">Hanan Arif</div>
+        <div className="hero-tr">Available for projects</div>
 
-        <p className="hero-masthead-sub">
-          I write copy that makes people buy things. For DTC brands and SaaS
-          companies done leaving revenue on the table.
-        </p>
+        <div className="hero-bl hero-fade">
+          <h1 className="hero-h1">
+            Conversion Copy
+            <span className="stroke">&amp; AI Systems</span>
+          </h1>
+          <p className="hero-sub">For DTC brands and SaaS companies.</p>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => setBookingOpen(true)}
-          data-clickable
-          className="hero-masthead-cta"
-        >
-          Book a strategy call
-        </button>
-
-        <div className="hero-masthead-avail">
-          Currently taking 2 clients. Book below.
+        <div className="hero-br hero-fade-2">
+          <a href="#work">See the work</a>
+          <span className="scroll-hint">or scroll</span>
         </div>
       </div>
-
-      <BookingModal open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </section>
   );
 };

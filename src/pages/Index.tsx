@@ -1,35 +1,25 @@
-import CustomCursor from '@/components/CustomCursor';
-import SideNav from '@/components/SideNav';
+import Nav from '@/components/Nav';
 import HeroSection from '@/components/HeroSection';
-import StatsBar from '@/components/StatsBar';
-import ProofStrip from '@/components/ProofStrip';
-import OfferSection from '@/components/OfferSection';
-import WorkShowcase from '@/components/WorkShowcase';
-import ProcessSection from '@/components/ProcessSection';
-import ManifestoSection from '@/components/ManifestoSection';
+import StatementSection from '@/components/StatementSection';
+import WorkSection from '@/components/WorkSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import NotForYouSection from '@/components/NotForYouSection';
-import CTASection from '@/components/CTASection';
-import Footer from '@/components/Footer';
+import ServicesSection from '@/components/ServicesSection';
+import ProcessSection from '@/components/ProcessSection';
+import AboutSection from '@/components/AboutSection';
+import ContactSection from '@/components/ContactSection';
 
-const Index = () => {
-  return (
-    <div className="bg-dot-grid min-h-screen relative">
-      <CustomCursor />
-      <SideNav />
-      <HeroSection />
-      <StatsBar />
-      <ProofStrip />
-      <ManifestoSection />
-      <OfferSection />
-      <WorkShowcase />
-      <ProcessSection />
-      <TestimonialsSection />
-      <NotForYouSection />
-      <CTASection />
-      <Footer />
-    </div>
-  );
-};
+const Index = () => (
+  <div className="min-h-screen">
+    <Nav />
+    <HeroSection />
+    <StatementSection />
+    <WorkSection />
+    <TestimonialsSection />
+    <ServicesSection />
+    <ProcessSection />
+    <AboutSection />
+    <ContactSection />
+  </div>
+);
 
 export default Index;

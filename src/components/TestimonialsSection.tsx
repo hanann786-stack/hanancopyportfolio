@@ -45,11 +45,11 @@ const TestimonialsSection = () => (
       </div>
 
       <div>
-        <div className="testi-stat-big">100%</div>
-        <div className="testi-stat-cap">of clients asked to work together again</div>
-        <div className="testi-hr" />
-        <div className="testi-stat-sub">All 4 clients</div>
+        <div className="testi-stat-cap" style={{ textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 600 }}>
+          Testimonials from some of the recent cases
+        </div>
       </div>
+
 
       <div>
         <figure className="testi-frame testi-frame-sm">

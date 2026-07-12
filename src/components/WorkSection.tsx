@@ -30,7 +30,7 @@ const cards = [
 
 const WorkSection = () => (
   <section id="work" className="work">
-    <h2 className="work-title">Recent Client Cases</h2>
+    <h2 className="work-title">What I did for Clients&nbsp;</h2>
     <div className="work-scroll">
       {cards.map((c) => (
         <article key={c.title} className="work-card">

@@ -7,9 +7,11 @@ import ServicesSection from '@/components/ServicesSection';
 import ProcessSection from '@/components/ProcessSection';
 import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
+import CustomCursor from '@/components/CustomCursor';
 
 const Index = () => (
   <div className="min-h-screen">
+    <CustomCursor />
     <Nav />
     <HeroSection />
     <StatementSection />

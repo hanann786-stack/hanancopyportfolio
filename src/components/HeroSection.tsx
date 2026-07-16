@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import heroVideo from '@/assets/hero-bg.mp4.asset.json';
+import heroVideo from '@/assets/hero-bg-v2.mp4.asset.json';
 import heroPoster from '@/assets/hero-poster.jpg.asset.json';
 
 const HeroSection = () => {
@@ -8,7 +8,7 @@ const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
+    const mq = window.matchMedia('(max-width: 767px)');
     const update = () => setIsMobile(mq.matches);
     update();
     mq.addEventListener('change', update);
@@ -38,17 +38,14 @@ const HeroSection = () => {
       id="hero"
       ref={sectionRef}
       className="hero"
-      style={
-        isMobile
-          ? { backgroundImage: `url(${heroPoster.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-          : undefined
-      }
+      style={isMobile ? { background: '#1C1815' } : undefined}
     >
       {isMobile === false && (
         <div className="hero-video-wrap">
           <video
             ref={videoRef}
-            muted loop playsInline preload="metadata"
+            id="hero-video"
+            autoPlay muted loop playsInline preload="metadata"
             poster={heroPoster.url}
             className="hero-video"
           >
@@ -71,7 +68,7 @@ const HeroSection = () => {
         </div>
 
         <div className="hero-br hero-fade-2">
-          <a href="#work">See the work</a>
+          <a href="#work" className="btn-primary">See the work</a>
           <span className="scroll-hint">or scroll</span>
         </div>
       </div>

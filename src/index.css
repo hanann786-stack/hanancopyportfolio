@@ -75,7 +75,12 @@ p { max-width: 68ch; }
   background: transparent;
   transition: background 0.3s ease;
 }
-.nav.is-scrolled { background: #1C1815; }
+.nav.is-scrolled {
+  background: rgba(28,24,21,0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(232,223,210,0.08);
+}
 .nav-logo {
   font-family: 'Inter', sans-serif;
   font-weight: 500; font-size: 13px;

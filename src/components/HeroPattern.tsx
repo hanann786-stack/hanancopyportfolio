@@ -220,10 +220,10 @@ const HeroPattern = memo(() => {
 
         {/* Oversized so parallax translation never reveals edges */}
         <g ref={patternRef}>
-          <rect x="-40" y="-40" width="calc(100% + 80px)" height="calc(100% + 80px)" fill="url(#copy-icons)" />
+          <rect x="-5%" y="-5%" width="110%" height="110%" fill="url(#copy-icons)" />
         </g>
         <rect width="100%" height="100%" fill="url(#hero-overlay-grad)" />
-        <rect ref={overlayRef} x="-20" y="-20" width="calc(100% + 40px)" height="calc(100% + 40px)" fill="url(#hero-vignette)" />
+        <rect ref={overlayRef} x="-3%" y="-3%" width="106%" height="106%" fill="url(#hero-vignette)" />
       </svg>
     </div>
   );

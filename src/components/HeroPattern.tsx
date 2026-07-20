@@ -1,13 +1,84 @@
-import { memo } from 'react';
+import { memo, useEffect, useRef } from 'react';
 
 /**
  * Deep navy background with a repeating pattern of white outline
- * copywriting icons (pen, quote, document, envelope, ampersand, at, hashtag,
- * pilcrow, sparkle, cursor, chart, speech bubble). Purely SVG — no canvas, no JS.
+ * copywriting icons. Adds a subtle mouse-driven parallax + a slow
+ * ambient float. GPU-only transforms, rAF-throttled, respects
+ * prefers-reduced-motion, and pauses when the hero is offscreen.
  */
 const HeroPattern = memo(() => {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const patternRef = useRef<SVGGElement>(null);
+  const overlayRef = useRef<SVGRectElement>(null);
+
+  // Target + current values (LERP smoothed)
+  const target = useRef({ x: 0, y: 0 });
+  const current = useRef({ x: 0, y: 0 });
+  const raf = useRef(0);
+  const visible = useRef(true);
+  const t0 = useRef(performance.now());
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const pat = patternRef.current;
+    const ov = overlayRef.current;
+    if (!wrap || !pat) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
+
+    const onMove = (e: MouseEvent) => {
+      const r = wrap.getBoundingClientRect();
+      // -1 → 1 normalized cursor position within hero
+      const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      const ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+      target.current.x = Math.max(-1, Math.min(1, nx));
+      target.current.y = Math.max(-1, Math.min(1, ny));
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+
+    const io = new IntersectionObserver(
+      ([entry]) => { visible.current = entry.isIntersecting; },
+      { threshold: 0.05 }
+    );
+    io.observe(wrap);
+
+    const tick = (now: number) => {
+      if (visible.current) {
+        // LERP toward target
+        current.current.x += (target.current.x - current.current.x) * 0.06;
+        current.current.y += (target.current.y - current.current.y) * 0.06;
+
+        // Ambient float (very slow sine)
+        const t = (now - t0.current) * 0.00025;
+        const floatX = Math.sin(t) * 6;
+        const floatY = Math.cos(t * 0.8) * 4;
+
+        // Pattern shifts more than overlay for depth
+        const px = current.current.x * 22 + floatX;
+        const py = current.current.y * 16 + floatY;
+        pat.setAttribute('transform', `translate(${px} ${py})`);
+
+        if (ov) {
+          const ox = current.current.x * -6;
+          const oy = current.current.y * -4;
+          ov.setAttribute('transform', `translate(${ox} ${oy})`);
+        }
+      }
+      raf.current = requestAnimationFrame(tick);
+    };
+    raf.current = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(raf.current);
+      window.removeEventListener('mousemove', onMove);
+      io.disconnect();
+    };
+  }, []);
+
   return (
     <div
+      ref={wrapRef}
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ zIndex: 0, background: '#1A2744' }}
       aria-hidden="true"
@@ -15,6 +86,7 @@ const HeroPattern = memo(() => {
       <svg
         className="absolute inset-0 w-full h-full"
         xmlns="http://www.w3.org/2000/svg"
+        style={{ willChange: 'transform' }}
       >
         <defs>
           <pattern
@@ -146,9 +218,12 @@ const HeroPattern = memo(() => {
           </radialGradient>
         </defs>
 
-        <rect width="100%" height="100%" fill="url(#copy-icons)" />
+        {/* Oversized so parallax translation never reveals edges */}
+        <g ref={patternRef}>
+          <rect x="-5%" y="-5%" width="110%" height="110%" fill="url(#copy-icons)" />
+        </g>
         <rect width="100%" height="100%" fill="url(#hero-overlay-grad)" />
-        <rect width="100%" height="100%" fill="url(#hero-vignette)" />
+        <rect ref={overlayRef} x="-3%" y="-3%" width="106%" height="106%" fill="url(#hero-vignette)" />
       </svg>
     </div>
   );

@@ -218,9 +218,12 @@ const HeroPattern = memo(() => {
           </radialGradient>
         </defs>
 
-        <rect width="100%" height="100%" fill="url(#copy-icons)" />
+        {/* Oversized so parallax translation never reveals edges */}
+        <g ref={patternRef}>
+          <rect x="-40" y="-40" width="calc(100% + 80px)" height="calc(100% + 80px)" fill="url(#copy-icons)" />
+        </g>
         <rect width="100%" height="100%" fill="url(#hero-overlay-grad)" />
-        <rect width="100%" height="100%" fill="url(#hero-vignette)" />
+        <rect ref={overlayRef} x="-20" y="-20" width="calc(100% + 40px)" height="calc(100% + 40px)" fill="url(#hero-vignette)" />
       </svg>
     </div>
   );

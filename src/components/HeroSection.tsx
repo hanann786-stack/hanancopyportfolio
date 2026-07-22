@@ -16,8 +16,6 @@ const HeroSection = () => {
       <div className="hero-overlay hero-overlay-readable" />
 
       <div className="hero-content">
-        <div className="hero-tl">Hanan Arif</div>
-        <div className="hero-tr">Available for projects</div>
 
         <div className="hero-bl hero-fade">
           <h1 className="hero-h1">

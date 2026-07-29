@@ -149,7 +149,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                 <>
                   <div className="text-center mb-8">
                     <p className="font-accent text-[11px] uppercase tracking-[0.25em] text-[#B8703F]/70 mb-3">
-                      Book your free strategy call
+                      ✦&nbsp; BOOK YOUR FREE STRATEGY CALL &nbsp;✦
                     </p>
                     <p className="font-body text-sm text-[#1C1815]/50 italic">"20 minutes. No pitch. Just clarity."</p>
                   </div>
@@ -264,7 +264,7 @@ const BookingModal = ({ open, onClose }: BookingModalProps) => {
                     className="w-full mt-8 font-accent text-[13px] uppercase tracking-[0.15em] px-10 py-4 text-[#1C1815] font-semibold hover:brightness-110 transition-all disabled:opacity-50"
                     style={{ backgroundColor: "#B8703F" }}
                   >
-                    {sending ? "Sending..." : "Book my call"}
+                    {sending ? "Sending..." : "Let's Talk — Book My Call →"}
                   </button>
 
                   <p className="text-center font-body text-xs text-[#1C1815]/40 italic mt-4">

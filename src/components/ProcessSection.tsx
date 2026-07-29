@@ -1,29 +1,79 @@
+import { useEffect, useRef, useState } from 'react';
+
 const steps = [
-  { n: '01', time: 'Days 1–2', h: 'Discovery call', p: "We talk about your brand, offer, and the exact problem you need solved. No forms, no fluff — a 45-minute conversation that decides whether we're a fit." },
-  { n: '02', time: 'Days 3–7', h: 'Research and strategy', p: 'I read your reviews, study your competitors, and interview your best customers. The copy is 80% research, 20% writing — this is where the leverage lives.' },
-  { n: '03', time: 'Days 8–14', h: 'Writing and iteration', p: 'First draft, one round of edits, final version. Every line is defensible: I can tell you why a word is there and what happens if we remove it.' },
-  { n: '04', time: 'Days 15–21', h: 'Launch and measure', p: "We ship, watch the numbers, and adjust. The work isn't done when the copy is delivered — it's done when the metric moves." },
+  {
+    n: '01',
+    title: 'Discovery',
+    desc: 'Deep-dive into your brand, audience, offer, and current funnel. We surface the real bottleneck — not the obvious one.',
+    time: 'Days 1–2',
+  },
+  {
+    n: '02',
+    title: 'Strategy',
+    desc: 'Messaging architecture, hooks, and angles mapped to buyer psychology. You approve the direction before a word is written.',
+    time: 'Days 3–4',
+  },
+  {
+    n: '03',
+    title: 'Copy Delivery',
+    desc: 'Final copy delivered, structured for plug-and-play. Includes variations for testing and notes for your designer or dev.',
+    time: 'Days 5–10',
+  },
+  {
+    n: '04',
+    title: 'Optimize',
+    desc: 'Post-launch review of performance data. We refine subject lines, headlines, and CTAs based on what your audience actually does.',
+    time: 'Post-launch',
+  },
 ];
 
-const ProcessSection = () => (
-  <section id="process" className="process">
-    <h2 className="process-title">How it works</h2>
-    <div className="process-timeline">
-      <div className="process-line" />
-      {steps.map((s) => (
-        <div key={s.n} className="process-step">
-          <div className="process-num-block">
-            <div className="process-num">{s.n}</div>
-            <div className="process-time">{s.time}</div>
-          </div>
-          <div className="process-content">
-            <h3 className="process-h">{s.h}</h3>
-            <p className="process-p">{s.p}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+const ProcessSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section id="process" className="process-section">
+      <div className="process-head">
+        <span className="process-eyebrow"><i /> How We Work</span>
+        <h2 className="process-title">A clear path from brief to revenue.</h2>
+      </div>
+      <div ref={ref} className="process-block process-block--zigzag">
+        {steps.map((s, i) => {
+          const down = i % 2 === 1;
+          const dir = ['ed-from-left', 'ed-from-top', 'ed-from-right', 'ed-from-bottom'][i];
+          return (
+            <div
+              key={s.n}
+              className={`process-step ed-enter ${dir} ${down ? 'process-step--down' : ''} ${visible ? 'is-visible' : ''}`}
+              style={{ animationDelay: `${i * 0.12}s` }}
+            >
+              <span className="process-step-bg-num">{s.n}</span>
+              <div className="process-step-dot">{s.n}</div>
+              <h3 className="process-step-title">{s.title}</h3>
+              <p className="process-step-desc">{s.desc}</p>
+              <span className="process-step-time">{s.time}</span>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
 
 export default ProcessSection;

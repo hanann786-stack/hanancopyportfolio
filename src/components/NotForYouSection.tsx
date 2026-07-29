@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
 const forYou = [
-  'You have a product that works and want copy to scale it aggressively',
+  'You have a proven product and want copy to scale it aggressively',
   'You understand great copy is an investment, not a cost',
   'You value strategy over surface-level pretty words',
-  'You want measurable results: opens, clicks, conversions, revenue',
+  'You want measurable results — opens, clicks, conversions, revenue',
   "You're building a brand with a decade-long horizon",
 ];
 
@@ -48,7 +48,7 @@ const NotForYouSection = () => {
         }}
       >
         <div className="nfy-head">
-          <h2 className="nfy-title">Who I work best with.</h2>
+          <h2 className="nfy-title">This is not for everyone.</h2>
           <p className="nfy-sub">
             Honest filters save us both time. Read these before you book.
           </p>

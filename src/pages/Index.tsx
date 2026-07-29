@@ -1,27 +1,39 @@
-import Nav from '@/components/Nav';
-import HeroSection from '@/components/HeroSection';
-import StatementSection from '@/components/StatementSection';
-import WorkSection from '@/components/WorkSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import ServicesSection from '@/components/ServicesSection';
-import ProcessSection from '@/components/ProcessSection';
-import AboutSection from '@/components/AboutSection';
-import ContactSection from '@/components/ContactSection';
 import CustomCursor from '@/components/CustomCursor';
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import StatsBar from '@/components/StatsBar';
+import ProofStrip from '@/components/ProofStrip';
+import CredibilityBar from '@/components/CredibilityBar';
+import PainSection from '@/components/PainSection';
+import OfferSection from '@/components/OfferSection';
+import WorkShowcase from '@/components/WorkShowcase';
+import ProcessSection from '@/components/ProcessSection';
+import ManifestoSection from '@/components/ManifestoSection';
+import TestimonialsSection from '@/components/TestimonialsSection';
+import NotForYouSection from '@/components/NotForYouSection';
+import CTASection from '@/components/CTASection';
+import Footer from '@/components/Footer';
 
-const Index = () => (
-  <div className="min-h-screen">
-    <CustomCursor />
-    <Nav />
-    <HeroSection />
-    <StatementSection />
-    <WorkSection />
-    <TestimonialsSection />
-    <ServicesSection />
-    <ProcessSection />
-    <AboutSection />
-    <ContactSection />
-  </div>
-);
+const Index = () => {
+  return (
+    <div className="bg-grain bg-dot-grid min-h-screen relative">
+      <CustomCursor />
+      <Navbar />
+      <HeroSection />
+      <StatsBar />
+      <ProofStrip />
+      <CredibilityBar />
+      <PainSection />
+      <OfferSection />
+      <WorkShowcase />
+      <ProcessSection />
+      <ManifestoSection />
+      <TestimonialsSection />
+      <NotForYouSection />
+      <CTASection />
+      <Footer />
+    </div>
+  );
+};
 
 export default Index;

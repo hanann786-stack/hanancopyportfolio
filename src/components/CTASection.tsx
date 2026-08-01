@@ -4,7 +4,7 @@ const CTASection = () => (
       <h2 className="cta-head">Ready to see what better copy looks like for your brand?</h2>
 
       <a
-        href="https://calendly.com/hananhereat/15min"
+        href="https://calendly.com/hananhereat/30min?month=2026-08"
         target="_blank"
         rel="noopener noreferrer"
         className="btn btn-primary"

@@ -2,7 +2,7 @@ const Footer = () => (
   <footer className="site-footer">
     <div className="site-footer-inner">
       <nav aria-label="Footer">
-        <a href="https://instagram.com/hanan.arif.here" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/hanan.copy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
           Instagram
         </a>
         <a href="mailto:hananhereat@gmail.com">Email</a>

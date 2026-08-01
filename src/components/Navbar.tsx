@@ -1,28 +1,25 @@
-import { useEffect, useState, useRef, useCallback, memo } from 'react';
+import { useEffect, useState, useCallback, memo } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
   { label: 'Work', href: '#work' },
-  { label: 'Process', href: '#process' },
-  { label: 'Clients', href: '#clients' },
+  { label: 'Practice', href: '#practice' },
+  { label: 'Services', href: '#services' },
+  { label: 'About', href: '#about' },
 ];
 
 const Navbar = memo(() => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const ticking = useRef(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    // Use IntersectionObserver on a top-of-page sentinel instead of a scroll listener
     const sentinel = document.createElement('div');
-    sentinel.style.cssText = 'position:absolute;top:60px;left:0;width:1px;height:1px;pointer-events:none;';
+    sentinel.style.cssText =
+      'position:absolute;top:60px;left:0;width:1px;height:1px;pointer-events:none;';
     document.body.appendChild(sentinel);
-    const io = new IntersectionObserver(
-      ([entry]) => setScrolled(!entry.isIntersecting),
-      { threshold: 0 }
-    );
+    const io = new IntersectionObserver(([e]) => setScrolled(!e.isIntersecting), {
+      threshold: 0,
+    });
     io.observe(sentinel);
     return () => {
       io.disconnect();
@@ -30,65 +27,43 @@ const Navbar = memo(() => {
     };
   }, []);
 
-
-  useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
-    window.addEventListener('resize', onResize, { passive: true });
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  const closeMobile = useCallback(() => setMobileOpen(false), []);
-  const toggleMobile = useCallback(() => setMobileOpen(o => !o), []);
+  const close = useCallback(() => setOpen(false), []);
 
   return (
     <nav className={`site-nav ${scrolled ? 'scrolled' : ''}`}>
       <div className="site-nav-inner">
-        <a href="#" className="site-nav-logo" data-clickable onClick={closeMobile}>
-          <span className="logo-hanan">Hanan</span>
-          <span className="logo-dot">.</span>
-          <span className="logo-arif">Arif</span>
+        <a href="#top" className="site-nav-logo" onClick={close}>
+          Hanan <em>Arif</em>
         </a>
 
         <div className="site-nav-links">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} className="site-nav-link" data-clickable>
-              {link.label}
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="site-nav-link">
+              {l.label}
             </a>
           ))}
         </div>
 
-        <a href="#contact" className="site-nav-cta site-nav-cta-desktop" data-clickable>
-          Book a Call
+        <a href="#contact" className="site-nav-link site-nav-links" style={{ color: 'var(--copper)' }}>
+          Book a call
         </a>
 
         <button
           className="site-nav-burger"
-          onClick={toggleMobile}
+          onClick={() => setOpen((o) => !o)}
           aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-          data-clickable
+          aria-expanded={open}
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      <div className={`site-nav-drawer ${mobileOpen ? 'open' : ''}`}>
-        <div className="site-nav-drawer-inner">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={closeMobile}
-              className="site-nav-link site-nav-link-mobile"
-              data-clickable
-            >
-              {link.label}
-            </a>
-          ))}
-          <a href="#contact" onClick={closeMobile} className="site-nav-cta" data-clickable>
-            Book a Call
+      <div className={`site-nav-drawer ${open ? 'open' : ''}`}>
+        {[...links, { label: 'Book a call', href: '#contact' }].map((l) => (
+          <a key={l.href} href={l.href} className="site-nav-link" onClick={close}>
+            {l.label}
           </a>
-        </div>
+        ))}
       </div>
     </nav>
   );

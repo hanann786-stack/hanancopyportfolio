@@ -1,39 +1,29 @@
-import CustomCursor from '@/components/CustomCursor';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
-import StatsBar from '@/components/StatsBar';
-import ProofStrip from '@/components/ProofStrip';
-import CredibilityBar from '@/components/CredibilityBar';
-import PainSection from '@/components/PainSection';
-import OfferSection from '@/components/OfferSection';
-import WorkShowcase from '@/components/WorkShowcase';
-import ProcessSection from '@/components/ProcessSection';
-import ManifestoSection from '@/components/ManifestoSection';
+import ResultsBar from '@/components/ResultsBar';
+import WorkSamples from '@/components/WorkSamples';
+import PracticeWork from '@/components/PracticeWork';
+import ServicesList from '@/components/ServicesList';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import NotForYouSection from '@/components/NotForYouSection';
+import AboutSection from '@/components/AboutSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 
-const Index = () => {
-  return (
-    <div className="bg-grain bg-dot-grid min-h-screen relative">
-      <CustomCursor />
-      <Navbar />
+const Index = () => (
+  <div className="min-h-screen">
+    <Navbar />
+    <main>
       <HeroSection />
-      <StatsBar />
-      <ProofStrip />
-      <CredibilityBar />
-      <PainSection />
-      <OfferSection />
-      <WorkShowcase />
-      <ProcessSection />
-      <ManifestoSection />
+      <ResultsBar />
+      <WorkSamples />
+      <PracticeWork />
+      <ServicesList />
       <TestimonialsSection />
-      <NotForYouSection />
+      <AboutSection />
       <CTASection />
-      <Footer />
-    </div>
-  );
-};
+    </main>
+    <Footer />
+  </div>
+);
 
 export default Index;

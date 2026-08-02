@@ -1,7 +1,7 @@
 const results = [
-  { num: '62%', label: 'Drop in CPA — Fitness Ad Campaign' },
-  { num: '4.1% → 7.3%', label: 'CVR — DTC Fashion Landing Page' },
-  { num: '34%', label: 'Open Rate — Email Welcome Sequence' },
+  { num: '62%', label: 'Drop in CPA, Fitness Ad Campaign' },
+  { num: '4.1% → 7.3%', label: 'CVR on a DTC Fashion Landing Page' },
+  { num: '34%', label: 'Open Rate, Email Welcome Sequence' },
 ];
 
 const ResultsBar = () => (

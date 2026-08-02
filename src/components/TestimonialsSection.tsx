@@ -5,7 +5,7 @@ import tripta from '@/assets/testimonial-tripta-sports.jpeg.asset.json';
 
 const quotes = [
   {
-    text: 'Our open rate went from 18% to 47% after Hanan rewrote the sequence. Same list, same offer — different words.',
+    text: 'Our open rate went from 18% to 47% after Hanan rewrote the sequence. Same list, same offer, different words.',
     name: 'Marcus Webb',
     img: marcus.url,
     alt: 'Email from Marcus Webb noting open rate jumped from 18% to 47%',
@@ -48,7 +48,7 @@ const TestimonialsSection = () => (
           <blockquote>{q.text}</blockquote>
           <img className="testi-shot" src={q.img} alt={q.alt} loading="lazy" />
           <cite>
-            — {q.name} · <span className="testi-source">{q.source}</span>
+            {q.name} · <span className="testi-source">{q.source}</span>
           </cite>
         </figure>
       ))}

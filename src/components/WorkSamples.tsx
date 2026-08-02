@@ -30,20 +30,20 @@ const tabs: Tab[] = [
         <p className="meta">Preview: that one was us.</p>
         <p>
           You just made the switch most people do not know they need to make. 30 braiding hair
-          brands were independently tested for heavy metals — lead, mercury, cadmium. 29 failed. You
+          brands were independently tested for heavy metals: lead, mercury, cadmium. 29 failed. You
           are holding the one that did not.
         </p>
         <p>
           [Founder name] did not start this brand with a business plan. She started it after her own
-          allergic reaction — and a deep dive into what was actually in the hair she had been using
+          allergic reaction, and a deep dive into what was actually in the hair she had been using
           her whole life.
         </p>
         <p>
           Over the next few days we will show you what the other 29 brands do not want you to
-          Google. For now — welcome. You made the right call.
+          Google. For now, welcome. You made the right call.
         </p>
         <p>
-          P.S. Your 10% off code is LOYALTY10. Read what we send you this week first — then you will
+          P.S. Your 10% off code is LOYALTY10. Read what we send you this week first, then you will
           know exactly what you are saving on.
         </p>
       </>
@@ -88,7 +88,7 @@ const tabs: Tab[] = [
         <p>
           Close your eyes. That is warm vanilla extract whipped into raw shea butter, melting into
           your skin like the first bite of something made from scratch. Your skin does not just
-          absorb it — it drinks it up. And hours later, when you catch a warm sweet drift from your
+          absorb it, it drinks it up. And hours later, when you catch a warm sweet drift from your
           own skin, you will understand why people reorder before the jar is half empty.
         </p>
         <p className="meta">Best for: dry skin, post-shower ritual, bedtime indulgence.</p>
@@ -101,7 +101,7 @@ const tabs: Tab[] = [
     label: 'Ad Copy',
     title: 'Facebook/Instagram Ad Rewrite',
     before: (
-      <p>"Check out our new collection! Limited time offer — 20% off all products. Shop now!"</p>
+      <p>"Check out our new collection! Limited time offer, 20% off all products. Shop now!"</p>
     ),
     after: (
       <>
@@ -130,7 +130,7 @@ const WorkSamples = () => {
       <div className="wrap">
         <h2 className="section-title">Work Samples</h2>
         <p className="section-sub">
-          Real copy, side by side with what it replaced. Read the whole thing — that is the point.
+          Real copy, side by side with what it replaced. Read the whole thing, that is the point.
         </p>
 
         <div className="tabs" role="tablist" aria-label="Work samples">

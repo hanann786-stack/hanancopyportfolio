@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly service_hrohxo7: string;
-  readonly template_hj78p58: string;
-  readonly 0EJI2fnqOx3AL8tu4: string;
+  readonly VITE_EMAILJS_SERVICE_ID: string;
+  readonly VITE_EMAILJS_TEMPLATE_ID: string;
+  readonly VITE_EMAILJS_PUBLIC_KEY: string;
 }
 
 interface ImportMeta {

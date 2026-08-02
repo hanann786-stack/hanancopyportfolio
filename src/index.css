@@ -380,11 +380,23 @@ h1, h2, h3, blockquote {
   font-style: italic;
   margin-bottom: 18px;
 }
+.pullquote .testi-shot {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 22px 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
 .pullquote cite {
   font-style: normal;
   font-size: 15px;
   color: var(--ink-muted);
 }
+.testi-source { color: var(--copper); }
+
 
 /* ---------- about / cta ---------- */
 .about-text {

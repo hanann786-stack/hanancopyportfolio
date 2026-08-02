@@ -3,20 +3,20 @@ const cards = [
     brand: 'The Shea Parlor',
     before: 'Ice Cream-Inspired Skincare That Truly Treat Your Skin!',
     after: 'Skincare That Smells Like Dessert. Works Like a Treatment.',
-    note: 'Replaced vague filler language with a dual promise — sensory appeal plus functional proof.',
+    note: 'Replaced vague filler language with a dual promise: sensory appeal plus functional proof.',
   },
   {
     brand: 'Generic Fitness Coach',
     before: 'I help busy professionals get fit with personalized workout plans.',
     after:
-      'You have watched the videos. You know what to do. So why has nothing changed yet? Because knowing and doing are two different things — and I am the person who closes that gap.',
+      'You have watched the videos. You know what to do. So why has nothing changed yet? Because knowing and doing are two different things, and I am the person who closes that gap.',
     note: "Opened a psychological loop using the reader's own internal dialogue against their hesitation.",
   },
   {
     brand: 'DTC Haircare Brand',
     before: 'Natural ingredients for healthy, beautiful hair.',
     after:
-      'Most haircare brands are built in boardrooms by people who have never actually struggled to find a formula that works for their hair. This one was built differently — out of frustration, by someone who knew there had to be a better way.',
+      'Most haircare brands are built in boardrooms by people who have never actually struggled to find a formula that works for their hair. This one was built differently, out of frustration, by someone who knew there had to be a better way.',
     note: 'Replaced generic benefit language with an origin story that creates instant differentiation.',
   },
 ];
@@ -24,10 +24,10 @@ const cards = [
 const PracticeWork = () => (
   <section id="practice" className="section">
     <div className="wrap">
-      <h2 className="section-title">Practice Copy — Real Rewrites</h2>
+      <h2 className="section-title">Practice Copy: Real Rewrites</h2>
       <p className="section-sub">
         These are unsolicited rewrites I wrote for real brands to show what better copy looks like.
-        No client relationship — just proof of skill.
+        No client relationship, just proof of skill.
       </p>
 
       {cards.map((c) => (

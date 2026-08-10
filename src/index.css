@@ -254,6 +254,12 @@ h1, h2, h3, blockquote {
   line-height: 1.7;
   color: var(--ink-soft);
 }
+.result-note {
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
 @media (max-width: 768px) {
   .results-row { gap: 36px; }
 }
@@ -286,7 +292,7 @@ h1, h2, h3, blockquote {
 }
 
 .copy-block {
-  padding: 4px 0 4px 22px;
+  padding: 20px;
   max-width: var(--measure);
   margin-bottom: 40px;
 }
@@ -330,10 +336,25 @@ h1, h2, h3, blockquote {
   font-size: 1.3rem;
   margin-bottom: 24px;
 }
-.practice-arrow {
-  color: var(--ink-muted);
-  font-size: 20px;
-  margin: 4px 0 16px;
+.practice-card .copy-block { margin-bottom: 0; }
+.rewrite-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 20px 0;
+}
+.rewrite-divider::before,
+.rewrite-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.rewrite-divider span {
+  color: var(--copper);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 .practice-note {
   font-size: 15px;

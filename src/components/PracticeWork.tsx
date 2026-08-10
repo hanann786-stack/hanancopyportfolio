@@ -39,8 +39,8 @@ const PracticeWork = () => (
             <p>{c.before}</p>
           </div>
 
-          <div className="practice-arrow" aria-hidden>
-            →
+          <div className="rewrite-divider" aria-hidden>
+            <span>Rewrite</span>
           </div>
 
           <div className="copy-block after">

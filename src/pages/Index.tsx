@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ResultsBar from '@/components/ResultsBar';
@@ -11,7 +12,11 @@ import Footer from '@/components/Footer';
 
 const Index = () => (
   <div className="min-h-screen">
+    <Helmet>
+      <link rel="canonical" href="https://hanancopyportfolio.lovable.app/" />
+    </Helmet>
     <Navbar />
+
     <main>
       <HeroSection />
       <ResultsBar />

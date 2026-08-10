@@ -254,6 +254,12 @@ h1, h2, h3, blockquote {
   line-height: 1.7;
   color: var(--ink-soft);
 }
+.result-note {
+  font-size: 13px;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
 @media (max-width: 768px) {
   .results-row { gap: 36px; }
 }
@@ -286,9 +292,9 @@ h1, h2, h3, blockquote {
 }
 
 .copy-block {
-  padding: 4px 0 4px 22px;
+  padding: 20px;
   max-width: var(--measure);
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 .copy-block.before { border-left: 3px solid var(--bad); }
 .copy-block.after { border-left: 3px solid var(--good); }

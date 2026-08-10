@@ -23,6 +23,7 @@ const ResultsBar = () => (
         <div key={r.label} className="result-item">
           <div className="result-num">{r.num}</div>
           <div className="result-label">{r.label}</div>
+          <div className="result-note">{r.note}</div>
         </div>
       ))}
     </div>

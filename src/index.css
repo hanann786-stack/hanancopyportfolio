@@ -294,7 +294,7 @@ h1, h2, h3, blockquote {
 .copy-block {
   padding: 20px;
   max-width: var(--measure);
-  margin-bottom: 0;
+  margin-bottom: 40px;
 }
 .copy-block.before { border-left: 3px solid var(--bad); }
 .copy-block.after { border-left: 3px solid var(--good); }

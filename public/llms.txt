@@ -1,0 +1,16 @@
+# Hanan Arif — Conversion Copywriter
+
+> Portfolio of Hanan Arif, a conversion copywriter for DTC beauty, haircare, fitness and fashion brands. Email sequences, landing pages, ad copy, and AI brand voice systems.
+
+## Pages
+
+- [Home](/): Work samples, practice copy, services, client testimonials, about, and booking.
+
+## Sections
+
+- [Work Samples](/#work): Before/after rewrites for email, landing pages, product copy, and ads.
+- [Practice Copy](/#practice): Self-directed rewrites showing method and range.
+- [Services](/#services): Email marketing, landing pages, social ads, AI email system setup, AI brand voice systems.
+- [Client Feedback](/#clients): Real client screenshots and quotes.
+- [About](/#about): Background and approach.
+- [Contact](/#contact): Book a free 15-minute call or email directly.

@@ -19,6 +19,16 @@ if (document.readyState === "loading") {
   markLoaded();
 }
 
+// Release compositor layers once an entrance animation finishes
+document.addEventListener(
+  'animationend',
+  (e) => {
+    const el = e.target as HTMLElement;
+    if (el instanceof HTMLElement && el.style) el.style.willChange = 'auto';
+  },
+  true
+);
+
 // Auto section reveal — opt-in via IntersectionObserver on top-level sections
 const observeSections = () => {
   const io = new IntersectionObserver(

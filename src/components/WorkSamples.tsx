@@ -1,4 +1,5 @@
-import { useState, type ReactNode } from 'react';
+import { useState, type ReactNode, type CSSProperties } from 'react';
+import { useReveal } from '@/hooks/use-reveal';
 
 type Tab = {
   id: string;
@@ -124,23 +125,28 @@ const tabs: Tab[] = [
 const WorkSamples = () => {
   const [active, setActive] = useState(tabs[0].id);
   const tab = tabs.find((t) => t.id === active)!;
+  const ref = useReveal<HTMLDivElement>();
 
   return (
     <section id="work" className="section">
-      <div className="wrap">
-        <h2 className="section-title">Work Samples</h2>
-        <p className="section-sub">
+      <div className="wrap" ref={ref}>
+        <h2 className="section-title reveal-up" data-reveal>
+          Work Samples
+        </h2>
+        <p className="section-sub reveal-up" data-reveal>
           Real copy, side by side with what it replaced. Read the whole thing, that is the point.
         </p>
 
         <div className="tabs" role="tablist" aria-label="Work samples">
-          {tabs.map((t) => (
+          {tabs.map((t, i) => (
             <button
               key={t.id}
               role="tab"
               type="button"
               aria-selected={t.id === active}
-              className="tab"
+              className="tab reveal-left"
+              data-reveal
+              style={{ '--d': `${i * 0.08}s` } as CSSProperties}
               onClick={() => setActive(t.id)}
             >
               {t.label}
@@ -148,7 +154,7 @@ const WorkSamples = () => {
           ))}
         </div>
 
-        <div role="tabpanel">
+        <div role="tabpanel" key={tab.id} className="tab-panel">
           <h3 className="panel-title">{tab.title}</h3>
 
           <div className="copy-block before">

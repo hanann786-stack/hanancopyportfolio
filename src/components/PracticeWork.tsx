@@ -1,3 +1,5 @@
+import { useReveal } from '@/hooks/use-reveal';
+
 const cards = [
   {
     brand: 'The Shea Parlor',
@@ -21,38 +23,49 @@ const cards = [
   },
 ];
 
-const PracticeWork = () => (
-  <section id="practice" className="section">
-    <div className="wrap">
-      <h2 className="section-title">Practice Copy: Real Rewrites</h2>
-      <p className="section-sub">
-        These are unsolicited rewrites I wrote for real brands to show what better copy looks like.
-        No client relationship, just proof of skill.
-      </p>
+const PracticeWork = () => {
+  const ref = useReveal<HTMLDivElement>();
 
-      {cards.map((c) => (
-        <article key={c.brand} className="practice-card">
-          <h3 className="practice-brand">{c.brand}</h3>
+  return (
+    <section id="practice" className="section">
+      <div className="wrap" ref={ref}>
+        <h2 className="section-title reveal-up" data-reveal>
+          Practice Copy: Real Rewrites
+        </h2>
+        <p className="section-sub reveal-up" data-reveal>
+          These are unsolicited rewrites I wrote for real brands to show what better copy looks like.
+          No client relationship, just proof of skill.
+        </p>
 
-          <div className="copy-block before">
-            <div className="copy-label">Before</div>
-            <p>{c.before}</p>
-          </div>
+        {cards.map((c, i) => (
+          <article
+            key={c.brand}
+            className="practice-card reveal-up-lg"
+            data-reveal
+            style={{ '--d': `${i * 0.15}s` } as React.CSSProperties}
+          >
+            <h3 className="practice-brand">{c.brand}</h3>
 
-          <div className="rewrite-divider" aria-hidden>
-            <span>Rewrite</span>
-          </div>
+            <div className="copy-block before">
+              <div className="copy-label">Before</div>
+              <p>{c.before}</p>
+            </div>
 
-          <div className="copy-block after">
-            <div className="copy-label">After</div>
-            <p>{c.after}</p>
-          </div>
+            <div className="rewrite-divider" aria-hidden>
+              <span>Rewrite</span>
+            </div>
 
-          <p className="practice-note">{c.note}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-);
+            <div className="copy-block after">
+              <div className="copy-label">After</div>
+              <p>{c.after}</p>
+            </div>
+
+            <p className="practice-note">{c.note}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default PracticeWork;

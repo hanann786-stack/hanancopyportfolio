@@ -2,6 +2,7 @@ import marcus from '@/assets/testimonial-marcus-webb.jpeg.asset.json';
 import sarah from '@/assets/testimonial-sarah-chen.jpeg.asset.json';
 import elena from '@/assets/testimonial-elena-rossi.jpeg.asset.json';
 import tripta from '@/assets/testimonial-tripta-sports.jpeg.asset.json';
+import { useReveal } from '@/hooks/use-reveal';
 
 const quotes = [
   {
@@ -34,26 +35,39 @@ const quotes = [
   },
 ];
 
-const TestimonialsSection = () => (
-  <section id="clients" className="section">
-    <div className="wrap">
-      <h2 className="section-title">What clients say</h2>
-      <p className="section-sub">Real feedback. Real screenshots. Unedited.</p>
+const TestimonialsSection = () => {
+  const ref = useReveal<HTMLDivElement>();
 
-      {quotes.map((q) => (
-        <figure key={q.name} className="pullquote">
-          <span className="mark" aria-hidden>
-            “
-          </span>
-          <blockquote>{q.text}</blockquote>
-          <img className="testi-shot" src={q.img} alt={q.alt} loading="lazy" />
-          <cite>
-            {q.name} · <span className="testi-source">{q.source}</span>
-          </cite>
-        </figure>
-      ))}
-    </div>
-  </section>
-);
+  return (
+    <section id="clients" className="section">
+      <div className="wrap" ref={ref}>
+        <h2 className="section-title reveal-up" data-reveal>
+          What clients say
+        </h2>
+        <p className="section-sub reveal-up" data-reveal>
+          Real feedback. Real screenshots. Unedited.
+        </p>
+
+        {quotes.map((q, i) => (
+          <figure
+            key={q.name}
+            className="pullquote reveal-up"
+            data-reveal
+            style={{ '--d': `${i * 0.15}s` } as React.CSSProperties}
+          >
+            <span className="mark" aria-hidden>
+              “
+            </span>
+            <blockquote>{q.text}</blockquote>
+            <img className="testi-shot" src={q.img} alt={q.alt} loading="lazy" />
+            <cite>
+              {q.name} · <span className="testi-source">{q.source}</span>
+            </cite>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default TestimonialsSection;

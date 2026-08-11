@@ -1,3 +1,6 @@
+import CountUp from '@/components/CountUp';
+import { useReveal } from '@/hooks/use-reveal';
+
 const results = [
   {
     num: '62%',
@@ -16,18 +19,27 @@ const results = [
   },
 ];
 
-const ResultsBar = () => (
-  <section className="section" aria-label="Results">
-    <div className="wrap results-row">
-      {results.map((r) => (
-        <div key={r.label} className="result-item">
-          <div className="result-num">{r.num}</div>
-          <div className="result-label">{r.label}</div>
-          <div className="result-note">{r.note}</div>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+const ResultsBar = () => {
+  const ref = useReveal<HTMLDivElement>();
+
+  return (
+    <section className="section" aria-label="Results">
+      <div className="wrap results-row" ref={ref}>
+        {results.map((r, i) => (
+          <div
+            key={r.label}
+            className="result-item reveal-up"
+            data-reveal
+            style={{ '--d': `${i * 0.12}s` } as React.CSSProperties}
+          >
+            <CountUp className="result-num" value={r.num} />
+            <div className="result-label">{r.label}</div>
+            <div className="result-note">{r.note}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default ResultsBar;

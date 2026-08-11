@@ -1,3 +1,5 @@
+import { useReveal } from '@/hooks/use-reveal';
+
 const services = [
   {
     name: 'Email Marketing',
@@ -21,20 +23,33 @@ const services = [
   },
 ];
 
-const ServicesList = () => (
-  <section id="services" className="section">
-    <div className="wrap">
-      <h2 className="section-title">Services</h2>
-      <p className="section-sub">What I do, and what you get when I do it.</p>
+const ServicesList = () => {
+  const ref = useReveal<HTMLDivElement>();
 
-      {services.map((s) => (
-        <div key={s.name} className="service-row">
-          <h3 className="service-name">{s.name}</h3>
-          <p className="service-desc">{s.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-);
+  return (
+    <section id="services" className="section">
+      <div className="wrap" ref={ref}>
+        <h2 className="section-title reveal-up" data-reveal>
+          Services
+        </h2>
+        <p className="section-sub reveal-up" data-reveal>
+          What I do, and what you get when I do it.
+        </p>
+
+        {services.map((s, i) => (
+          <div
+            key={s.name}
+            className="service-row reveal-left"
+            data-reveal
+            style={{ '--d': `${i * 0.1}s` } as React.CSSProperties}
+          >
+            <h3 className="service-name">{s.name}</h3>
+            <p className="service-desc">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default ServicesList;

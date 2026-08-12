@@ -33,7 +33,11 @@ const ServicesList = () => {
           Services
         </h2>
         <p className="section-sub reveal-up" data-reveal>
-          What I do, and what you get when I do it.
+          What I do, and what you get when I do it. Looking for ecommerce copywriting services?{' '}
+          <a href="/ecommerce-copywriting-services" className="link-underline">
+            See the dedicated service page
+          </a>
+          .
         </p>
 
         {services.map((s, i) => (

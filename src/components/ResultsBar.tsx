@@ -23,7 +23,10 @@ const ResultsBar = () => {
   const ref = useReveal<HTMLDivElement>();
 
   return (
-    <section className="section" aria-label="Results">
+    <section className="section" aria-labelledby="results-heading">
+      <div className="wrap">
+        <h2 className="section-title" id="results-heading">Results</h2>
+      </div>
       <div className="wrap results-row" ref={ref}>
         {results.map((r, i) => (
           <div
